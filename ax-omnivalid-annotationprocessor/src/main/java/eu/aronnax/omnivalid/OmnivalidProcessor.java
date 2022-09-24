@@ -55,7 +55,7 @@ class MapEntry<V> implements Map.Entry<CharSequence, V> {
 }
 
 @SupportedAnnotationTypes("javax.validation.constraints.*")
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 @AutoService(Processor.class)
 public class OmnivalidProcessor extends AbstractProcessor {
 

@@ -65,7 +65,7 @@ public class OmnivalidProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 
         this.collectAnnotElements(annotations, roundEnv)
-                .map(this::buildVO)
+                .map(this::buildSourceDto)
                 .map(this::renderSource)
                 .forEach(this::writeSource);
 
@@ -129,7 +129,7 @@ public class OmnivalidProcessor extends AbstractProcessor {
                 .collect(Collectors.toList());
     }
 
-    private Map.Entry<CharSequence, SourceClassDto> buildVO(final Map.Entry<TypeElement, List<Element>> entry) {
+    private Map.Entry<CharSequence, SourceClassDto> buildSourceDto(final Map.Entry<TypeElement, List<Element>> entry) {
 
         String classQualifiedName = entry.getKey().getQualifiedName() + "Constraints";
         String classSimpleName = entry.getKey().getSimpleName() + "Constraints";

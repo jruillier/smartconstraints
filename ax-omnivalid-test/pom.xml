@@ -16,6 +16,7 @@
             <groupId>eu.aronnax.omnivalid</groupId>
             <artifactId>ax-omnivalid-annotationprocessor</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.validation</groupId>

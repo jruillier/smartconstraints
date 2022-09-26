@@ -16,9 +16,33 @@
     </properties>
 
     <modules>
-
         <module>ax-omnivalid-annotationprocessor</module>
+        <module>ax-omnivalid-sourcerenderer-jte</module>
+        <module>ax-omnivalid-domain</module>
+        <module>ax-omnivalid-utils-apachecommons3</module>
+        <module>ax-omnivalid-sourcerenderer-simple</module>
         <module>ax-omnivalid-test</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>jakarta.enterprise</groupId>
+                <artifactId>jakarta.enterprise.cdi-api</artifactId>
+                <version>4.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.dagger</groupId>
+                <artifactId>dagger</artifactId>
+                <version>2.44</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.dagger</groupId>
+                <artifactId>dagger-compiler</artifactId>
+                <version>2.44</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

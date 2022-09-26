@@ -1,10 +1,10 @@
-package eu.aronnax.omnivalid;
+package eu.aronnax.omnivalid.domain;
 
 import java.util.List;
 import org.immutables.value.Value;
 
 @Value.Immutable
-abstract class SourceElemDto {
+public abstract class SourceElemDto {
 
     public abstract String name();
 

@@ -1,9 +1,9 @@
-package eu.aronnax.omnivalid;
+package eu.aronnax.omnivalid.domain;
 
 import org.immutables.value.Value;
 
 @Value.Immutable
-abstract class SourceAnnotDto {
+public abstract class SourceAnnotDto {
 
     public abstract String qualifiedName();
 

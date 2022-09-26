@@ -1,4 +1,4 @@
-package eu.aronnax.omnivalid;
+package eu.aronnax.omnivalid.domain;
 
 import java.util.List;
 import javax.validation.constraints.NotNull;
@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import org.immutables.value.Value;
 
 @Value.Immutable
-abstract class SourceClassDto {
+public abstract class SourceClassDto {
 
     @NotNull
     public abstract String packageName();

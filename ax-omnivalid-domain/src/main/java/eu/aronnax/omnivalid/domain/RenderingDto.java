@@ -1,4 +1,4 @@
-package eu.aronnax.omnivalid;
+package eu.aronnax.omnivalid.domain;
 
 import org.immutables.value.Value;
 

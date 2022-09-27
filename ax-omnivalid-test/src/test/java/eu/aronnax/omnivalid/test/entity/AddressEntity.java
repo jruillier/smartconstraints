@@ -1,4 +1,4 @@
-package eu.aronnax.omnivalid.test;
+package eu.aronnax.omnivalid.test.entity;
 
 import javax.validation.constraints.NotNull;
 

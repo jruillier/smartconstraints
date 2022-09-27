@@ -13,8 +13,12 @@ import java.util.stream.Stream;
 
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.Elements;
+import javax.validation.constraints.NotNull;
 
+import eu.aronnax.omnivalid.annotation.CopyConstraints;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -27,34 +31,39 @@ public class CollectElementsUC {
     public CollectElementsUC() {
     }
 
-    public Stream<Map.Entry<TypeElement, List<Element>>> collectAnnotElements(
-            Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        Map<TypeElement, List<Element>> anotElementsPerClass = new HashMap<>();
+    public Stream<Map.Entry<String, List<Element>>> collectAnnotElements(
+            Set<? extends TypeElement> annotations, RoundEnvironment roundEnv, Elements elementUtils) {
+        Map<String, List<Element>> anotElementsPerClass = new HashMap<>();
 
-        annotations.forEach(annotation -> {
-            LOGGER.info("Annotation : " + annotation.getSimpleName());
-            Set<? extends Element> elementsAnnotatedWith = roundEnv.getElementsAnnotatedWith(annotation);
-            elementsAnnotatedWith.stream()
-                    .filter(element -> !element.getEnclosingElement()
-                            .getSimpleName()
-                            .toString()
-                            .endsWith("Constraints"))
-                    .forEach(element -> {
-                        anotElementsPerClass.merge(
-                                ((TypeElement) element.getEnclosingElement()),
-                                Collections.singletonList(element),
-                                (elements, elements2) -> {
-                                    ArrayList<Element> merge = new ArrayList<Element>();
-                                    merge.addAll(elements);
-                                    merge.addAll(elements2);
-                                    return merge;
-                                });
-                    });
-        });
+        annotations.stream()
+                .filter(annot -> annot.getQualifiedName().contentEquals(CopyConstraints.class.getName()))
+                .flatMap(copyConstAnnot -> roundEnv.getElementsAnnotatedWith(copyConstAnnot).stream())
+                .map(targetPackage -> new SourceTargetVO(
+                        targetPackage.getAnnotation(CopyConstraints.class).from(),
+                        ((PackageElement) targetPackage).getQualifiedName()))
+                .flatMap(sourceTargetVO -> roundEnv.getElementsAnnotatedWith(NotNull.class).stream()
+                        .filter(elem -> ((TypeElement)elem.getEnclosingElement()).getQualifiedName().toString().startsWith(sourceTargetVO.sourcePackage.toString()))
+                        .filter(element -> !element.getEnclosingElement()
+                                .getSimpleName()
+                                .toString()
+                                .endsWith("Constraints"))
+                        .map(element -> new ElemTargetVO(element, sourceTargetVO.targetPackage))
+                )
+                .forEach(elementTarget -> {
+                    anotElementsPerClass.merge(
+                            elementTarget.targetPackage + "." + elementTarget.element.getEnclosingElement().getSimpleName(),
+                            Collections.singletonList(elementTarget.element),
+                            (elements, elements2) -> {
+                                ArrayList<Element> merge = new ArrayList<Element>();
+                                merge.addAll(elements);
+                                merge.addAll(elements2);
+                                return merge;
+                            });
+                });
 
         return anotElementsPerClass.entrySet().stream()
                 .peek(entry -> LOGGER.info(
-                        "CLASSE: " + entry.getKey().getQualifiedName().toString() + " ELEMS : "
+                        "CLASSE: " + entry.getKey() + " ELEMS : "
                                 + entry.getValue().stream()
                                 .map(element -> {
                                     return element.getSimpleName() + " ("
@@ -64,5 +73,27 @@ public class CollectElementsUC {
                                             + ") ";
                                 })
                                 .collect(Collectors.joining(", "))));
+    }
+
+    static class ElemTargetVO {
+
+        final Element element;
+        final CharSequence targetPackage;
+
+        public ElemTargetVO(Element element, CharSequence targetPackage) {
+            this.element = element;
+            this.targetPackage = targetPackage;
+        }
+    }
+
+    static class SourceTargetVO {
+
+        final CharSequence sourcePackage;
+        final CharSequence targetPackage;
+
+        public SourceTargetVO(CharSequence sourcePackage, CharSequence targetPackage) {
+            this.sourcePackage = sourcePackage;
+            this.targetPackage = targetPackage;
+        }
     }
 }

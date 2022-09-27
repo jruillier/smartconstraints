@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.lang.model.element.Element;
-import javax.lang.model.element.TypeElement;
 import javax.validation.constraints.NotNull;
 
 import jakarta.inject.Inject;
@@ -22,18 +21,11 @@ public class BuildSourceUC {
         this.stringUtils = stringUtils;
     }
 
-    public Map.Entry<CharSequence, SourceClassDto> buildSourceDto(final Map.Entry<TypeElement, List<Element>> entry) {
+    public Map.Entry<CharSequence, SourceClassDto> buildSourceDto(final Map.Entry<String, List<Element>> entry) {
 
-        String classQualifiedName = entry.getKey().getQualifiedName() + "Constraints";
-        String classSimpleName = entry.getKey().getSimpleName() + "Constraints";
-        String packageName = entry.getKey()
-                .getQualifiedName()
-                .subSequence(
-                        0,
-                        entry.getKey().getQualifiedName().length()
-                                - entry.getKey().getSimpleName().length()
-                                - 1)
-                .toString();
+        String classQualifiedName = entry.getKey() + "Constraints";
+        String classSimpleName = NamingUtil.extractSimpleName(classQualifiedName);
+        String packageName = NamingUtil.extractPackageName(classQualifiedName);
 
         MapEntryDto<SourceClassDto> result = new MapEntryDto<>(
                 classQualifiedName,
@@ -47,7 +39,7 @@ public class BuildSourceUC {
         return result;
     }
 
-    private List<ImmutableSourceElemDto> getAnnotElements(Map.Entry<TypeElement, List<Element>> entry) {
+    private List<ImmutableSourceElemDto> getAnnotElements(Map.Entry<String, List<Element>> entry) {
         return entry.getValue().stream()
                 .map(annotElem -> ImmutableSourceElemDto.builder()
                         .name(this.stringUtils.capitalize(annotElem.getSimpleName().toString()))

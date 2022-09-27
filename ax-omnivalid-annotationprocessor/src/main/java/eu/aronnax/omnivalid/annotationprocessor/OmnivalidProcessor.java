@@ -55,7 +55,7 @@ class MapEntry<V> implements Map.Entry<CharSequence, V> {
     }
 }
 
-@SupportedAnnotationTypes("javax.validation.constraints.*")
+@SupportedAnnotationTypes({"javax.validation.constraints.*", "eu.aronnax.omnivalid.annotation.CopyConstraints"})
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
 @AutoService(Processor.class)
 public class OmnivalidProcessor extends AbstractProcessor {
@@ -77,7 +77,7 @@ public class OmnivalidProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         this.collectElementsUC
-                .collectAnnotElements(annotations, roundEnv)
+                .collectAnnotElements(annotations, roundEnv, this.processingEnv.getElementUtils())
                 .map(this::buildSourceDto)
                 .map(this::renderSource)
                 .forEach(this::writeSource);
@@ -89,21 +89,20 @@ public class OmnivalidProcessor extends AbstractProcessor {
     }
 
     private Map.Entry<CharSequence, SourceClassDto> buildSourceDto(
-            Map.Entry<TypeElement, List<Element>> typeElementListEntry) {
+            Map.Entry<String, List<Element>> typeElementListEntry) {
         return this.buildSourceUC.buildSourceDto(typeElementListEntry);
     }
 
-    private Stream<Map.Entry<TypeElement, List<Element>>> collectAnnotElements(
+    private Stream<Map.Entry<String, List<Element>>> collectAnnotElements(
             Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        return collectElementsUC.collectAnnotElements(annotations, roundEnv);
+        return collectElementsUC.collectAnnotElements(annotations, roundEnv, this.processingEnv.getElementUtils());
     }
 
     private void writeSource(RenderingDto entry) {
 
         try {
             LOGGER.info("Writing source " + entry.classQualifiedName());
-            JavaFileObject sourceFile =
-                    this.processingEnv.getFiler().createSourceFile(entry.classQualifiedName());
+            JavaFileObject sourceFile = this.processingEnv.getFiler().createSourceFile(entry.classQualifiedName());
             Writer writer = sourceFile.openWriter();
             writer.write(entry.sourceRendering());
             writer.close();

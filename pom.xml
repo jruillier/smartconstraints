@@ -22,6 +22,7 @@
         <module>ax-omnivalid-utils-apachecommons3</module>
         <module>ax-omnivalid-sourcerenderer-simple</module>
         <module>ax-omnivalid-test</module>
+        <module>ax-omnivalid-annotation</module>
     </modules>
 
     <dependencyManagement>

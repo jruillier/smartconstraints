@@ -17,7 +17,6 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.tools.JavaFileObject;
 
@@ -101,11 +100,10 @@ public class OmnivalidProcessor extends AbstractProcessor {
 
     private void writeSource(RenderingDto entry) {
 
-        PackageElement packageElement = this.processingEnv.getElementUtils().getPackageElement(entry.packageName());
         try {
-            LOGGER.info("Writing source " + entry.packageName() + "." + entry.classSimpleName());
+            LOGGER.info("Writing source " + entry.classQualifiedName());
             JavaFileObject sourceFile =
-                    this.processingEnv.getFiler().createSourceFile(entry.classSimpleName(), packageElement);
+                    this.processingEnv.getFiler().createSourceFile(entry.classQualifiedName());
             Writer writer = sourceFile.openWriter();
             writer.write(entry.sourceRendering());
             writer.close();

@@ -9,5 +9,7 @@ public abstract class RenderingDto {
 
     public abstract String classSimpleName();
 
+    public abstract String classQualifiedName();
+
     public abstract String sourceRendering();
 }

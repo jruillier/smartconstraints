@@ -55,6 +55,7 @@ public class SourceRendererSimple implements SourceRendererPort {
         return ImmutableRenderingDto.builder()
                 .packageName(packageName)
                 .classSimpleName(classSimpleName)
+                .classQualifiedName(qualifiedName)
                 .sourceRendering(prefix + content + suffix)
                 .build();
     }

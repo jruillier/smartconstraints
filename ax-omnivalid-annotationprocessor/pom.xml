@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>eu.aronnax.omnivalid</groupId>
-            <artifactId>ax-omnivalid-utils</artifactId>
+            <artifactId>ax-omnivalid-utils-apachecommons3</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

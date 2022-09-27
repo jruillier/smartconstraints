@@ -25,35 +25,6 @@ import eu.aronnax.omnivalid.domain.CollectElementsUC;
 import eu.aronnax.omnivalid.domain.RenderSourceUC;
 import eu.aronnax.omnivalid.domain.RenderingDto;
 import eu.aronnax.omnivalid.domain.SourceClassDto;
-import eu.aronnax.omnivalid.sourcerenderer.simple.SourceRendererSimple;
-
-class MapEntry<V> implements Map.Entry<CharSequence, V> {
-
-    private CharSequence key;
-    private V value;
-
-    public MapEntry(CharSequence key, V value) {
-        this.key = key;
-        this.value = value;
-    }
-
-    @Override
-    public CharSequence getKey() {
-        return this.key;
-    }
-
-    @Override
-    public V getValue() {
-        return this.value;
-    }
-
-    @Override
-    public V setValue(V value) {
-        V oldValue = this.value;
-        this.value = value;
-        return oldValue;
-    }
-}
 
 @SupportedAnnotationTypes({"javax.validation.constraints.*", "eu.aronnax.omnivalid.annotation.CopyConstraints"})
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
@@ -69,15 +40,14 @@ public class OmnivalidProcessor extends AbstractProcessor {
     @SuppressWarnings("unused")
     public OmnivalidProcessor() {
         ServicesFactory servicesFactory = DaggerServicesFactory.builder().build();
-        this.collectElementsUC = new CollectElementsUC();
+        this.collectElementsUC = servicesFactory.collectElementsUC();
         this.buildSourceUC = servicesFactory.buildSourceUC();
-        this.renderSourceUC = new RenderSourceUC(new SourceRendererSimple());
+        this.renderSourceUC = servicesFactory.renderSourceUC();
     }
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        this.collectElementsUC
-                .collectAnnotElements(annotations, roundEnv, this.processingEnv.getElementUtils())
+        this.collectAnnotElements(annotations, roundEnv)
                 .map(this::buildSourceDto)
                 .map(this::renderSource)
                 .forEach(this::writeSource);

@@ -1,4 +1,4 @@
-package eu.aronnax.omnivalid.dto;
+package eu.aronnax.omnivalid.test.dto;
 
 public class AddressDto {
 

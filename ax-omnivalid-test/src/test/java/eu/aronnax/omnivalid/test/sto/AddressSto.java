@@ -4,5 +4,4 @@ public class AddressSto {
 
     @AddressEntityConstraints.ZipCode
     private String zipCode;
-
 }

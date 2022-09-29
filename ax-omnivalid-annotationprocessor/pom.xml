@@ -25,7 +25,7 @@
         </dependency>
         <dependency>
             <groupId>eu.aronnax.omnivalid</groupId>
-            <artifactId>ax-omnivalid-sourcerenderer-simple</artifactId>
+            <artifactId>ax-omnivalid-sourcerenderer-jte</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- Other libs -->
@@ -45,28 +45,5 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.diffplug.spotless</groupId>
-                <artifactId>spotless-maven-plugin</artifactId>
-                <version>2.24.1</version>
-                <configuration>
-                    <java>
-                        <palantirJavaFormat />
-                    </java>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>apply</goal>
-                        </goals>
-                        <phase>process-sources</phase>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

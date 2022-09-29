@@ -5,9 +5,8 @@ import dagger.Module;
 import eu.aronnax.omnivalid.domain.SourceRendererPort;
 
 @Module
-public abstract class SourceRendererModuleSimple {
+public abstract class SimpleSourceRendererModule {
 
     @Binds
-    public abstract SourceRendererPort sourceRendererSimple(SourceRendererSimple sourceRendererPort);
-
+    public abstract SourceRendererPort simpleSourceRenderer(SimpleSourceRenderer sourceRendererPort);
 }

@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import eu.aronnax.omnivalid.domain.ImmutableRenderingDto;
+import eu.aronnax.omnivalid.domain.NamingUtil;
 import eu.aronnax.omnivalid.domain.RenderingDto;
 import eu.aronnax.omnivalid.domain.SourceClassDto;
 import eu.aronnax.omnivalid.domain.SourceRendererPort;
@@ -11,11 +12,10 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 @ApplicationScoped
-public class SourceRendererSimple implements SourceRendererPort {
+public class SimpleSourceRenderer implements SourceRendererPort {
 
     @Inject
-    public SourceRendererSimple() {
-    }
+    public SimpleSourceRenderer() {}
 
     @Override
     public RenderingDto renderSource(Map.Entry<CharSequence, SourceClassDto> entry) {
@@ -40,8 +40,8 @@ public class SourceRendererSimple implements SourceRendererPort {
 
         String content = entry.getValue().annotElements().stream()
                 .map(elem -> elem.annots().stream()
-                        .map(annot -> "\n@" + annot.qualifiedName())
-                        .collect(Collectors.joining())
+                                .map(annot -> "\n@" + annot.qualifiedName())
+                                .collect(Collectors.joining())
                         + "\n@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })"
                         + "\n@Retention(RUNTIME)"
                         + "\n@Documented"
@@ -50,8 +50,8 @@ public class SourceRendererSimple implements SourceRendererPort {
                 .collect(Collectors.joining("\n\n"));
 
         String qualifiedName = entry.getKey().toString();
-        String packageName = qualifiedName.substring(0, qualifiedName.lastIndexOf("."));
-        String classSimpleName = qualifiedName.substring(qualifiedName.lastIndexOf(".") + 1);
+        String packageName = NamingUtil.extractPackageName(qualifiedName);
+        String classSimpleName = NamingUtil.extractSimpleName(qualifiedName);
         return ImmutableRenderingDto.builder()
                 .packageName(packageName)
                 .classSimpleName(classSimpleName)

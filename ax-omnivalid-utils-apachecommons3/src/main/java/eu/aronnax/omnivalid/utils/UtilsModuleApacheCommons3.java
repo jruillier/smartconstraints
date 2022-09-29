@@ -9,6 +9,4 @@ public abstract class UtilsModuleApacheCommons3 {
 
     @Binds
     abstract StringUtilsPort stringUtilsPort(StringUtilsImpl stringUtils);
-
-
 }

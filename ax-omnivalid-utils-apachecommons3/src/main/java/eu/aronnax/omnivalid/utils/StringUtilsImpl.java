@@ -10,8 +10,7 @@ import jakarta.inject.Inject;
 public class StringUtilsImpl implements StringUtilsPort {
 
     @Inject
-    public StringUtilsImpl() {
-    }
+    public StringUtilsImpl() {}
 
     @Override
     public String capitalize(String str) {

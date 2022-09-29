@@ -1,13 +1,12 @@
 package eu.aronnax.omnivalid.domain;
 
-class NamingUtil {
+public class NamingUtil {
 
-    static String extractSimpleName(String qualifiedName) {
-        return qualifiedName.substring(qualifiedName.lastIndexOf('.')+1);
+    public static String extractSimpleName(String qualifiedName) {
+        return qualifiedName.substring(qualifiedName.lastIndexOf('.') + 1);
     }
 
-    static String extractPackageName(String qualifiedName) {
+    public static String extractPackageName(String qualifiedName) {
         return qualifiedName.substring(0, qualifiedName.lastIndexOf('.'));
     }
-
 }

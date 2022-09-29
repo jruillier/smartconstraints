@@ -1,14 +1,12 @@
 package eu.aronnax.omnivalid.domain;
 
+import jakarta.inject.Inject;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
 import javax.lang.model.element.Element;
 import javax.validation.constraints.NotNull;
-
-import jakarta.inject.Inject;
 
 public class BuildSourceUC {
 
@@ -42,7 +40,8 @@ public class BuildSourceUC {
     private List<ImmutableSourceElemDto> getAnnotElements(Map.Entry<String, List<Element>> entry) {
         return entry.getValue().stream()
                 .map(annotElem -> ImmutableSourceElemDto.builder()
-                        .name(this.stringUtils.capitalize(annotElem.getSimpleName().toString()))
+                        .name(this.stringUtils.capitalize(
+                                annotElem.getSimpleName().toString()))
                         .addAnnots(ImmutableSourceAnnotDto.builder()
                                 .qualifiedName(annotElem
                                         .getAnnotation(NotNull.class)

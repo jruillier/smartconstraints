@@ -41,12 +41,15 @@ public class CollectElementsUC {
                 .map(targetPackage -> new SourceTargetVO(
                         targetPackage.getAnnotation(CopyConstraints.class).from(),
                         ((PackageElement) targetPackage).getQualifiedName()))
-                .flatMap(sourceTargetVO -> roundEnv.getElementsAnnotatedWith(NotNull.class).stream()
+                .flatMap(sourceTargetVO -> //roundEnv.getElementsAnnotatedWith(NotNull.class).stream()
+                        elementUtils.getPackageElement(sourceTargetVO.sourcePackage).getEnclosedElements().stream()
+                                .flatMap(typeElem -> ((TypeElement)typeElem).getEnclosedElements().stream())
                         .filter(elem -> ((TypeElement)elem.getEnclosingElement()).getQualifiedName().toString().startsWith(sourceTargetVO.sourcePackage.toString()))
                         .filter(element -> !element.getEnclosingElement()
                                 .getSimpleName()
                                 .toString()
                                 .endsWith("Constraints"))
+                        .filter(element -> element.getAnnotation(NotNull.class) != null)
                         .map(element -> new ElemTargetVO(element, sourceTargetVO.targetPackage))
                 )
                 .forEach(elementTarget -> {

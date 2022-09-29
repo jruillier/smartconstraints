@@ -1,7 +1,11 @@
 package eu.aronnax.omnivalid.annotationprocessor;
 
 import com.google.auto.service.AutoService;
-
+import eu.aronnax.omnivalid.domain.BuildSourceUC;
+import eu.aronnax.omnivalid.domain.CollectElementsUC;
+import eu.aronnax.omnivalid.domain.RenderSourceUC;
+import eu.aronnax.omnivalid.domain.RenderingDto;
+import eu.aronnax.omnivalid.domain.SourceClassDto;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
@@ -9,7 +13,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
-
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
@@ -19,12 +22,6 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.tools.JavaFileObject;
-
-import eu.aronnax.omnivalid.domain.BuildSourceUC;
-import eu.aronnax.omnivalid.domain.CollectElementsUC;
-import eu.aronnax.omnivalid.domain.RenderSourceUC;
-import eu.aronnax.omnivalid.domain.RenderingDto;
-import eu.aronnax.omnivalid.domain.SourceClassDto;
 
 @SupportedAnnotationTypes({"javax.validation.constraints.*", "eu.aronnax.omnivalid.annotation.CopyConstraints"})
 @SupportedSourceVersion(SourceVersion.RELEASE_11)

@@ -11,30 +11,30 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.Elements;
 
 import eu.aronnax.omnivalid.annotation.CopyConstraints;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 @ApplicationScoped
-public class CollectElementsUC {
+class CollectElementsHelper {
 
-    private static final Logger LOGGER = Logger.getLogger(CollectElementsUC.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CollectElementsHelper.class.getName());
 
     private final ConstraintsHelper constraintsHelper;
 
     @Inject
-    public CollectElementsUC(ConstraintsHelper constraintsHelper) {
+    CollectElementsHelper(ConstraintsHelper constraintsHelper) {
         this.constraintsHelper = constraintsHelper;
     }
 
-    public Stream<Map.Entry<String, List<Element>>> collectAnnotElements(
-            Set<? extends TypeElement> annotations, RoundEnvironment roundEnv, Elements elementUtils) {
+    Stream<Map.Entry<String, List<Element>>> collectAnnotElements(
+            Set<? extends TypeElement> annotations, RoundEnvironment roundEnv, ProcessingEnvironment processingEnv) {
         Map<String, List<Element>> anotElementsPerClass = new HashMap<>();
 
         annotations.stream()
@@ -43,7 +43,7 @@ public class CollectElementsUC {
                 .map(targetPackage -> new SourceTargetVO(
                         targetPackage.getAnnotation(CopyConstraints.class).from(),
                         ((PackageElement) targetPackage).getQualifiedName()))
-                .flatMap(sourceTargetVO -> getProperties(elementUtils, sourceTargetVO))
+                .flatMap(sourceTargetVO -> getProperties(sourceTargetVO, processingEnv))
                 .forEach(elementTarget -> {
                     anotElementsPerClass.merge(
                             elementTarget.targetPackage + "."
@@ -73,8 +73,12 @@ public class CollectElementsUC {
                                 .collect(Collectors.joining(", "))));
     }
 
-    private Stream<ElemTargetVO> getProperties(Elements elementUtils, SourceTargetVO sourceTargetVO) {
-        return elementUtils.getPackageElement(sourceTargetVO.sourcePackage).getEnclosedElements().stream()
+    private Stream<ElemTargetVO> getProperties(SourceTargetVO sourceTargetVO, ProcessingEnvironment processingEnv) {
+        return processingEnv
+                .getElementUtils()
+                .getPackageElement(sourceTargetVO.sourcePackage)
+                .getEnclosedElements()
+                .stream()
                 .flatMap(typeElem -> ((TypeElement) typeElem).getEnclosedElements().stream())
                 .filter(elem -> ((TypeElement) elem.getEnclosingElement())
                         .getQualifiedName()
@@ -95,7 +99,7 @@ public class CollectElementsUC {
         final Element element;
         final CharSequence targetPackage;
 
-        public ElemTargetVO(Element element, CharSequence targetPackage) {
+        ElemTargetVO(Element element, CharSequence targetPackage) {
             this.element = element;
             this.targetPackage = targetPackage;
         }
@@ -106,7 +110,7 @@ public class CollectElementsUC {
         final CharSequence sourcePackage;
         final CharSequence targetPackage;
 
-        public SourceTargetVO(CharSequence sourcePackage, CharSequence targetPackage) {
+        SourceTargetVO(CharSequence sourcePackage, CharSequence targetPackage) {
             this.sourcePackage = sourcePackage;
             this.targetPackage = targetPackage;
         }

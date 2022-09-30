@@ -1,6 +1,6 @@
-@import eu.aronnax.omnivalid.domain.SourceAnnotDto
-@import eu.aronnax.omnivalid.domain.SourceClassDto
-@import eu.aronnax.omnivalid.domain.SourcePropertyDto
+@import eu.aronnax.omnivalid.domainport.SourceAnnotDto
+@import eu.aronnax.omnivalid.domainport.SourceClassDto
+@import eu.aronnax.omnivalid.domainport.SourcePropertyDto
 
 @param SourceClassDto sourceClass
 

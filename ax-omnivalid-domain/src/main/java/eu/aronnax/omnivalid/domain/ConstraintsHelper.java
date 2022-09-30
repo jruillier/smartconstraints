@@ -33,7 +33,7 @@ import jakarta.inject.Inject;
 class ConstraintsHelper {
 
     @Inject
-    public ConstraintsHelper() {}
+    ConstraintsHelper() {}
 
     Stream<Class<? extends Annotation>> getConstraintClasses() {
         return Stream.of(

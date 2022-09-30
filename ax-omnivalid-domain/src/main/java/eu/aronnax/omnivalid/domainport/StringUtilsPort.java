@@ -1,4 +1,4 @@
-package eu.aronnax.omnivalid.domain;
+package eu.aronnax.omnivalid.domainport;
 
 public interface StringUtilsPort {
 

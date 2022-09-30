@@ -3,11 +3,11 @@ package eu.aronnax.omnivalid.sourcerenderer.simple;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import eu.aronnax.omnivalid.domain.ImmutableRenderingDto;
 import eu.aronnax.omnivalid.domain.NamingUtil;
-import eu.aronnax.omnivalid.domain.RenderingDto;
-import eu.aronnax.omnivalid.domain.SourceClassDto;
-import eu.aronnax.omnivalid.domain.SourceRendererPort;
+import eu.aronnax.omnivalid.domainport.ImmutableRenderingDto;
+import eu.aronnax.omnivalid.domainport.RenderingDto;
+import eu.aronnax.omnivalid.domainport.SourceClassDto;
+import eu.aronnax.omnivalid.domainport.SourceRendererPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 

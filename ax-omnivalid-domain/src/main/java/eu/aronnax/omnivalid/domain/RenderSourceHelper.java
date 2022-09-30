@@ -2,20 +2,23 @@ package eu.aronnax.omnivalid.domain;
 
 import java.util.Map;
 
+import eu.aronnax.omnivalid.domainport.RenderingDto;
+import eu.aronnax.omnivalid.domainport.SourceClassDto;
+import eu.aronnax.omnivalid.domainport.SourceRendererPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 @ApplicationScoped
-public class RenderSourceUC {
+class RenderSourceHelper {
 
     private final SourceRendererPort sourceRendererPort;
 
     @Inject
-    public RenderSourceUC(SourceRendererPort sourceRendererPort) {
+    RenderSourceHelper(SourceRendererPort sourceRendererPort) {
         this.sourceRendererPort = sourceRendererPort;
     }
 
-    public RenderingDto renderSource(Map.Entry<CharSequence, SourceClassDto> entry) {
+    RenderingDto renderSource(Map.Entry<CharSequence, SourceClassDto> entry) {
         return this.sourceRendererPort.renderSource(entry);
     }
 }

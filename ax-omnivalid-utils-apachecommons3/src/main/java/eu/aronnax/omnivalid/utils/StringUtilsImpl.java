@@ -2,7 +2,7 @@ package eu.aronnax.omnivalid.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
-import eu.aronnax.omnivalid.domain.StringUtilsPort;
+import eu.aronnax.omnivalid.domainport.StringUtilsPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 

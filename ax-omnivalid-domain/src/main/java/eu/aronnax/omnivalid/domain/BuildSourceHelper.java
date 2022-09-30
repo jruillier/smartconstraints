@@ -7,22 +7,27 @@ import java.util.stream.Collectors;
 
 import javax.lang.model.element.Element;
 
+import eu.aronnax.omnivalid.domainport.ImmutableSourceAnnotDto;
+import eu.aronnax.omnivalid.domainport.ImmutableSourceClassDto;
+import eu.aronnax.omnivalid.domainport.ImmutableSourcePropertyDto;
+import eu.aronnax.omnivalid.domainport.SourceClassDto;
+import eu.aronnax.omnivalid.domainport.StringUtilsPort;
 import jakarta.inject.Inject;
 
-public class BuildSourceUC {
+class BuildSourceHelper {
 
-    private static final Logger LOGGER = Logger.getLogger(BuildSourceUC.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BuildSourceHelper.class.getName());
 
     private final StringUtilsPort stringUtils;
     private final ConstraintsHelper constraintsHelper;
 
     @Inject
-    public BuildSourceUC(final StringUtilsPort stringUtils, ConstraintsHelper constraintsHelper) {
+    BuildSourceHelper(final StringUtilsPort stringUtils, ConstraintsHelper constraintsHelper) {
         this.stringUtils = stringUtils;
         this.constraintsHelper = constraintsHelper;
     }
 
-    public Map.Entry<CharSequence, SourceClassDto> buildSourceDto(final Map.Entry<String, List<Element>> entry) {
+    Map.Entry<CharSequence, SourceClassDto> buildSourceDto(final Map.Entry<String, List<Element>> entry) {
 
         String classQualifiedName = entry.getKey() + "Constraints";
         String classSimpleName = NamingUtil.extractSimpleName(classQualifiedName);

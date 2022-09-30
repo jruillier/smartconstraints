@@ -2,7 +2,7 @@ package eu.aronnax.omnivalid.utils;
 
 import dagger.Binds;
 import dagger.Module;
-import eu.aronnax.omnivalid.domain.StringUtilsPort;
+import eu.aronnax.omnivalid.domainport.StringUtilsPort;
 
 @Module
 public abstract class UtilsModuleApacheCommons3 {

@@ -1,4 +1,4 @@
-package eu.aronnax.omnivalid.domain;
+package eu.aronnax.omnivalid.domainport;
 
 import java.util.List;
 import org.immutables.value.Value;

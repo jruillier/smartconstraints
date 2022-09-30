@@ -1,13 +1,13 @@
-package eu.aronnax.omnivalid.domain;
+package eu.aronnax.omnivalid.domainport;
 
 import org.immutables.value.Value;
 
 @Value.Immutable
 public abstract class RenderingDto {
 
-    public abstract String packageName();
+    abstract String packageName();
 
-    public abstract String classSimpleName();
+    abstract String classSimpleName();
 
     public abstract String classQualifiedName();
 

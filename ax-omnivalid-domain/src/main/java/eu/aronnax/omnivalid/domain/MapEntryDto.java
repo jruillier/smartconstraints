@@ -7,7 +7,7 @@ class MapEntryDto<V> implements Map.Entry<CharSequence, V> {
     private CharSequence key;
     private V value;
 
-    public MapEntryDto(CharSequence key, V value) {
+    MapEntryDto(CharSequence key, V value) {
         this.key = key;
         this.value = value;
     }

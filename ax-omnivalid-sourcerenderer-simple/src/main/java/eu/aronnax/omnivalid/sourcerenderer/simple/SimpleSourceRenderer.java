@@ -38,7 +38,7 @@ public class SimpleSourceRenderer implements SourceRendererPort {
                 + "\npublic class " + sourceClassDto.simpleName() + " { ";
         String suffix = "\n }";
 
-        String content = entry.getValue().annotElements().stream()
+        String content = entry.getValue().properties().stream()
                 .map(elem -> elem.annots().stream()
                                 .map(annot -> "\n@" + annot.qualifiedName())
                                 .collect(Collectors.joining())

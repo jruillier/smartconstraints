@@ -1,22 +1,25 @@
 package eu.aronnax.omnivalid.domain;
 
-import jakarta.inject.Inject;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
 import javax.lang.model.element.Element;
-import javax.validation.constraints.NotNull;
+
+import jakarta.inject.Inject;
 
 public class BuildSourceUC {
 
     private static final Logger LOGGER = Logger.getLogger(BuildSourceUC.class.getName());
 
     private final StringUtilsPort stringUtils;
+    private final ConstraintsHelper constraintsHelper;
 
     @Inject
-    public BuildSourceUC(final StringUtilsPort stringUtils) {
+    public BuildSourceUC(final StringUtilsPort stringUtils, ConstraintsHelper constraintsHelper) {
         this.stringUtils = stringUtils;
+        this.constraintsHelper = constraintsHelper;
     }
 
     public Map.Entry<CharSequence, SourceClassDto> buildSourceDto(final Map.Entry<String, List<Element>> entry) {
@@ -31,28 +34,36 @@ public class BuildSourceUC {
                         .packageName(packageName)
                         .qualifiedName(classQualifiedName)
                         .simpleName(classSimpleName)
-                        .addAllAnnotElements(this.getAnnotElements(entry))
+                        .addAllProperties(this.getSourceProperties(entry))
                         .build());
         LOGGER.info(result.getValue().toString());
         return result;
     }
 
-    private List<ImmutableSourceElemDto> getAnnotElements(Map.Entry<String, List<Element>> entry) {
+    private List<ImmutableSourcePropertyDto> getSourceProperties(Map.Entry<String, List<Element>> entry) {
         return entry.getValue().stream()
-                .map(annotElem -> ImmutableSourceElemDto.builder()
+                .map(propertyElem -> ImmutableSourcePropertyDto.builder()
                         .name(this.stringUtils.capitalize(
-                                annotElem.getSimpleName().toString()))
-                        .addAnnots(ImmutableSourceAnnotDto.builder()
-                                .qualifiedName(annotElem
-                                        .getAnnotation(NotNull.class)
-                                        .annotationType()
-                                        .getCanonicalName())
-                                .simpleName(annotElem
-                                        .getAnnotation(NotNull.class)
-                                        .annotationType()
-                                        .getSimpleName())
-                                .build())
+                                propertyElem.getSimpleName().toString()))
+                        .addAnnots(getSourceAnnots(propertyElem))
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    private ImmutableSourceAnnotDto[] getSourceAnnots(Element propertyElem) {
+        return this.constraintsHelper
+                .getConstraintClasses()
+                .filter(aClass -> propertyElem.getAnnotation(aClass) != null)
+                .map(aClass -> ImmutableSourceAnnotDto.builder()
+                        .qualifiedName(propertyElem
+                                .getAnnotation(aClass)
+                                .annotationType()
+                                .getCanonicalName())
+                        .simpleName(propertyElem
+                                .getAnnotation(aClass)
+                                .annotationType()
+                                .getSimpleName())
+                        .build())
+                .toArray(ImmutableSourceAnnotDto[]::new);
     }
 }

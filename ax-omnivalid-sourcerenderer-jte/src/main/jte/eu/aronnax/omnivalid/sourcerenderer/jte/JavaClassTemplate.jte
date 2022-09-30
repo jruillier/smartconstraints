@@ -1,6 +1,6 @@
 @import eu.aronnax.omnivalid.domain.SourceAnnotDto
 @import eu.aronnax.omnivalid.domain.SourceClassDto
-@import eu.aronnax.omnivalid.domain.SourceElemDto
+@import eu.aronnax.omnivalid.domain.SourcePropertyDto
 
 @param SourceClassDto sourceClass
 
@@ -20,10 +20,9 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 public class ${sourceClass.simpleName()} {
-@for(SourceElemDto sourceElement : sourceClass.annotElements())
+@for(SourcePropertyDto sourceElement : sourceClass.properties())
     @for(SourceAnnotDto sourceAnnot : sourceElement.annots())
-    @${sourceAnnot.qualifiedName()}
-    @endfor
+    @${sourceAnnot.qualifiedName()}@endfor
     @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
     @Retention(RUNTIME)
     @Documented

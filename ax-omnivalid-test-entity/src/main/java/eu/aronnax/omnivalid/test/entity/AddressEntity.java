@@ -1,6 +1,9 @@
 package eu.aronnax.omnivalid.test.entity;
 
+import java.time.LocalDate;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 public class AddressEntity {
 
@@ -8,9 +11,12 @@ public class AddressEntity {
     private String street;
 
     @NotNull
-    //    @Size(min = 5, max = 5)
+    @Size(min = 5, max = 5)
     private String zipCode;
 
     @NotNull
     private String countryCode;
+
+    @Past
+    private LocalDate existsSince;
 }

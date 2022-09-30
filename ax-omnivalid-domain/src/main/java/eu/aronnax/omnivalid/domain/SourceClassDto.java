@@ -18,5 +18,5 @@ public abstract class SourceClassDto {
     public abstract String simpleName();
 
     @Size(min = 1)
-    public abstract List<SourceElemDto> annotElements();
+    public abstract List<SourcePropertyDto> properties();
 }

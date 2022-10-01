@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>eu.aronnax.omnivalid</groupId>
-    <artifactId>ax-omnivalid</artifactId>
+    <groupId>eu.aronnax.smartconstraints</groupId>
+    <artifactId>smartconstraints-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -16,14 +16,14 @@
     </properties>
 
     <modules>
-        <module>ax-omnivalid-annotation</module>
-        <module>ax-omnivalid-annotationprocessor</module>
-        <module>ax-omnivalid-sourcerenderer-jte</module>
-        <module>ax-omnivalid-domain</module>
-        <module>ax-omnivalid-utils-apachecommons3</module>
-        <module>ax-omnivalid-sourcerenderer-simple</module>
-        <module>ax-omnivalid-test</module>
-        <module>ax-omnivalid-test-entity</module>
+        <module>smartconstraints-annotation</module>
+        <module>smartconstraints-annotationprocessor</module>
+        <module>smartconstraints-sourcerenderer-jte</module>
+        <module>smartconstraints-domain</module>
+        <module>smartconstraints-utils-apachecommons3</module>
+        <module>smartconstraints-sourcerenderer-simple</module>
+        <module>smartconstraints-test</module>
+        <module>smartconstraints-test-entity</module>
     </modules>
 
     <dependencyManagement>

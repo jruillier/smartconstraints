@@ -1,0 +1,12 @@
+package eu.aronnax.smartconstraints.domain;
+
+public class NamingUtil {
+
+    public static String extractSimpleName(String qualifiedName) {
+        return qualifiedName.substring(qualifiedName.lastIndexOf('.') + 1);
+    }
+
+    public static String extractPackageName(String qualifiedName) {
+        return qualifiedName.substring(0, qualifiedName.lastIndexOf('.'));
+    }
+}

@@ -27,7 +27,7 @@ As a compile time dependency to your project.
 Run your build :-)
 
 You can now use annotations like :
-`@Address.StreetName` on your DTOs that
+`@AddressConstraints.StreetName` on your DTOs that
 aggregates validations from original
  field , without any runtime 
 dependency to `AddressEntity`. 
@@ -46,3 +46,10 @@ entities located in third party libraries.
 You project must be a least a Java 11 project.
 
 Your project must use `javax.validation.constraints.*` annotations.
+
+## Contribute
+
+Project is still in alpha stage. Any contribution is welcome.
+
+To build project :
+`mvn clean install`

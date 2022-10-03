@@ -40,3 +40,9 @@ CleanArchitecture principles.
 
 SmartConstraints also works with source
 entities located in third party libraries. 
+
+## Requirements
+
+You project must be a least a Java 11 project.
+
+Your project must use `javax.validation.constraints.*` annotations.

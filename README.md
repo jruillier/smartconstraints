@@ -16,7 +16,7 @@ Add the `@CopyConstraints` annotation
 on a ˋpackage-info.javaˋ in jour project, 
 where meta-annotations will be generated. 
 
-Add the `from` attribute to `@CopyCpnstraints` 
+Add the `from` attribute to `@CopyConstraints` 
 and specify the package where your entities
 are located. 
 

@@ -1,8 +1,5 @@
 package eu.aronnax.smartconstraints.domain;
 
-import eu.aronnax.smartconstraints.annotation.CopyConstraints;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,11 +10,16 @@ import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
+
+import eu.aronnax.smartconstraints.annotation.CopyConstraints;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 class CollectElementsHelper {
@@ -38,37 +40,17 @@ class CollectElementsHelper {
         annotations.stream()
                 .filter(annot -> annot.getQualifiedName().contentEquals(CopyConstraints.class.getName()))
                 .flatMap(smartConstraintsAnnot -> roundEnv.getElementsAnnotatedWith(smartConstraintsAnnot).stream())
-                .map(targetPackage -> new SourceTargetVO(
-                        targetPackage.getAnnotation(CopyConstraints.class).from(),
-                        ((PackageElement) targetPackage).getQualifiedName()))
+                .map(this::buildSourceTarget)
                 .flatMap(sourceTargetVO -> getProperties(sourceTargetVO, processingEnv))
-                .forEach(elementTarget -> {
-                    anotElementsPerClass.merge(
-                            elementTarget.targetPackage + "."
-                                    + elementTarget
-                                            .element
-                                            .getEnclosingElement()
-                                            .getSimpleName(),
-                            Collections.singletonList(elementTarget.element),
-                            (elements, elements2) -> {
-                                ArrayList<Element> merge = new ArrayList<Element>();
-                                merge.addAll(elements);
-                                merge.addAll(elements2);
-                                return merge;
-                            });
-                });
+                .forEach(elementTarget -> mergeIntoMap(anotElementsPerClass, elementTarget));
 
-        return anotElementsPerClass.entrySet().stream()
-                .peek(entry -> LOGGER.info("CLASSE: " + entry.getKey() + " ELEMS : "
-                        + entry.getValue().stream()
-                                .map(element -> {
-                                    return element.getSimpleName() + " ("
-                                            + element.getAnnotationMirrors().stream()
-                                                    .map(Objects::toString)
-                                                    .collect(Collectors.joining(", "))
-                                            + ") ";
-                                })
-                                .collect(Collectors.joining(", "))));
+        return anotElementsPerClass.entrySet().stream().peek(this::logProcessedElement);
+    }
+
+    private SourceTargetVO buildSourceTarget(Element targetPackage) {
+        return new SourceTargetVO(
+                targetPackage.getAnnotation(CopyConstraints.class).from(),
+                ((PackageElement) targetPackage).getQualifiedName());
     }
 
     private Stream<ElemTargetVO> getProperties(SourceTargetVO sourceTargetVO, ProcessingEnvironment processingEnv) {
@@ -90,6 +72,33 @@ class CollectElementsHelper {
                         .getConstraintClasses()
                         .anyMatch(constClass -> element.getAnnotation(constClass) != null))
                 .map(element -> new ElemTargetVO(element, sourceTargetVO.targetPackage));
+    }
+
+    private static List<Element> mergeIntoMap(
+            Map<String, List<Element>> anotElementsPerClass, ElemTargetVO elementTarget) {
+        return anotElementsPerClass.merge(
+                elementTarget.targetPackage + "."
+                        + elementTarget.element.getEnclosingElement().getSimpleName(),
+                Collections.singletonList(elementTarget.element),
+                (elements, elements2) -> {
+                    ArrayList<Element> merge = new ArrayList<Element>();
+                    merge.addAll(elements);
+                    merge.addAll(elements2);
+                    return merge;
+                });
+    }
+
+    private void logProcessedElement(Map.Entry<String, List<Element>> entry) {
+        LOGGER.info("CLASSE: " + entry.getKey() + " ELEMS : "
+                + entry.getValue().stream()
+                        .map(element -> {
+                            return element.getSimpleName() + " ("
+                                    + element.getAnnotationMirrors().stream()
+                                            .map(Objects::toString)
+                                            .collect(Collectors.joining(", "))
+                                    + ") ";
+                        })
+                        .collect(Collectors.joining(", ")));
     }
 
     static class ElemTargetVO {

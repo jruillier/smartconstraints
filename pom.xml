@@ -21,7 +21,6 @@
         <module>smartconstraints-sourcerenderer-jte</module>
         <module>smartconstraints-domain</module>
         <module>smartconstraints-utils-apachecommons3</module>
-        <module>smartconstraints-sourcerenderer-simple</module>
         <module>smartconstraints-test</module>
         <module>smartconstraints-test-entity</module>
     </modules>

@@ -35,6 +35,7 @@ class CollectElementsHelper {
 
     Stream<Map.Entry<String, List<Element>>> collectAnnotElements(
             Set<? extends TypeElement> annotations, RoundEnvironment roundEnv, ProcessingEnvironment processingEnv) {
+
         Map<String, List<Element>> anotElementsPerClass = new HashMap<>();
 
         annotations.stream()
@@ -59,24 +60,16 @@ class CollectElementsHelper {
                 .getPackageElement(sourceTargetVO.sourcePackage)
                 .getEnclosedElements()
                 .stream()
-                .flatMap(typeElem -> ((TypeElement) typeElem).getEnclosedElements().stream())
-                .filter(elem -> ((TypeElement) elem.getEnclosingElement())
-                        .getQualifiedName()
-                        .toString()
-                        .startsWith(sourceTargetVO.sourcePackage.toString()))
-                .filter(element -> !element.getEnclosingElement()
-                        .getSimpleName()
-                        .toString()
-                        .endsWith("Constraints"))
+                .filter(element -> !element.getSimpleName().toString().endsWith("Constraints"))
+                .flatMap(typeElem -> typeElem.getEnclosedElements().stream())
                 .filter(element -> this.constraintsHelper
                         .getConstraintClasses()
                         .anyMatch(constClass -> element.getAnnotation(constClass) != null))
                 .map(element -> new ElemTargetVO(element, sourceTargetVO.targetPackage));
     }
 
-    private static List<Element> mergeIntoMap(
-            Map<String, List<Element>> anotElementsPerClass, ElemTargetVO elementTarget) {
-        return anotElementsPerClass.merge(
+    private void mergeIntoMap(Map<String, List<Element>> anotElementsPerClass, ElemTargetVO elementTarget) {
+        anotElementsPerClass.merge(
                 elementTarget.targetPackage + "."
                         + elementTarget.element.getEnclosingElement().getSimpleName(),
                 Collections.singletonList(elementTarget.element),

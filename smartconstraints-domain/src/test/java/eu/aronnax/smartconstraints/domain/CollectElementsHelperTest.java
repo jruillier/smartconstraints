@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.Name;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
@@ -103,34 +102,5 @@ class CollectElementsHelperTest {
         TypeElement mock = mock(TypeElement.class);
         when(mock.getQualifiedName()).thenReturn(new AName(str));
         return mock;
-    }
-
-    private class AName implements Name {
-
-        private final String str;
-
-        private AName(String str) {
-            this.str = str;
-        }
-
-        @Override
-        public boolean contentEquals(CharSequence cs) {
-            return str.contentEquals(cs);
-        }
-
-        @Override
-        public int length() {
-            return str.length();
-        }
-
-        @Override
-        public char charAt(int index) {
-            return str.charAt(index);
-        }
-
-        @Override
-        public CharSequence subSequence(int start, int end) {
-            return str.subSequence(start, end);
-        }
     }
 }

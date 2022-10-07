@@ -1,16 +1,23 @@
 package eu.aronnax.smartconstraints.domain;
 
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.lang.model.element.Element;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import eu.aronnax.smartconstraints.domainport.ImmutableSourceAnnotDto;
 import eu.aronnax.smartconstraints.domainport.ImmutableSourceClassDto;
+import eu.aronnax.smartconstraints.domainport.ImmutableSourceParamDto;
 import eu.aronnax.smartconstraints.domainport.ImmutableSourcePropertyDto;
 import eu.aronnax.smartconstraints.domainport.SourceClassDto;
+import eu.aronnax.smartconstraints.domainport.SourceParamDto;
 import eu.aronnax.smartconstraints.domainport.StringUtilsPort;
 import jakarta.inject.Inject;
 
@@ -58,17 +65,52 @@ class BuildSourceHelper {
     private ImmutableSourceAnnotDto[] getSourceAnnots(Element propertyElem) {
         return this.constraintsHelper
                 .getConstraintClasses()
-                .filter(aClass -> propertyElem.getAnnotation(aClass) != null)
-                .map(aClass -> ImmutableSourceAnnotDto.builder()
-                        .qualifiedName(propertyElem
-                                .getAnnotation(aClass)
-                                .annotationType()
-                                .getCanonicalName())
-                        .simpleName(propertyElem
-                                .getAnnotation(aClass)
-                                .annotationType()
-                                .getSimpleName())
+                .map(propertyElem::getAnnotation)
+                .filter(Objects::nonNull)
+                .map(annotElmt -> ImmutableSourceAnnotDto.builder()
+                        .qualifiedName(annotElmt.annotationType().getCanonicalName())
+                        .simpleName(annotElmt.annotationType().getSimpleName())
+                        .annotParams(this.buildAnnotParams(annotElmt))
                         .build())
                 .toArray(ImmutableSourceAnnotDto[]::new);
+    }
+
+    private List<SourceParamDto> buildAnnotParams(Annotation annotElmt) {
+        Class<? extends Annotation> annotType = annotElmt.annotationType();
+
+        List<SourceParamDto> annotParams = new ArrayList<>();
+
+        if (annotType.equals(NotNull.class)) {
+            NotNull annot = (NotNull) annotElmt;
+            if (!"{javax.validation.constraints.NotNull.message}".equals(annot.message())) {
+                annotParams.add(ImmutableSourceParamDto.builder()
+                        .name("message")
+                        .value(annot.message())
+                        .build());
+            }
+        }
+        if (annotType.equals(Size.class)) {
+            Size annot = (Size) annotElmt;
+            if (annot.min() != 0) {
+                annotParams.add(ImmutableSourceParamDto.builder()
+                        .name("min")
+                        .value(annot.min())
+                        .build());
+            }
+            if (annot.max() != 0) {
+                annotParams.add(ImmutableSourceParamDto.builder()
+                        .name("max")
+                        .value(annot.max())
+                        .build());
+            }
+            if (!"{javax.validation.constraints.Size.message}".equals(annot.message())) {
+                annotParams.add(ImmutableSourceParamDto.builder()
+                        .name("message")
+                        .value(annot.message())
+                        .build());
+            }
+        }
+
+        return annotParams;
     }
 }

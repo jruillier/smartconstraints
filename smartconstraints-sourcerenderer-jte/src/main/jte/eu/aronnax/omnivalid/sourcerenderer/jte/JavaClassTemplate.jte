@@ -1,5 +1,6 @@
 @import eu.aronnax.smartconstraints.domainport.SourceAnnotDto
 @import eu.aronnax.smartconstraints.domainport.SourceClassDto
+@import eu.aronnax.smartconstraints.domainport.SourceParamDto
 @import eu.aronnax.smartconstraints.domainport.SourcePropertyDto
 
 @param SourceClassDto sourceClass
@@ -22,7 +23,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public class ${sourceClass.simpleName()} {
 @for(SourcePropertyDto sourceElement : sourceClass.properties())
     @for(SourceAnnotDto sourceAnnot : sourceElement.annots())
-    @${sourceAnnot.qualifiedName()}@endfor
+    @${sourceAnnot.qualifiedName()}(
+        @for(SourceParamDto param : sourceAnnot.annotParams())
+            ${param.name()} = "${param.value().toString()}",
+        @endfor)
+    @endfor
     @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
     @Retention(RUNTIME)
     @Documented

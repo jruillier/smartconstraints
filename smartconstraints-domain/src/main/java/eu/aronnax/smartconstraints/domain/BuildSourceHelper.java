@@ -1,16 +1,18 @@
 package eu.aronnax.smartconstraints.domain;
 
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
+import javax.lang.model.element.Element;
+
 import eu.aronnax.smartconstraints.domainport.ImmutableSourceAnnotDto;
 import eu.aronnax.smartconstraints.domainport.ImmutableSourceClassDto;
 import eu.aronnax.smartconstraints.domainport.ImmutableSourcePropertyDto;
 import eu.aronnax.smartconstraints.domainport.SourceClassDto;
 import eu.aronnax.smartconstraints.domainport.StringUtilsPort;
 import jakarta.inject.Inject;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import javax.lang.model.element.Element;
 
 class BuildSourceHelper {
 

@@ -85,7 +85,7 @@ class BuildSourceHelper {
             if (!"{javax.validation.constraints.NotNull.message}".equals(annot.message())) {
                 annotParams.add(ImmutableSourceParamDto.builder()
                         .name("message")
-                        .value(annot.message())
+                        .stringValue(annot.message())
                         .build());
             }
         }
@@ -94,19 +94,19 @@ class BuildSourceHelper {
             if (annot.min() != 0) {
                 annotParams.add(ImmutableSourceParamDto.builder()
                         .name("min")
-                        .value(annot.min())
+                        .nonStringValue(annot.min())
                         .build());
             }
             if (annot.max() != 0) {
                 annotParams.add(ImmutableSourceParamDto.builder()
                         .name("max")
-                        .value(annot.max())
+                        .nonStringValue(annot.max())
                         .build());
             }
             if (!"{javax.validation.constraints.Size.message}".equals(annot.message())) {
                 annotParams.add(ImmutableSourceParamDto.builder()
                         .name("message")
-                        .value(annot.message())
+                        .stringValue(annot.message())
                         .build());
             }
         }

@@ -2,6 +2,7 @@
 @import eu.aronnax.smartconstraints.domainport.SourceClassDto
 @import eu.aronnax.smartconstraints.domainport.SourceParamDto
 @import eu.aronnax.smartconstraints.domainport.SourcePropertyDto
+@import gg.jte.support.ForSupport
 
 @param SourceClassDto sourceClass
 
@@ -24,10 +25,9 @@ public class ${sourceClass.simpleName()} {
 @for(SourcePropertyDto sourceElement : sourceClass.properties())
     @for(SourceAnnotDto sourceAnnot : sourceElement.annots())
     @${sourceAnnot.qualifiedName()}(
-        @for(SourceParamDto param : sourceAnnot.annotParams())
-            ${param.name()} = "${param.value().toString()}",
-        @endfor)
-    @endfor
+        @for(var param : ForSupport.of(sourceAnnot.annotParams())) ${param.get().name()} = ${param.get().quotedValue()} @if(!param.isLast()),@endif @endfor
+    )
+@endfor
     @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
     @Retention(RUNTIME)
     @Documented

@@ -10,7 +10,7 @@ public class AddressEntity {
     //    @ValidAlphanumeric
     private String street;
 
-    @NotNull
+    @NotNull(message = "ZipCode must not be null")
     @Size(min = 5, max = 5)
     private String zipCode;
 

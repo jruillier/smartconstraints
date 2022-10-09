@@ -6,6 +6,9 @@ constraints from your entities and
  generates corresponding meta annotations. 
  You can then use them easily in your DTOs. 
 
+SmartConstraints is a Work In Progress. 
+Stay tuned for incoming release on maven central :-)
+
  ## How-To
 
 Add the `smartconstraints-annotation` as 

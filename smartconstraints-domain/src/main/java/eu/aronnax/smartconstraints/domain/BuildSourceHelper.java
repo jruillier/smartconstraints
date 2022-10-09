@@ -1,7 +1,7 @@
 package eu.aronnax.smartconstraints.domain;
 
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -9,12 +9,9 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.lang.model.element.Element;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import eu.aronnax.smartconstraints.domainport.ImmutableSourceAnnotDto;
 import eu.aronnax.smartconstraints.domainport.ImmutableSourceClassDto;
-import eu.aronnax.smartconstraints.domainport.ImmutableSourceParamDto;
 import eu.aronnax.smartconstraints.domainport.ImmutableSourcePropertyDto;
 import eu.aronnax.smartconstraints.domainport.SourceClassDto;
 import eu.aronnax.smartconstraints.domainport.SourceParamDto;
@@ -28,10 +25,13 @@ class BuildSourceHelper {
     private final StringUtilsPort stringUtils;
     private final ConstraintsHelper constraintsHelper;
 
+    private final AnnotElemSourceParamsBuilder annotElemSourceParamsBuilder;
+
     @Inject
-    BuildSourceHelper(final StringUtilsPort stringUtils, ConstraintsHelper constraintsHelper) {
+    BuildSourceHelper(final StringUtilsPort stringUtils, ConstraintsHelper constraintsHelper, AnnotElemSourceParamsBuilder annotElemSourceParamsBuilder) {
         this.stringUtils = stringUtils;
         this.constraintsHelper = constraintsHelper;
+        this.annotElemSourceParamsBuilder = annotElemSourceParamsBuilder;
     }
 
     Map.Entry<CharSequence, SourceClassDto> buildSourceDto(final Map.Entry<String, List<Element>> entry) {
@@ -77,40 +77,8 @@ class BuildSourceHelper {
 
     private List<SourceParamDto> buildAnnotParams(Annotation annotElmt) {
         Class<? extends Annotation> annotType = annotElmt.annotationType();
-
-        List<SourceParamDto> annotParams = new ArrayList<>();
-
-        if (annotType.equals(NotNull.class)) {
-            NotNull annot = (NotNull) annotElmt;
-            if (!"{javax.validation.constraints.NotNull.message}".equals(annot.message())) {
-                annotParams.add(ImmutableSourceParamDto.builder()
-                        .name("message")
-                        .stringValue(annot.message())
-                        .build());
-            }
-        }
-        if (annotType.equals(Size.class)) {
-            Size annot = (Size) annotElmt;
-            if (annot.min() != 0) {
-                annotParams.add(ImmutableSourceParamDto.builder()
-                        .name("min")
-                        .nonStringValue(annot.min())
-                        .build());
-            }
-            if (annot.max() != 0) {
-                annotParams.add(ImmutableSourceParamDto.builder()
-                        .name("max")
-                        .nonStringValue(annot.max())
-                        .build());
-            }
-            if (!"{javax.validation.constraints.Size.message}".equals(annot.message())) {
-                annotParams.add(ImmutableSourceParamDto.builder()
-                        .name("message")
-                        .stringValue(annot.message())
-                        .build());
-            }
-        }
-
-        return annotParams;
+        return SourceBuilderForAnnot.getByAnnotType(annotType)
+                .map( sourceBuilderForAnnot -> sourceBuilderForAnnot.process(this.annotElemSourceParamsBuilder, annotElmt))
+                .orElse(Collections.emptyList());
     }
 }

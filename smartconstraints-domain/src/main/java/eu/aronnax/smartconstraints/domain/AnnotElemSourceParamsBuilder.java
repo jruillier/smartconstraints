@@ -29,14 +29,18 @@ import javax.validation.constraints.Size;
 
 import eu.aronnax.smartconstraints.domainport.ImmutableSourceParamDto;
 import eu.aronnax.smartconstraints.domainport.SourceParamDto;
+import eu.aronnax.smartconstraints.domainport.StringUtilsPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 @ApplicationScoped
-public class AnnotElemSourceParamsBuilder implements AnnotElementProcessor<List<SourceParamDto>> {
+public class AnnotElemSourceParamsBuilder implements AnnotElementVisitor<List<SourceParamDto>> {
+
+    private final StringUtilsPort stringUtils;
 
     @Inject
-    public AnnotElemSourceParamsBuilder() {
+    public AnnotElemSourceParamsBuilder(StringUtilsPort stringUtils) {
+        this.stringUtils = stringUtils;
     }
 
     @Override
@@ -59,6 +63,18 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementProcessor<List<
     public List<SourceParamDto> processDecimalMax(Annotation annotElmt) {
         DecimalMax annot = (DecimalMax) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
+        if (!annot.inclusive()) {
+            annotParams.add(ImmutableSourceParamDto.builder()
+                    .name("inclusive")
+                    .nonStringValue(annot.inclusive())
+                    .build());
+        }
+        if (this.stringUtils.isNotBlank(annot.value())) {
+            annotParams.add(ImmutableSourceParamDto.builder()
+                    .name("value")
+                    .stringValue(annot.value())
+                    .build());
+        }
         this.addMessageParam(annotParams, DecimalMax.class, annot.message());
         return annotParams;
     }
@@ -67,6 +83,16 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementProcessor<List<
     public List<SourceParamDto> processDecimalMin(Annotation annotElmt) {
         DecimalMin annot = (DecimalMin) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
+        if (!annot.inclusive()) {
+            annotParams.add(ImmutableSourceParamDto.builder()
+                    .name("inclusive")
+                    .nonStringValue(annot.inclusive())
+                    .build());
+        }
+        annotParams.add(ImmutableSourceParamDto.builder()
+                .name("value")
+                .stringValue(annot.value())
+                .build());
         this.addMessageParam(annotParams, DecimalMin.class, annot.message());
         return annotParams;
     }
@@ -75,6 +101,14 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementProcessor<List<
     public List<SourceParamDto> processDigits(Annotation annotElmt) {
         Digits annot = (Digits) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
+        annotParams.add(ImmutableSourceParamDto.builder()
+                .name("fraction")
+                .nonStringValue(annot.fraction())
+                .build());
+        annotParams.add(ImmutableSourceParamDto.builder()
+                .name("integer")
+                .nonStringValue(annot.integer())
+                .build());
         this.addMessageParam(annotParams, Digits.class, annot.message());
         return annotParams;
     }
@@ -83,6 +117,18 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementProcessor<List<
     public List<SourceParamDto> processEmail(Annotation annotElmt) {
         Email annot = (Email) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
+        if (".*".equals(annot.regexp())) {
+            annotParams.add(ImmutableSourceParamDto.builder()
+                    .name("regexp")
+                    .nonStringValue(annot.regexp())
+                    .build());
+        }
+        if (annot.flags().length != 0) {
+            annotParams.add(ImmutableSourceParamDto.builder()
+                    .name("flags")
+                    .nonStringValue(annot.flags())
+                    .build());
+        }
         this.addMessageParam(annotParams, Email.class, annot.message());
         return annotParams;
     }
@@ -107,6 +153,10 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementProcessor<List<
     public List<SourceParamDto> processMax(Annotation annotElmt) {
         Max annot = (Max) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
+        annotParams.add(ImmutableSourceParamDto.builder()
+                .name("value")
+                .nonStringValue(annot.value())
+                .build());
         this.addMessageParam(annotParams, Max.class, annot.message());
         return annotParams;
     }
@@ -115,6 +165,10 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementProcessor<List<
     public List<SourceParamDto> processMin(Annotation annotElmt) {
         Min annot = (Min) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
+        annotParams.add(ImmutableSourceParamDto.builder()
+                .name("value")
+                .nonStringValue(annot.value())
+                .build());
         this.addMessageParam(annotParams, Min.class, annot.message());
         return annotParams;
     }
@@ -187,6 +241,16 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementProcessor<List<
     public List<SourceParamDto> processPattern(Annotation annotElmt) {
         Pattern annot = (Pattern) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
+        annotParams.add(ImmutableSourceParamDto.builder()
+                .name("regexp")
+                .nonStringValue(annot.regexp())
+                .build());
+        if (annot.flags().length != 0) {
+            annotParams.add(ImmutableSourceParamDto.builder()
+                    .name("flags")
+                    .nonStringValue(annot.flags())
+                    .build());
+        }
         this.addMessageParam(annotParams, Pattern.class, annot.message());
         return annotParams;
     }
@@ -210,7 +274,6 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementProcessor<List<
     @Override
     public List<SourceParamDto> processSize(Annotation annotElmt) {
         List<SourceParamDto> annotParams = new ArrayList<>();
-
         Size annot = (Size) annotElmt;
         if (annot.min() != 0) {
             annotParams.add(ImmutableSourceParamDto.builder()

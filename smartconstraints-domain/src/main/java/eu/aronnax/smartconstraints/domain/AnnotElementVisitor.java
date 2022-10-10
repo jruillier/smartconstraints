@@ -2,7 +2,7 @@ package eu.aronnax.smartconstraints.domain;
 
 import java.lang.annotation.Annotation;
 
-interface AnnotElementProcessor<R> {
+interface AnnotElementVisitor<R> {
 
     R processAssertFalse(Annotation annotElmt);
     R processAssertTrue(Annotation annotElmt);

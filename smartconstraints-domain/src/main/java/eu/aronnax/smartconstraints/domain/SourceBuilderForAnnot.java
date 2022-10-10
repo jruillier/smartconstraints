@@ -8,14 +8,14 @@ enum SourceBuilderForAnnot {
 
     NotNull(javax.validation.constraints.NotNull.class) {
         @Override
-        <R> R process(AnnotElementProcessor<R> elemProc, Annotation annotElmt) {
+        <R> R process(AnnotElementVisitor<R> elemProc, Annotation annotElmt) {
             return elemProc.processNotNull(annotElmt);
         }
     },
 
     Size(javax.validation.constraints.Size.class) {
         @Override
-        <R> R process(AnnotElementProcessor<R> elemProc, Annotation annotElmt) {
+        <R> R process(AnnotElementVisitor<R> elemProc, Annotation annotElmt) {
             return elemProc.processSize(annotElmt);
         }
     };
@@ -36,6 +36,6 @@ enum SourceBuilderForAnnot {
         return this.annotClass;
     }
 
-    abstract <R> R process(AnnotElementProcessor<R> elemProc, Annotation annotElmt);
+    abstract <R> R process(AnnotElementVisitor<R> elemProc, Annotation annotElmt);
 
 }

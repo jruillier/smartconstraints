@@ -1,7 +1,6 @@
 package eu.aronnax.smartconstraints.domain;
 
 import java.lang.annotation.Annotation;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -76,9 +75,6 @@ class BuildSourceHelper {
     }
 
     private List<SourceParamDto> buildAnnotParams(Annotation annotElmt) {
-        Class<? extends Annotation> annotType = annotElmt.annotationType();
-        return SourceBuilderForAnnot.getByAnnotType(annotType)
-                .map( sourceBuilderForAnnot -> sourceBuilderForAnnot.process(this.annotElemSourceParamsBuilder, annotElmt))
-                .orElse(Collections.emptyList());
+        return this.annotElemSourceParamsBuilder.process(annotElmt);
     }
 }

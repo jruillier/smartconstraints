@@ -1,9 +1,10 @@
 package eu.aronnax.smartconstraints.annotationprocessor;
 
 import com.google.auto.service.AutoService;
-import eu.aronnax.smartconstraints.domain.ProcessCopyConstraintsAnnotationUC;
+
 import java.util.Set;
 import java.util.logging.Logger;
+
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
@@ -12,8 +13,10 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
 
+import eu.aronnax.smartconstraints.domain.ProcessCopyConstraintsAnnotationUC;
+
 @SupportedAnnotationTypes({"javax.validation.constraints.*", "eu.aronnax.smartconstraints.annotation.CopyConstraints"})
-@SupportedSourceVersion(SourceVersion.RELEASE_11)
+@SupportedSourceVersion(SourceVersion.RELEASE_17)
 @AutoService(Processor.class)
 public class CopyConstraintsProcessor extends AbstractProcessor {
 

@@ -2,6 +2,7 @@ package eu.aronnax.smartconstraints.domain;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.validation.constraints.AssertFalse;
@@ -34,7 +35,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 @ApplicationScoped
-public class AnnotElemSourceParamsBuilder implements AnnotElementVisitor<List<SourceParamDto>> {
+class AnnotElemSourceParamsBuilder {
 
     private final StringUtilsPort stringUtils;
 
@@ -43,24 +44,49 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementVisitor<List<So
         this.stringUtils = stringUtils;
     }
 
-    @Override
-    public List<SourceParamDto> processAssertFalse(Annotation annotElmt) {
+    public List<SourceParamDto> process(Annotation annotElmt) {
+        return AnnotEnum.getByAnnotType(annotElmt.annotationType())
+                .map(annotEnum -> switch (annotEnum) {
+                    case AssertFalse -> this.processAssertFalse(annotElmt);
+                    case AssertTrue -> this.processAssertTrue(annotElmt);
+                    case DecimalMax -> this.processDecimalMax(annotElmt);
+                    case DecimalMin -> this.processDecimalMin(annotElmt);
+                    case Digits -> this.processDigits(annotElmt);
+                    case Email -> this.processEmail(annotElmt);
+                    case Future -> this.processFuture(annotElmt);
+                    case FutureOrPresent -> this.processFutureOrPresent(annotElmt);
+                    case Max -> this.processMax(annotElmt);
+                    case Min -> this.processMin(annotElmt);
+                    case Negative -> this.processNegative(annotElmt);
+                    case NegativeOrZero -> this.processNegativeOrZero(annotElmt);
+                    case NotBlank -> this.processNotBlank(annotElmt);
+                    case NotEmpty -> this.processNotEmpty(annotElmt);
+                    case NotNull -> this.processNotNull(annotElmt);
+                    case Null -> this.processNull(annotElmt);
+                    case Past -> this.processPast(annotElmt);
+                    case PastOrPresent -> this.processPastOrPresent(annotElmt);
+                    case Pattern -> this.processPattern(annotElmt);
+                    case Positive -> this.processPositive(annotElmt);
+                    case PositiveOrZero -> this.processPositiveOrZero(annotElmt);
+                    case Size -> this.processSize(annotElmt);
+                }).orElse(Collections.emptyList());
+    }
+
+    private List<SourceParamDto> processAssertFalse(Annotation annotElmt) {
         AssertFalse annot = (AssertFalse) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, AssertFalse.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processAssertTrue(Annotation annotElmt) {
+    private List<SourceParamDto> processAssertTrue(Annotation annotElmt) {
         AssertTrue annot = (AssertTrue) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, AssertTrue.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processDecimalMax(Annotation annotElmt) {
+    private List<SourceParamDto> processDecimalMax(Annotation annotElmt) {
         DecimalMax annot = (DecimalMax) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         if (!annot.inclusive()) {
@@ -79,8 +105,7 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementVisitor<List<So
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processDecimalMin(Annotation annotElmt) {
+    private List<SourceParamDto> processDecimalMin(Annotation annotElmt) {
         DecimalMin annot = (DecimalMin) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         if (!annot.inclusive()) {
@@ -97,8 +122,7 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementVisitor<List<So
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processDigits(Annotation annotElmt) {
+    private List<SourceParamDto> processDigits(Annotation annotElmt) {
         Digits annot = (Digits) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         annotParams.add(ImmutableSourceParamDto.builder()
@@ -113,8 +137,7 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementVisitor<List<So
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processEmail(Annotation annotElmt) {
+    private List<SourceParamDto> processEmail(Annotation annotElmt) {
         Email annot = (Email) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         if (".*".equals(annot.regexp())) {
@@ -133,24 +156,21 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementVisitor<List<So
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processFuture(Annotation annotElmt) {
+    private List<SourceParamDto> processFuture(Annotation annotElmt) {
         Future annot = (Future) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, Future.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processFutureOrPresent(Annotation annotElmt) {
+    private List<SourceParamDto> processFutureOrPresent(Annotation annotElmt) {
         FutureOrPresent annot = (FutureOrPresent) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, FutureOrPresent.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processMax(Annotation annotElmt) {
+    private List<SourceParamDto> processMax(Annotation annotElmt) {
         Max annot = (Max) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         annotParams.add(ImmutableSourceParamDto.builder()
@@ -161,8 +181,7 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementVisitor<List<So
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processMin(Annotation annotElmt) {
+    private List<SourceParamDto> processMin(Annotation annotElmt) {
         Min annot = (Min) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         annotParams.add(ImmutableSourceParamDto.builder()
@@ -173,72 +192,63 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementVisitor<List<So
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processNegative(Annotation annotElmt) {
+    private List<SourceParamDto> processNegative(Annotation annotElmt) {
         Negative annot = (Negative) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, Negative.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processNegativeOrZero(Annotation annotElmt) {
+    private List<SourceParamDto> processNegativeOrZero(Annotation annotElmt) {
         NegativeOrZero annot = (NegativeOrZero) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, NegativeOrZero.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processNotBlank(Annotation annotElmt) {
+    private List<SourceParamDto> processNotBlank(Annotation annotElmt) {
         NotBlank annot = (NotBlank) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, NotBlank.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processNotEmpty(Annotation annotElmt) {
+    private List<SourceParamDto> processNotEmpty(Annotation annotElmt) {
         NotEmpty annot = (NotEmpty) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, NotEmpty.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processNotNull(Annotation annotElmt) {
+    private List<SourceParamDto> processNotNull(Annotation annotElmt) {
         NotNull annot = (NotNull) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, NotNull.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processNull(Annotation annotElmt) {
+    private List<SourceParamDto> processNull(Annotation annotElmt) {
         Null annot = (Null) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, Null.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processPast(Annotation annotElmt) {
+    private List<SourceParamDto> processPast(Annotation annotElmt) {
         Past annot = (Past) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, Past.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processPastOrPresent(Annotation annotElmt) {
+    private List<SourceParamDto> processPastOrPresent(Annotation annotElmt) {
         PastOrPresent annot = (PastOrPresent) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, PastOrPresent.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processPattern(Annotation annotElmt) {
+    private List<SourceParamDto> processPattern(Annotation annotElmt) {
         Pattern annot = (Pattern) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         annotParams.add(ImmutableSourceParamDto.builder()
@@ -255,24 +265,21 @@ public class AnnotElemSourceParamsBuilder implements AnnotElementVisitor<List<So
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processPositive(Annotation annotElmt) {
+    private List<SourceParamDto> processPositive(Annotation annotElmt) {
         Positive annot = (Positive) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, Positive.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processPositiveOrZero(Annotation annotElmt) {
+    private List<SourceParamDto> processPositiveOrZero(Annotation annotElmt) {
         PositiveOrZero annot = (PositiveOrZero) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         this.addMessageParam(annotParams, PositiveOrZero.class, annot.message());
         return annotParams;
     }
 
-    @Override
-    public List<SourceParamDto> processSize(Annotation annotElmt) {
+    private List<SourceParamDto> processSize(Annotation annotElmt) {
         List<SourceParamDto> annotParams = new ArrayList<>();
         Size annot = (Size) annotElmt;
         if (annot.min() != 0) {

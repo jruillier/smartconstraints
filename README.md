@@ -46,7 +46,7 @@ entities located in third party libraries.
 
 ## Requirements
 
-You project must be a least a Java 11 project.
+Your project must be at least a Java 17 project.
 
 Your project must use `javax.validation.constraints.*` annotations.
 

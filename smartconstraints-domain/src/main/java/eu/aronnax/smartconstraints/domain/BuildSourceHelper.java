@@ -9,11 +9,10 @@ import java.util.stream.Collectors;
 
 import javax.lang.model.element.Element;
 
-import eu.aronnax.smartconstraints.domainport.ImmutableSourceAnnotDto;
-import eu.aronnax.smartconstraints.domainport.ImmutableSourceClassDto;
-import eu.aronnax.smartconstraints.domainport.ImmutableSourcePropertyDto;
+import eu.aronnax.smartconstraints.domainport.SourceAnnotDto;
 import eu.aronnax.smartconstraints.domainport.SourceClassDto;
 import eu.aronnax.smartconstraints.domainport.SourceParamDto;
+import eu.aronnax.smartconstraints.domainport.SourcePropertyDto;
 import eu.aronnax.smartconstraints.domainport.StringUtilsPort;
 import jakarta.inject.Inject;
 
@@ -41,37 +40,34 @@ class BuildSourceHelper {
 
         MapEntryDto<SourceClassDto> result = new MapEntryDto<>(
                 classQualifiedName,
-                ImmutableSourceClassDto.builder()
-                        .packageName(packageName)
-                        .qualifiedName(classQualifiedName)
-                        .simpleName(classSimpleName)
-                        .addAllProperties(this.getSourceProperties(entry))
-                        .build());
+                new SourceClassDto(
+                        packageName,
+                        classQualifiedName,
+                        classSimpleName,
+                        this.getSourceProperties(entry)));
         LOGGER.info(result.getValue().toString());
         return result;
     }
 
-    private List<ImmutableSourcePropertyDto> getSourceProperties(Map.Entry<String, List<Element>> entry) {
+    private List<SourcePropertyDto> getSourceProperties(Map.Entry<String, List<Element>> entry) {
         return entry.getValue().stream()
-                .map(propertyElem -> ImmutableSourcePropertyDto.builder()
-                        .name(this.stringUtils.capitalize(
-                                propertyElem.getSimpleName().toString()))
-                        .addAnnots(getSourceAnnots(propertyElem))
-                        .build())
+                .map(propertyElem -> new SourcePropertyDto(
+                        this.stringUtils.capitalize(
+                                propertyElem.getSimpleName().toString()),
+                        this.getSourceAnnots(propertyElem)))
                 .collect(Collectors.toList());
     }
 
-    private ImmutableSourceAnnotDto[] getSourceAnnots(Element propertyElem) {
+    private List<SourceAnnotDto> getSourceAnnots(Element propertyElem) {
         return this.constraintsHelper
                 .getConstraintClasses()
                 .map(propertyElem::getAnnotation)
                 .filter(Objects::nonNull)
-                .map(annotElmt -> ImmutableSourceAnnotDto.builder()
-                        .qualifiedName(annotElmt.annotationType().getCanonicalName())
-                        .simpleName(annotElmt.annotationType().getSimpleName())
-                        .annotParams(this.buildAnnotParams(annotElmt))
-                        .build())
-                .toArray(ImmutableSourceAnnotDto[]::new);
+                .map(annotElmt -> new SourceAnnotDto(
+                        annotElmt.annotationType().getCanonicalName(),
+                        annotElmt.annotationType().getSimpleName(),
+                        this.buildAnnotParams(annotElmt)))
+                .collect(Collectors.toList());
     }
 
     private List<SourceParamDto> buildAnnotParams(Annotation annotElmt) {

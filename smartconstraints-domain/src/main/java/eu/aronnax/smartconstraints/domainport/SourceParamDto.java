@@ -4,30 +4,22 @@ import java.util.Optional;
 
 import javax.validation.constraints.AssertTrue;
 
-import org.immutables.value.Value;
-
 import jakarta.annotation.Nullable;
 
-@Value.Immutable
-public interface SourceParamDto {
-
-    String name();
-
-    @Nullable
-    Object nonStringValue();
-
-    @Nullable
-    String stringValue();
+public record SourceParamDto(
+        String name,
+        @Nullable Object nonStringValue,
+        @Nullable String stringValue) {
 
     @AssertTrue
-    default boolean isWithvalue() {
-        return Optional.ofNullable(nonStringValue())
-                .or(() -> Optional.ofNullable(nonStringValue()))
+    boolean isWithvalue() {
+        return Optional.ofNullable(this.nonStringValue())
+                .or(() -> Optional.ofNullable(this.stringValue()))
                 .isPresent();
     }
 
-    default String quotedValue() {
-        return Optional.ofNullable(nonStringValue())
+    public String quotedValue() {
+        return Optional.ofNullable(this.nonStringValue())
                 .map(Object::toString)
                 .orElse("\"" + this.stringValue() + "\"");
     }

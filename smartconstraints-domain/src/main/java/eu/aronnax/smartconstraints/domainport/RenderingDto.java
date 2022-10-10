@@ -1,15 +1,9 @@
 package eu.aronnax.smartconstraints.domainport;
 
-import org.immutables.value.Value;
+public record RenderingDto(
+        String packageName,
+        String classSimpleName,
+        String classQualifiedName,
+        String sourceRendering) {
 
-@Value.Immutable
-public abstract class RenderingDto {
-
-    abstract String packageName();
-
-    abstract String classSimpleName();
-
-    public abstract String classQualifiedName();
-
-    public abstract String sourceRendering();
 }

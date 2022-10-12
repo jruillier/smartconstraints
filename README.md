@@ -16,7 +16,7 @@ a compile time dependency to your project.
 (Not required at runtime) 
 
 Add the `@CopyConstraints` annotation 
-on a `package-info.javaˋ in jour project, 
+on a `package-info.java` in jour project, 
 where meta-annotations will be generated. 
 
 Add the `from` attribute to `@CopyConstraints` 

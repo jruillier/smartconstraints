@@ -17,8 +17,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class JteSourceRenderer implements SourceRendererPort {
 
     @Inject
-    public JteSourceRenderer() {
-    }
+    public JteSourceRenderer() {}
 
     @Override
     public RenderingDto renderSource(Map.Entry<CharSequence, SourceClassDto> entry) {
@@ -27,10 +26,6 @@ public class JteSourceRenderer implements SourceRendererPort {
         String qualifiedName = entry.getKey().toString();
         String packageName = NamingUtil.extractPackageName(qualifiedName);
         String classSimpleName = NamingUtil.extractSimpleName(qualifiedName);
-        return new RenderingDto(
-                packageName,
-                classSimpleName,
-                qualifiedName,
-                output.toString());
+        return new RenderingDto(packageName, classSimpleName, qualifiedName, output.toString());
     }
 }

@@ -14,7 +14,6 @@ class ConstraintsHelper {
     ConstraintsHelper() {}
 
     Stream<Class<? extends Annotation>> getConstraintClasses() {
-        return Arrays.stream(AnnotEnum.values())
-                .map(AnnotEnum::getAnnotClass);
+        return Arrays.stream(AnnotEnum.values()).map(AnnotEnum::getAnnotClass);
     }
 }

@@ -22,11 +22,13 @@ class BuildSourceHelper {
 
     private final StringUtilsPort stringUtils;
     private final ConstraintsHelper constraintsHelper;
-
     private final AnnotElemSourceParamsBuilder annotElemSourceParamsBuilder;
 
     @Inject
-    BuildSourceHelper(final StringUtilsPort stringUtils, ConstraintsHelper constraintsHelper, AnnotElemSourceParamsBuilder annotElemSourceParamsBuilder) {
+    BuildSourceHelper(
+            final StringUtilsPort stringUtils,
+            final ConstraintsHelper constraintsHelper,
+            final AnnotElemSourceParamsBuilder annotElemSourceParamsBuilder) {
         this.stringUtils = stringUtils;
         this.constraintsHelper = constraintsHelper;
         this.annotElemSourceParamsBuilder = annotElemSourceParamsBuilder;
@@ -40,11 +42,7 @@ class BuildSourceHelper {
 
         MapEntryDto<SourceClassDto> result = new MapEntryDto<>(
                 classQualifiedName,
-                new SourceClassDto(
-                        packageName,
-                        classQualifiedName,
-                        classSimpleName,
-                        this.getSourceProperties(entry)));
+                new SourceClassDto(packageName, classQualifiedName, classSimpleName, this.getSourceProperties(entry)));
         LOGGER.info(result.getValue().toString());
         return result;
     }
@@ -52,8 +50,7 @@ class BuildSourceHelper {
     private List<SourcePropertyDto> getSourceProperties(Map.Entry<String, List<Element>> entry) {
         return entry.getValue().stream()
                 .map(propertyElem -> new SourcePropertyDto(
-                        this.stringUtils.capitalize(
-                                propertyElem.getSimpleName().toString()),
+                        this.stringUtils.capitalize(propertyElem.getSimpleName().toString()),
                         this.getSourceAnnots(propertyElem)))
                 .collect(Collectors.toList());
     }

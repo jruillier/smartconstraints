@@ -92,19 +92,19 @@
                 <version>2.24.1</version>
                 <configuration>
                     <java>
+                        <importOrder />
+                        <removeUnusedImports />
                         <palantirJavaFormat />
                     </java>
                 </configuration>
-                <!--
                 <executions>
                     <execution>
                         <goals>
                             <goal>apply</goal>
                         </goals>
-                        <phase>process-sources</phase>
+                        <phase>clean</phase>
                     </execution>
                 </executions>
-                -->
             </plugin>
         </plugins>
 

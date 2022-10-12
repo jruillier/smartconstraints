@@ -5,72 +5,49 @@ import java.util.Arrays;
 import java.util.Optional;
 
 enum AnnotEnum {
+    AssertFalse(javax.validation.constraints.AssertFalse.class) {},
 
-    AssertFalse(javax.validation.constraints.AssertFalse.class) {
-    },
+    AssertTrue(javax.validation.constraints.AssertTrue.class) {},
 
-    AssertTrue(javax.validation.constraints.AssertTrue.class) {
-    },
+    DecimalMax(javax.validation.constraints.DecimalMax.class) {},
 
-    DecimalMax(javax.validation.constraints.DecimalMax.class) {
-    },
+    DecimalMin(javax.validation.constraints.DecimalMin.class) {},
 
-    DecimalMin(javax.validation.constraints.DecimalMin.class) {
-    },
+    Digits(javax.validation.constraints.Digits.class) {},
 
-    Digits(javax.validation.constraints.Digits.class) {
-    },
+    Email(javax.validation.constraints.Email.class) {},
 
-    Email(javax.validation.constraints.Email.class) {
-    },
+    Future(javax.validation.constraints.Future.class) {},
 
-    Future(javax.validation.constraints.Future.class) {
-    },
+    FutureOrPresent(javax.validation.constraints.FutureOrPresent.class) {},
 
-    FutureOrPresent(javax.validation.constraints.FutureOrPresent.class) {
-    },
+    Max(javax.validation.constraints.Max.class) {},
 
-    Max(javax.validation.constraints.Max.class) {
-    },
+    Min(javax.validation.constraints.Min.class) {},
 
-    Min(javax.validation.constraints.Min.class) {
-    },
+    Negative(javax.validation.constraints.Negative.class) {},
 
-    Negative(javax.validation.constraints.Negative.class) {
-    },
+    NegativeOrZero(javax.validation.constraints.NegativeOrZero.class) {},
 
-    NegativeOrZero(javax.validation.constraints.NegativeOrZero.class) {
-    },
+    NotBlank(javax.validation.constraints.NotBlank.class) {},
 
-    NotBlank(javax.validation.constraints.NotBlank.class) {
-    },
+    NotEmpty(javax.validation.constraints.NotEmpty.class) {},
 
-    NotEmpty(javax.validation.constraints.NotEmpty.class) {
-    },
+    NotNull(javax.validation.constraints.NotNull.class) {},
 
-    NotNull(javax.validation.constraints.NotNull.class) {
-    },
+    Null(javax.validation.constraints.Null.class) {},
 
-    Null(javax.validation.constraints.Null.class) {
-    },
+    Past(javax.validation.constraints.Past.class) {},
 
-    Past(javax.validation.constraints.Past.class) {
-    },
+    PastOrPresent(javax.validation.constraints.PastOrPresent.class) {},
 
-    PastOrPresent(javax.validation.constraints.PastOrPresent.class) {
-    },
+    Pattern(javax.validation.constraints.Pattern.class) {},
 
-    Pattern(javax.validation.constraints.Pattern.class) {
-    },
+    Positive(javax.validation.constraints.Positive.class) {},
 
-    Positive(javax.validation.constraints.Positive.class) {
-    },
+    PositiveOrZero(javax.validation.constraints.PositiveOrZero.class) {},
 
-    PositiveOrZero(javax.validation.constraints.PositiveOrZero.class) {
-    },
-
-    Size(javax.validation.constraints.Size.class) {
-    };
+    Size(javax.validation.constraints.Size.class) {};
 
     static Optional<AnnotEnum> getByAnnotType(Class<? extends Annotation> annotType) {
         return Arrays.stream(values())
@@ -87,5 +64,4 @@ enum AnnotEnum {
     public Class<? extends Annotation> getAnnotClass() {
         return this.annotClass;
     }
-
 }

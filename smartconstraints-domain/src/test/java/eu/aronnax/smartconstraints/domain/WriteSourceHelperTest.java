@@ -32,8 +32,10 @@ class WriteSourceHelperTest {
 
     @Mock
     private Filer filer;
+
     @Mock
     private JavaFileObject javaFileObject;
+
     @Mock
     private Writer writer;
 
@@ -48,20 +50,18 @@ class WriteSourceHelperTest {
     void writeSource() throws IOException {
         // Prepare
         String classQualifiedName = "gp.fake.test.TestAddressConstraints";
-        String sourceRendering = """
+        String sourceRendering =
+                """
                 package gp.fake.test;
-                                        
-                public class TestAddressConstraints {
-                    
-                }
-                """.stripIndent();
 
-        RenderingDto renderingDto = new RenderingDto(
-                "gp.fake.test",
-                "TestAddressConstraints",
-                classQualifiedName,
-                sourceRendering
-        );
+                public class TestAddressConstraints {
+
+                }
+                """
+                        .stripIndent();
+
+        RenderingDto renderingDto =
+                new RenderingDto("gp.fake.test", "TestAddressConstraints", classQualifiedName, sourceRendering);
 
         // Run
         this.instance.writeSource(renderingDto, processingEnv);
@@ -74,6 +74,5 @@ class WriteSourceHelperTest {
         verify(this.writer, times(1)).write(sourceRendering);
         verify(this.writer, times(1)).close();
         verifyNoMoreInteractions(this.writer);
-
     }
 }

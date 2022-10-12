@@ -68,7 +68,8 @@ class AnnotElemSourceParamsBuilder {
                     case Positive -> this.processPositive(annotElmt);
                     case PositiveOrZero -> this.processPositiveOrZero(annotElmt);
                     case Size -> this.processSize(annotElmt);
-                }).orElse(Collections.emptyList());
+                })
+                .orElse(Collections.emptyList());
     }
 
     private List<SourceParamDto> processAssertFalse(Annotation annotElmt) {
@@ -89,16 +90,10 @@ class AnnotElemSourceParamsBuilder {
         DecimalMax annot = (DecimalMax) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         if (!annot.inclusive()) {
-            annotParams.add(new SourceParamDto(
-                    "inclusive",
-                    annot.inclusive(),
-                    null));
+            annotParams.add(new SourceParamDto("inclusive", annot.inclusive(), null));
         }
         if (this.stringUtils.isNotBlank(annot.value())) {
-            annotParams.add(new SourceParamDto(
-                    "value",
-                    null,
-                    annot.value()));
+            annotParams.add(new SourceParamDto("value", null, annot.value()));
         }
         this.addMessageParam(annotParams, DecimalMax.class, annot.message());
         return annotParams;
@@ -108,15 +103,9 @@ class AnnotElemSourceParamsBuilder {
         DecimalMin annot = (DecimalMin) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         if (!annot.inclusive()) {
-            annotParams.add(new SourceParamDto(
-                    "inclusive",
-                    annot.inclusive(),
-                    null));
+            annotParams.add(new SourceParamDto("inclusive", annot.inclusive(), null));
         }
-        annotParams.add(new SourceParamDto(
-                "value",
-                null,
-                annot.value()));
+        annotParams.add(new SourceParamDto("value", null, annot.value()));
         this.addMessageParam(annotParams, DecimalMin.class, annot.message());
         return annotParams;
     }
@@ -124,14 +113,8 @@ class AnnotElemSourceParamsBuilder {
     private List<SourceParamDto> processDigits(Annotation annotElmt) {
         Digits annot = (Digits) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
-        annotParams.add(new SourceParamDto(
-                "fraction",
-                annot.fraction(),
-                null));
-        annotParams.add(new SourceParamDto(
-                "integer",
-                annot.integer(),
-                null));
+        annotParams.add(new SourceParamDto("fraction", annot.fraction(), null));
+        annotParams.add(new SourceParamDto("integer", annot.integer(), null));
         this.addMessageParam(annotParams, Digits.class, annot.message());
         return annotParams;
     }
@@ -140,16 +123,10 @@ class AnnotElemSourceParamsBuilder {
         Email annot = (Email) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
         if (".*".equals(annot.regexp())) {
-            annotParams.add(new SourceParamDto(
-                    "regexp",
-                    null,
-                    annot.regexp()));
+            annotParams.add(new SourceParamDto("regexp", null, annot.regexp()));
         }
         if (annot.flags().length != 0) {
-            annotParams.add(new SourceParamDto(
-                    "flags",
-                    annot.flags(),
-                    null));
+            annotParams.add(new SourceParamDto("flags", annot.flags(), null));
         }
         this.addMessageParam(annotParams, Email.class, annot.message());
         return annotParams;
@@ -172,10 +149,7 @@ class AnnotElemSourceParamsBuilder {
     private List<SourceParamDto> processMax(Annotation annotElmt) {
         Max annot = (Max) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
-        annotParams.add(new SourceParamDto(
-                "value",
-                annot.value(),
-                null));
+        annotParams.add(new SourceParamDto("value", annot.value(), null));
         this.addMessageParam(annotParams, Max.class, annot.message());
         return annotParams;
     }
@@ -183,10 +157,7 @@ class AnnotElemSourceParamsBuilder {
     private List<SourceParamDto> processMin(Annotation annotElmt) {
         Min annot = (Min) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
-        annotParams.add(new SourceParamDto(
-                "value",
-                annot.value(),
-                null));
+        annotParams.add(new SourceParamDto("value", annot.value(), null));
         this.addMessageParam(annotParams, Min.class, annot.message());
         return annotParams;
     }
@@ -250,15 +221,9 @@ class AnnotElemSourceParamsBuilder {
     private List<SourceParamDto> processPattern(Annotation annotElmt) {
         Pattern annot = (Pattern) annotElmt;
         List<SourceParamDto> annotParams = new ArrayList<>();
-        annotParams.add(new SourceParamDto(
-                "regexp",
-                null,
-                annot.regexp()));
+        annotParams.add(new SourceParamDto("regexp", null, annot.regexp()));
         if (annot.flags().length != 0) {
-            annotParams.add(new SourceParamDto(
-                    "flags",
-                    annot.flags(),
-                    null));
+            annotParams.add(new SourceParamDto("flags", annot.flags(), null));
         }
         this.addMessageParam(annotParams, Pattern.class, annot.message());
         return annotParams;
@@ -282,27 +247,19 @@ class AnnotElemSourceParamsBuilder {
         List<SourceParamDto> annotParams = new ArrayList<>();
         Size annot = (Size) annotElmt;
         if (annot.min() != 0) {
-            annotParams.add(new SourceParamDto(
-                    "min",
-                    annot.min(),
-                    null));
+            annotParams.add(new SourceParamDto("min", annot.min(), null));
         }
         if (annot.max() != 0) {
-            annotParams.add(new SourceParamDto(
-                    "max",
-                    annot.max(),
-                    null));
+            annotParams.add(new SourceParamDto("max", annot.max(), null));
         }
         this.addMessageParam(annotParams, Size.class, annot.message());
         return annotParams;
     }
 
-    private void addMessageParam(List<SourceParamDto> annotParams, Class<? extends Annotation> annotClass, String message) {
+    private void addMessageParam(
+            List<SourceParamDto> annotParams, Class<? extends Annotation> annotClass, String message) {
         if (!this.buildMessageKeyForParam(annotClass, "message").equals(message)) {
-            annotParams.add(new SourceParamDto(
-                    "message",
-                    null,
-                    message));
+            annotParams.add(new SourceParamDto("message", null, message));
         }
     }
 

@@ -6,10 +6,7 @@ import javax.validation.constraints.AssertTrue;
 
 import jakarta.annotation.Nullable;
 
-public record SourceParamDto(
-        String name,
-        @Nullable Object nonStringValue,
-        @Nullable String stringValue) {
+public record SourceParamDto(String name, @Nullable Object nonStringValue, @Nullable String stringValue) {
 
     @AssertTrue
     boolean isWithvalue() {
@@ -23,5 +20,4 @@ public record SourceParamDto(
                 .map(Object::toString)
                 .orElse("\"" + this.stringValue() + "\"");
     }
-
 }

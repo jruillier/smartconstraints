@@ -52,8 +52,7 @@ class AnnotElemSourceParamsBuilderTest {
     private StringUtilsPort stringUtilsPort;
 
     @BeforeEach
-    void setUp() {
-    }
+    void setUp() {}
 
     @Test
     void processAssertFalse() {
@@ -65,9 +64,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A AssertFalse msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A AssertFalse msg")), params);
     }
 
     @Test
@@ -80,9 +77,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A AssertTrue msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A AssertTrue msg")), params);
     }
 
     @Test
@@ -101,11 +96,12 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("inclusive", false, null),
-                new SourceParamDto("value", null, "42"),
-                new SourceParamDto("message", null, "A DecimalMax msg")
-        ), params);
+        assertEquals(
+                Arrays.asList(
+                        new SourceParamDto("inclusive", false, null),
+                        new SourceParamDto("value", null, "42"),
+                        new SourceParamDto("message", null, "A DecimalMax msg")),
+                params);
     }
 
     @Test
@@ -119,11 +115,12 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("inclusive", false, null),
-                new SourceParamDto("value", null, "42"),
-                new SourceParamDto("message", null, "A DecimalMin msg")
-        ), params);
+        assertEquals(
+                Arrays.asList(
+                        new SourceParamDto("inclusive", false, null),
+                        new SourceParamDto("value", null, "42"),
+                        new SourceParamDto("message", null, "A DecimalMin msg")),
+                params);
     }
 
     @Test
@@ -138,11 +135,12 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("fraction", 3, null),
-                new SourceParamDto("integer", 2, null),
-                new SourceParamDto("message", null, "A Digits msg")
-        ), params);
+        assertEquals(
+                Arrays.asList(
+                        new SourceParamDto("fraction", 3, null),
+                        new SourceParamDto("integer", 2, null),
+                        new SourceParamDto("message", null, "A Digits msg")),
+                params);
     }
 
     @Test
@@ -156,9 +154,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A Email msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A Email msg")), params);
     }
 
     @Test
@@ -171,9 +167,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A Future msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A Future msg")), params);
     }
 
     @Test
@@ -186,9 +180,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A FutureOrPresent msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A FutureOrPresent msg")), params);
     }
 
     @Test
@@ -202,10 +194,9 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("value", 5L, null),
-                new SourceParamDto("message", null, "A Max msg")
-        ), params);
+        assertEquals(
+                Arrays.asList(new SourceParamDto("value", 5L, null), new SourceParamDto("message", null, "A Max msg")),
+                params);
     }
 
     @Test
@@ -219,10 +210,9 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("value", 5L, null),
-                new SourceParamDto("message", null, "A Min msg")
-        ), params);
+        assertEquals(
+                Arrays.asList(new SourceParamDto("value", 5L, null), new SourceParamDto("message", null, "A Min msg")),
+                params);
     }
 
     @Test
@@ -235,9 +225,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A Negative msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A Negative msg")), params);
     }
 
     @Test
@@ -250,9 +238,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A NegativeOrZero msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A NegativeOrZero msg")), params);
     }
 
     @Test
@@ -265,9 +251,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A NotBlank msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A NotBlank msg")), params);
     }
 
     @Test
@@ -280,9 +264,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A NotEmpty msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A NotEmpty msg")), params);
     }
 
     @Test
@@ -295,9 +277,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A NotNull msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A NotNull msg")), params);
     }
 
     @Test
@@ -310,9 +290,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A Null msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A Null msg")), params);
     }
 
     @Test
@@ -325,9 +303,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A Past msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A Past msg")), params);
     }
 
     @Test
@@ -340,9 +316,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A PastOrPresent msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A PastOrPresent msg")), params);
     }
 
     @Test
@@ -357,10 +331,11 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("regexp", null, "aSmartRegexp"),
-                new SourceParamDto("message", null, "A Pattern msg")
-        ), params);
+        assertEquals(
+                Arrays.asList(
+                        new SourceParamDto("regexp", null, "aSmartRegexp"),
+                        new SourceParamDto("message", null, "A Pattern msg")),
+                params);
     }
 
     @Test
@@ -373,9 +348,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A Positive msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A Positive msg")), params);
     }
 
     @Test
@@ -388,9 +361,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A PositiveOrZero msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A PositiveOrZero msg")), params);
     }
 
     @Test
@@ -403,9 +374,7 @@ class AnnotElemSourceParamsBuilderTest {
         List<SourceParamDto> params = instance.process(annotElmt);
 
         // Verify
-        assertEquals(Arrays.asList(
-                new SourceParamDto("message", null, "A Size msg")
-        ), params);
+        assertEquals(List.of(new SourceParamDto("message", null, "A Size msg")), params);
     }
 
     private <R extends Annotation> R buildAnnotElmt(Class<R> classToMock) {

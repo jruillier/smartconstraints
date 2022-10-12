@@ -8,5 +8,4 @@ public record SourceClassDto(
         @NotNull String packageName,
         @NotNull String qualifiedName,
         @NotNull String simpleName,
-        @Size(min = 1) List<SourcePropertyDto> properties) {
-}
+        @Size(min = 1) List<SourcePropertyDto> properties) {}

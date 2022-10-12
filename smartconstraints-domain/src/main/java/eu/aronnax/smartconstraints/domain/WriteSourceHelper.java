@@ -3,12 +3,11 @@ package eu.aronnax.smartconstraints.domain;
 import eu.aronnax.smartconstraints.domainport.RenderingDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.tools.JavaFileObject;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.tools.JavaFileObject;
 
 @ApplicationScoped
 class WriteSourceHelper {

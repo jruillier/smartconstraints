@@ -19,4 +19,9 @@ public class AddressEntity {
 
     @Past
     private LocalDate existsSince;
+
+    @NotNull
+    public String getAsCustomString() {
+        return this.street + "\n" + this.zipCode + "\n" + this.countryCode;
+    }
 }

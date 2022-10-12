@@ -1,9 +1,5 @@
 package eu.aronnax.smartconstraints.sourcerenderer.jte;
 
-import java.util.Map;
-
-import javax.inject.Inject;
-
 import eu.aronnax.smartconstraints.domain.NamingUtil;
 import eu.aronnax.smartconstraints.domainport.RenderingDto;
 import eu.aronnax.smartconstraints.domainport.SourceClassDto;
@@ -12,6 +8,9 @@ import gg.jte.TemplateOutput;
 import gg.jte.generated.precompiled.eu.aronnax.omnivalid.sourcerenderer.jte.JteJavaClassTemplateGenerated;
 import gg.jte.output.StringOutput;
 import jakarta.enterprise.context.ApplicationScoped;
+
+import javax.inject.Inject;
+import java.util.Map;
 
 @ApplicationScoped
 public class JteSourceRenderer implements SourceRendererPort {

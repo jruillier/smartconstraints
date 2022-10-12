@@ -1,12 +1,8 @@
 package eu.aronnax.smartconstraints.domain;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.lang.model.element.Element;
-import javax.lang.model.element.VariableElement;
-
+import eu.aronnax.smartconstraints.domainport.SourceClassDto;
+import eu.aronnax.smartconstraints.domainport.SourcePropertyDto;
+import eu.aronnax.smartconstraints.domainport.StringUtilsPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,9 +10,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import eu.aronnax.smartconstraints.domainport.SourceClassDto;
-import eu.aronnax.smartconstraints.domainport.SourcePropertyDto;
-import eu.aronnax.smartconstraints.domainport.StringUtilsPort;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.VariableElement;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;

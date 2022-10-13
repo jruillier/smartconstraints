@@ -53,7 +53,7 @@ class CollectElementsHelper {
                 .getPackageElement(sourceTargetVO.sourcePackage)
                 .getEnclosedElements()
                 .stream()
-                .filter(element -> !element.getSimpleName().toString().endsWith("Constraints"))
+                .filter(element -> !element.getSimpleName().toString().endsWith("_Constraints"))
                 .flatMap(typeElem -> typeElem.getEnclosedElements().stream())
                 .filter(typeElem -> typeElem.getKind().equals(ElementKind.FIELD))
                 .filter(element -> this.constraintsHelper

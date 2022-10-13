@@ -30,7 +30,7 @@ class BuildSourceHelper {
 
     Map.Entry<CharSequence, SourceClassDto> buildSourceDto(final Map.Entry<String, List<Element>> entry) {
 
-        String classQualifiedName = entry.getKey() + "Constraints";
+        String classQualifiedName = entry.getKey() + "_Constraints";
         String classSimpleName = NamingUtil.extractSimpleName(classQualifiedName);
         String packageName = NamingUtil.extractPackageName(classQualifiedName);
 

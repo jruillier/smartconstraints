@@ -1,6 +1,5 @@
 @import eu.aronnax.smartconstraints.domainport.SourceAnnotDto
 @import eu.aronnax.smartconstraints.domainport.SourceClassDto
-@import eu.aronnax.smartconstraints.domainport.SourceParamDto
 @import eu.aronnax.smartconstraints.domainport.SourcePropertyDto
 @import gg.jte.support.ForSupport
 
@@ -13,6 +12,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
+import javax.validation.Payload;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
@@ -21,7 +21,7 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public class ${sourceClass.simpleName()} {
+class ${sourceClass.simpleName()} {
 @for(SourcePropertyDto sourceElement : sourceClass.properties())
     @for(SourceAnnotDto sourceAnnot : sourceElement.annots())
     @${sourceAnnot.qualifiedName()}(
@@ -32,6 +32,10 @@ public class ${sourceClass.simpleName()} {
     @Retention(RUNTIME)
     @Documented
     @Constraint(validatedBy = {})
-    public @interface ${sourceElement.name()} {}
+    public @interface ${sourceElement.name()} {
+        String message() default "{${sourceClass.qualifiedName()}.message}";
+        Class<?>[] groups() default { };
+        Class<? extends Payload>[] payload() default { };
+    }
 @endfor
 }

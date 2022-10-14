@@ -1,13 +1,11 @@
 package eu.aronnax.smartconstraints.domain.usecase;
 
-import eu.aronnax.smartconstraints.annotation.CopyConstraints;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
+import eu.aronnax.smartconstraints.annotation.CopyConstraints;
+import java.util.*;
+import java.util.stream.Collectors;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
@@ -16,11 +14,12 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.Elements;
 import javax.validation.constraints.Size;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class CollectElementsHelperTest {
@@ -39,9 +38,9 @@ class CollectElementsHelperTest {
     @Test
     void collectAnnotElements() {
         // Prepare
-        TypeElement copyConstraintsAnnotDef = buildTypeElement(CopyConstraints.class.getName());
+        TypeElement copyConstraintsAnnotDef = this.buildTypeElement(CopyConstraints.class.getName());
         Set<? extends TypeElement> annots =
-                new HashSet<>(Arrays.asList(buildTypeElement("gp.fake.AnotherAnnotation"), copyConstraintsAnnotDef));
+                new HashSet<>(Arrays.asList(this.buildTypeElement("gp.fake.AnotherAnnotation"), copyConstraintsAnnotDef));
 
         PackageElement annotPackage = this.buildCCPackageElement("gp.fake.targetpkg", "gp.fake.frompkg");
 

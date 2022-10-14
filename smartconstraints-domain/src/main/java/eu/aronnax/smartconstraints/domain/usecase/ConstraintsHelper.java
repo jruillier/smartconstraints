@@ -2,7 +2,6 @@ package eu.aronnax.smartconstraints.domain.usecase;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.stream.Stream;

@@ -1,9 +1,8 @@
 package eu.aronnax.smartconstraints.domain.port.sourcerenderer;
 
 import jakarta.annotation.Nullable;
-
-import javax.validation.constraints.AssertTrue;
 import java.util.Optional;
+import javax.validation.constraints.AssertTrue;
 
 public record SourceParamDto(String name, @Nullable Object nonStringValue, @Nullable String stringValue) {
 

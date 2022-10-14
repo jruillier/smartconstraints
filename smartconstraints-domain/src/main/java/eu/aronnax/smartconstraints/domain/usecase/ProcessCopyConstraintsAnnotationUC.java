@@ -2,11 +2,10 @@ package eu.aronnax.smartconstraints.domain.usecase;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
+import java.util.Set;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.TypeElement;
-import java.util.Set;
 
 @ApplicationScoped
 public class ProcessCopyConstraintsAnnotationUC {

@@ -15,21 +15,21 @@ class AName implements Name {
 
     @Override
     public boolean contentEquals(CharSequence cs) {
-        return str.contentEquals(cs);
+        return this.str.contentEquals(cs);
     }
 
     @Override
     public int length() {
-        return str.length();
+        return this.str.length();
     }
 
     @Override
     public char charAt(int index) {
-        return str.charAt(index);
+        return this.str.charAt(index);
     }
 
     @Override
     public CharSequence subSequence(int start, int end) {
-        return str.subSequence(start, end);
+        return this.str.subSequence(start, end);
     }
 }

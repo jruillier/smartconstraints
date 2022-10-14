@@ -36,8 +36,8 @@ class CollectElementsHelper {
                 .filter(annot -> annot.getQualifiedName().contentEquals(CopyConstraints.class.getName()))
                 .flatMap(smartConstraintsAnnot -> roundEnv.getElementsAnnotatedWith(smartConstraintsAnnot).stream())
                 .map(this::buildSourceTarget)
-                .flatMap(sourceTargetVO -> getProperties(sourceTargetVO, processingEnv))
-                .forEach(elementTarget -> mergeIntoMap(anotElementsPerClass, elementTarget));
+                .flatMap(sourceTargetVO -> this.getProperties(sourceTargetVO, processingEnv))
+                .forEach(elementTarget -> this.mergeIntoMap(anotElementsPerClass, elementTarget));
 
         return anotElementsPerClass.entrySet().stream().peek(this::logProcessedElement);
     }

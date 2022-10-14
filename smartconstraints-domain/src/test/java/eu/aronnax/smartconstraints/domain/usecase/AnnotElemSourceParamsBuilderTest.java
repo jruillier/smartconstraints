@@ -35,11 +35,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processAssertFalse() {
         // Prepare
-        AssertFalse annotElmt = buildAnnotElmt(AssertFalse.class);
+        AssertFalse annotElmt = this.buildAnnotElmt(AssertFalse.class);
         when(annotElmt.message()).thenReturn("A AssertFalse msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A AssertFalse msg")), params);
@@ -48,11 +48,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processAssertTrue() {
         // Prepare
-        AssertTrue annotElmt = buildAnnotElmt(AssertTrue.class);
+        AssertTrue annotElmt = this.buildAnnotElmt(AssertTrue.class);
         when(annotElmt.message()).thenReturn("A AssertTrue msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A AssertTrue msg")), params);
@@ -66,12 +66,12 @@ class AnnotElemSourceParamsBuilderTest {
                         .map(String::isBlank)
                         .orElse(false));
 
-        DecimalMax annotElmt = buildAnnotElmt(DecimalMax.class);
+        DecimalMax annotElmt = this.buildAnnotElmt(DecimalMax.class);
         when(annotElmt.message()).thenReturn("A DecimalMax msg");
         when(annotElmt.value()).thenReturn("42");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(
@@ -85,12 +85,12 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processDecimalMin() {
         // Prepare
-        DecimalMin annotElmt = buildAnnotElmt(DecimalMin.class);
+        DecimalMin annotElmt = this.buildAnnotElmt(DecimalMin.class);
         when(annotElmt.message()).thenReturn("A DecimalMin msg");
         when(annotElmt.value()).thenReturn("42");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(
@@ -104,13 +104,13 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processDigits() {
         // Prepare
-        Digits annotElmt = buildAnnotElmt(Digits.class);
+        Digits annotElmt = this.buildAnnotElmt(Digits.class);
         when(annotElmt.message()).thenReturn("A Digits msg");
         when(annotElmt.integer()).thenReturn(2);
         when(annotElmt.fraction()).thenReturn(3);
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(
@@ -124,12 +124,12 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processEmail() {
         // Prepare
-        Email annotElmt = buildAnnotElmt(Email.class);
+        Email annotElmt = this.buildAnnotElmt(Email.class);
         when(annotElmt.message()).thenReturn("A Email msg");
         when(annotElmt.flags()).thenReturn(new Pattern.Flag[0]);
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A Email msg")), params);
@@ -138,11 +138,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processFuture() {
         // Prepare
-        Future annotElmt = buildAnnotElmt(Future.class);
+        Future annotElmt = this.buildAnnotElmt(Future.class);
         when(annotElmt.message()).thenReturn("A Future msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A Future msg")), params);
@@ -151,11 +151,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processFutureOrPresent() {
         // Prepare
-        FutureOrPresent annotElmt = buildAnnotElmt(FutureOrPresent.class);
+        FutureOrPresent annotElmt = this.buildAnnotElmt(FutureOrPresent.class);
         when(annotElmt.message()).thenReturn("A FutureOrPresent msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A FutureOrPresent msg")), params);
@@ -164,12 +164,12 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processMax() {
         // Prepare
-        Max annotElmt = buildAnnotElmt(Max.class);
+        Max annotElmt = this.buildAnnotElmt(Max.class);
         when(annotElmt.message()).thenReturn("A Max msg");
         when(annotElmt.value()).thenReturn(5L);
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(
@@ -180,12 +180,12 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processMin() {
         // Prepare
-        Min annotElmt = buildAnnotElmt(Min.class);
+        Min annotElmt = this.buildAnnotElmt(Min.class);
         when(annotElmt.message()).thenReturn("A Min msg");
         when(annotElmt.value()).thenReturn(5L);
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(
@@ -196,11 +196,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processNegative() {
         // Prepare
-        Negative annotElmt = buildAnnotElmt(Negative.class);
+        Negative annotElmt = this.buildAnnotElmt(Negative.class);
         when(annotElmt.message()).thenReturn("A Negative msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A Negative msg")), params);
@@ -209,11 +209,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processNegativeOrZero() {
         // Prepare
-        NegativeOrZero annotElmt = buildAnnotElmt(NegativeOrZero.class);
+        NegativeOrZero annotElmt = this.buildAnnotElmt(NegativeOrZero.class);
         when(annotElmt.message()).thenReturn("A NegativeOrZero msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A NegativeOrZero msg")), params);
@@ -222,11 +222,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processNotBlank() {
         // Prepare
-        NotBlank annotElmt = buildAnnotElmt(NotBlank.class);
+        NotBlank annotElmt = this.buildAnnotElmt(NotBlank.class);
         when(annotElmt.message()).thenReturn("A NotBlank msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A NotBlank msg")), params);
@@ -235,11 +235,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processNotEmpty() {
         // Prepare
-        NotEmpty annotElmt = buildAnnotElmt(NotEmpty.class);
+        NotEmpty annotElmt = this.buildAnnotElmt(NotEmpty.class);
         when(annotElmt.message()).thenReturn("A NotEmpty msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A NotEmpty msg")), params);
@@ -248,11 +248,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processNotNull() {
         // Prepare
-        NotNull annotElmt = buildAnnotElmt(NotNull.class);
+        NotNull annotElmt = this.buildAnnotElmt(NotNull.class);
         when(annotElmt.message()).thenReturn("A NotNull msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A NotNull msg")), params);
@@ -261,11 +261,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processNull() {
         // Prepare
-        Null annotElmt = buildAnnotElmt(Null.class);
+        Null annotElmt = this.buildAnnotElmt(Null.class);
         when(annotElmt.message()).thenReturn("A Null msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A Null msg")), params);
@@ -274,11 +274,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processPast() {
         // Prepare
-        Past annotElmt = buildAnnotElmt(Past.class);
+        Past annotElmt = this.buildAnnotElmt(Past.class);
         when(annotElmt.message()).thenReturn("A Past msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A Past msg")), params);
@@ -287,11 +287,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processPastOrPresent() {
         // Prepare
-        PastOrPresent annotElmt = buildAnnotElmt(PastOrPresent.class);
+        PastOrPresent annotElmt = this.buildAnnotElmt(PastOrPresent.class);
         when(annotElmt.message()).thenReturn("A PastOrPresent msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A PastOrPresent msg")), params);
@@ -300,13 +300,13 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processPattern() {
         // Prepare
-        Pattern annotElmt = buildAnnotElmt(Pattern.class);
+        Pattern annotElmt = this.buildAnnotElmt(Pattern.class);
         when(annotElmt.message()).thenReturn("A Pattern msg");
         when(annotElmt.regexp()).thenReturn("aSmartRegexp");
         when(annotElmt.flags()).thenReturn(new Pattern.Flag[0]);
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(
@@ -319,11 +319,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processPositive() {
         // Prepare
-        Positive annotElmt = buildAnnotElmt(Positive.class);
+        Positive annotElmt = this.buildAnnotElmt(Positive.class);
         when(annotElmt.message()).thenReturn("A Positive msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A Positive msg")), params);
@@ -332,11 +332,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processPositiveOrZero() {
         // Prepare
-        PositiveOrZero annotElmt = buildAnnotElmt(PositiveOrZero.class);
+        PositiveOrZero annotElmt = this.buildAnnotElmt(PositiveOrZero.class);
         when(annotElmt.message()).thenReturn("A PositiveOrZero msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A PositiveOrZero msg")), params);
@@ -345,11 +345,11 @@ class AnnotElemSourceParamsBuilderTest {
     @Test
     void processSize() {
         // Prepare
-        Size annotElmt = buildAnnotElmt(Size.class);
+        Size annotElmt = this.buildAnnotElmt(Size.class);
         when(annotElmt.message()).thenReturn("A Size msg");
 
         // Run
-        List<SourceParamDto> params = instance.process(annotElmt);
+        List<SourceParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(List.of(new SourceParamDto("message", null, "A Size msg")), params);

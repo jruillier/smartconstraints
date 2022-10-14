@@ -35,7 +35,7 @@ class BuildSourceHelperTest {
 
     @BeforeEach
     void setUp() {
-        when(stringUtils.capitalize(anyString())).thenAnswer(invocation -> {
+        when(this.stringUtils.capitalize(anyString())).thenAnswer(invocation -> {
             String str = invocation.getArgument(0, String.class);
             return str.substring(0, 1).toUpperCase(Locale.ROOT) + str.substring(1);
         });

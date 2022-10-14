@@ -1,8 +1,8 @@
-package eu.aronnax.smartconstraints.domainport;
+package eu.aronnax.smartconstraints.domain.port.sourcerenderer;
 
-import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 public record SourceClassDto(
         @NotNull String packageName,

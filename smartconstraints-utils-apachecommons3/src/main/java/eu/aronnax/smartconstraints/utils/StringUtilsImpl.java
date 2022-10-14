@@ -1,6 +1,6 @@
 package eu.aronnax.smartconstraints.utils;
 
-import eu.aronnax.smartconstraints.domainport.StringUtilsPort;
+import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.commons.lang3.StringUtils;

@@ -1,4 +1,4 @@
-package eu.aronnax.smartconstraints.domainport;
+package eu.aronnax.smartconstraints.domain.port.sourcerenderer;
 
 import java.util.List;
 

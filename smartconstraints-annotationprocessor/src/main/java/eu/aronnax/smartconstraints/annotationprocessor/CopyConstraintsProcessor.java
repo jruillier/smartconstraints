@@ -1,12 +1,13 @@
 package eu.aronnax.smartconstraints.annotationprocessor;
 
 import com.google.auto.service.AutoService;
-import eu.aronnax.smartconstraints.domain.ProcessCopyConstraintsAnnotationUC;
-import java.util.Set;
-import java.util.logging.Logger;
+import eu.aronnax.smartconstraints.domain.usecase.ProcessCopyConstraintsAnnotationUC;
+
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
+import java.util.Set;
+import java.util.logging.Logger;
 
 @SupportedAnnotationTypes({"javax.validation.constraints.*", "eu.aronnax.smartconstraints.annotation.CopyConstraints"})
 @SupportedSourceVersion(SourceVersion.RELEASE_17)

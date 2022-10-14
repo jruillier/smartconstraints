@@ -5,7 +5,6 @@ import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceClassDto;
 import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceRendererPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
 import java.util.Map;
 
 @ApplicationScoped

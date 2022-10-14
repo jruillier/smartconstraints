@@ -1,21 +1,20 @@
 package eu.aronnax.smartconstraints.domain.usecase;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
 import eu.aronnax.smartconstraints.domain.port.sourcerenderer.RenderingDto;
+import java.io.IOException;
+import java.io.Writer;
+import javax.annotation.processing.Filer;
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.tools.JavaFileObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import javax.annotation.processing.Filer;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.tools.JavaFileObject;
-import java.io.IOException;
-import java.io.Writer;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class WriteSourceHelperTest {

@@ -4,12 +4,11 @@ import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceParamDto;
 import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
-import javax.validation.constraints.*;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.validation.constraints.*;
 
 @ApplicationScoped
 class AnnotElemSourceParamsBuilder {

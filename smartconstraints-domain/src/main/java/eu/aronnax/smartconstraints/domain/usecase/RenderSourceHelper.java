@@ -1,10 +1,11 @@
-package eu.aronnax.smartconstraints.domain;
+package eu.aronnax.smartconstraints.domain.usecase;
 
-import eu.aronnax.smartconstraints.domainport.RenderingDto;
-import eu.aronnax.smartconstraints.domainport.SourceClassDto;
-import eu.aronnax.smartconstraints.domainport.SourceRendererPort;
+import eu.aronnax.smartconstraints.domain.port.sourcerenderer.RenderingDto;
+import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceClassDto;
+import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceRendererPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+
 import java.util.Map;
 
 @ApplicationScoped

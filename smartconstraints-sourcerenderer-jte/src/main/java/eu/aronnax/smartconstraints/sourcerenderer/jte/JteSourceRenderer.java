@@ -1,15 +1,16 @@
 package eu.aronnax.smartconstraints.sourcerenderer.jte;
 
-import eu.aronnax.smartconstraints.domain.NamingUtil;
-import eu.aronnax.smartconstraints.domainport.RenderingDto;
-import eu.aronnax.smartconstraints.domainport.SourceClassDto;
-import eu.aronnax.smartconstraints.domainport.SourceRendererPort;
+import eu.aronnax.smartconstraints.domain.port.sourcerenderer.RenderingDto;
+import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceClassDto;
+import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceRendererPort;
+import eu.aronnax.smartconstraints.domain.usecase.NamingUtil;
 import gg.jte.TemplateOutput;
 import gg.jte.generated.precompiled.eu.aronnax.omnivalid.sourcerenderer.jte.JteJavaClassTemplateGenerated;
 import gg.jte.output.StringOutput;
 import jakarta.enterprise.context.ApplicationScoped;
-import java.util.Map;
+
 import javax.inject.Inject;
+import java.util.Map;
 
 @ApplicationScoped
 public class JteSourceRenderer implements SourceRendererPort {

@@ -1,6 +1,6 @@
-@import eu.aronnax.smartconstraints.domainport.SourceAnnotDto
-@import eu.aronnax.smartconstraints.domainport.SourceClassDto
-@import eu.aronnax.smartconstraints.domainport.SourcePropertyDto
+@import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceAnnotDto
+@import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceClassDto
+@import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourcePropertyDto
 @import gg.jte.support.ForSupport
 
 @param SourceClassDto sourceClass

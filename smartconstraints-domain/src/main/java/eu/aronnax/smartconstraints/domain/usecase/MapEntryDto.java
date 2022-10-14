@@ -1,4 +1,4 @@
-package eu.aronnax.smartconstraints.domain;
+package eu.aronnax.smartconstraints.domain.usecase;
 
 import java.util.Map;
 

@@ -1,23 +1,24 @@
-package eu.aronnax.smartconstraints.domain;
+package eu.aronnax.smartconstraints.domain.usecase;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import eu.aronnax.smartconstraints.domainport.SourceParamDto;
-import eu.aronnax.smartconstraints.domainport.StringUtilsPort;
-import java.lang.annotation.Annotation;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import javax.validation.constraints.*;
+import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceParamDto;
+import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import javax.validation.constraints.*;
+import java.lang.annotation.Annotation;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class AnnotElemSourceParamsBuilderTest {

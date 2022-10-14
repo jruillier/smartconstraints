@@ -1,14 +1,19 @@
-package eu.aronnax.smartconstraints.domain;
+package eu.aronnax.smartconstraints.domain.usecase;
 
-import eu.aronnax.smartconstraints.domainport.*;
+import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceAnnotDto;
+import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceClassDto;
+import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceParamDto;
+import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourcePropertyDto;
+import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;
 import jakarta.inject.Inject;
+
+import javax.lang.model.element.Element;
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import javax.lang.model.element.Element;
 
 class BuildSourceHelper {
 

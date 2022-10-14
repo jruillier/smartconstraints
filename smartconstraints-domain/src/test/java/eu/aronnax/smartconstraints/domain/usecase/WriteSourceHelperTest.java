@@ -60,7 +60,7 @@ class WriteSourceHelperTest {
                 new RenderingDto("gp.fake.test", "TestAddressConstraints", classQualifiedName, sourceRendering);
 
         // Run
-        this.instance.writeSource(renderingDto, processingEnv);
+        this.instance.writeSource(renderingDto, this.processingEnv);
 
         // Verify
         verify(this.filer, times(1)).createSourceFile(classQualifiedName);

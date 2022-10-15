@@ -5,8 +5,8 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceClassDto;
-import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourcePropertyDto;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetClassDto;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetMetaAnnotDto;
 import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;
 import java.util.List;
 import java.util.Locale;
@@ -51,13 +51,13 @@ class BuildSourceHelperTest {
                 new MapEntryDto("gp.fake.FakeAddress", List.<Element>of(propStreetName));
 
         // Run
-        Map.Entry<CharSequence, SourceClassDto> result = this.instance.buildSourceDto(elementsByName);
+        Map.Entry<CharSequence, TargetClassDto> result = this.instance.buildSourceDto(elementsByName);
 
         // Verify
         assertEquals("FakeAddress_Constraints", result.getValue().simpleName());
         assertEquals("gp.fake.FakeAddress_Constraints", result.getValue().qualifiedName());
-        List<SourcePropertyDto> resultProperties = result.getValue().properties();
-        SourcePropertyDto streetNameProp = resultProperties.get(0);
+        List<TargetMetaAnnotDto> resultProperties = result.getValue().properties();
+        TargetMetaAnnotDto streetNameProp = resultProperties.get(0);
         assertEquals("StreetName", streetNameProp.name());
         //        List<SourceAnnotDto> streetNameAnnots = streetNameProp.annots();
         //        assertEquals("NotNull", streetNameAnnots.get(0).simpleName());

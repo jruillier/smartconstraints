@@ -1,8 +1,8 @@
 package eu.aronnax.smartconstraints.domain.usecase;
 
-import eu.aronnax.smartconstraints.domain.port.sourcerenderer.RenderingDto;
-import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceClassDto;
-import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceRendererPort;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.CodeRendererPort;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.RenderingDto;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetClassDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.util.Map;
@@ -10,14 +10,14 @@ import java.util.Map;
 @ApplicationScoped
 class RenderSourceHelper {
 
-    private final SourceRendererPort sourceRendererPort;
+    private final CodeRendererPort codeRendererPort;
 
     @Inject
-    RenderSourceHelper(SourceRendererPort sourceRendererPort) {
-        this.sourceRendererPort = sourceRendererPort;
+    RenderSourceHelper(CodeRendererPort codeRendererPort) {
+        this.codeRendererPort = codeRendererPort;
     }
 
-    RenderingDto renderSource(Map.Entry<CharSequence, SourceClassDto> entry) {
-        return this.sourceRendererPort.renderSource(entry);
+    RenderingDto renderSource(Map.Entry<CharSequence, TargetClassDto> entry) {
+        return this.codeRendererPort.render(entry);
     }
 }

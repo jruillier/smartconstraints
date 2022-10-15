@@ -5,7 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceParamDto;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetAnnotParamDto;
 import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
@@ -38,10 +38,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A AssertFalse msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A AssertFalse msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A AssertFalse msg")), params);
     }
 
     @Test
@@ -51,10 +51,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A AssertTrue msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A AssertTrue msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A AssertTrue msg")), params);
     }
 
     @Test
@@ -70,14 +70,14 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.value()).thenReturn("42");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(
                 Arrays.asList(
-                        new SourceParamDto("inclusive", false, null),
-                        new SourceParamDto("value", null, "42"),
-                        new SourceParamDto("message", null, "A DecimalMax msg")),
+                        new TargetAnnotParamDto("inclusive", false, null),
+                        new TargetAnnotParamDto("value", null, "42"),
+                        new TargetAnnotParamDto("message", null, "A DecimalMax msg")),
                 params);
     }
 
@@ -89,14 +89,14 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.value()).thenReturn("42");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(
                 Arrays.asList(
-                        new SourceParamDto("inclusive", false, null),
-                        new SourceParamDto("value", null, "42"),
-                        new SourceParamDto("message", null, "A DecimalMin msg")),
+                        new TargetAnnotParamDto("inclusive", false, null),
+                        new TargetAnnotParamDto("value", null, "42"),
+                        new TargetAnnotParamDto("message", null, "A DecimalMin msg")),
                 params);
     }
 
@@ -109,14 +109,14 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.fraction()).thenReturn(3);
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(
                 Arrays.asList(
-                        new SourceParamDto("fraction", 3, null),
-                        new SourceParamDto("integer", 2, null),
-                        new SourceParamDto("message", null, "A Digits msg")),
+                        new TargetAnnotParamDto("fraction", 3, null),
+                        new TargetAnnotParamDto("integer", 2, null),
+                        new TargetAnnotParamDto("message", null, "A Digits msg")),
                 params);
     }
 
@@ -128,10 +128,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.flags()).thenReturn(new Pattern.Flag[0]);
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A Email msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A Email msg")), params);
     }
 
     @Test
@@ -141,10 +141,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A Future msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A Future msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A Future msg")), params);
     }
 
     @Test
@@ -154,10 +154,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A FutureOrPresent msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A FutureOrPresent msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A FutureOrPresent msg")), params);
     }
 
     @Test
@@ -168,11 +168,11 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.value()).thenReturn(5L);
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(
-                Arrays.asList(new SourceParamDto("value", 5L, null), new SourceParamDto("message", null, "A Max msg")),
+                Arrays.asList(new TargetAnnotParamDto("value", 5L, null), new TargetAnnotParamDto("message", null, "A Max msg")),
                 params);
     }
 
@@ -184,11 +184,11 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.value()).thenReturn(5L);
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(
-                Arrays.asList(new SourceParamDto("value", 5L, null), new SourceParamDto("message", null, "A Min msg")),
+                Arrays.asList(new TargetAnnotParamDto("value", 5L, null), new TargetAnnotParamDto("message", null, "A Min msg")),
                 params);
     }
 
@@ -199,10 +199,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A Negative msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A Negative msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A Negative msg")), params);
     }
 
     @Test
@@ -212,10 +212,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A NegativeOrZero msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A NegativeOrZero msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A NegativeOrZero msg")), params);
     }
 
     @Test
@@ -225,10 +225,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A NotBlank msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A NotBlank msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A NotBlank msg")), params);
     }
 
     @Test
@@ -238,10 +238,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A NotEmpty msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A NotEmpty msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A NotEmpty msg")), params);
     }
 
     @Test
@@ -251,10 +251,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A NotNull msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A NotNull msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A NotNull msg")), params);
     }
 
     @Test
@@ -264,10 +264,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A Null msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A Null msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A Null msg")), params);
     }
 
     @Test
@@ -277,10 +277,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A Past msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A Past msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A Past msg")), params);
     }
 
     @Test
@@ -290,10 +290,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A PastOrPresent msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A PastOrPresent msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A PastOrPresent msg")), params);
     }
 
     @Test
@@ -305,13 +305,13 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.flags()).thenReturn(new Pattern.Flag[0]);
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
         assertEquals(
                 Arrays.asList(
-                        new SourceParamDto("regexp", null, "aSmartRegexp"),
-                        new SourceParamDto("message", null, "A Pattern msg")),
+                        new TargetAnnotParamDto("regexp", null, "aSmartRegexp"),
+                        new TargetAnnotParamDto("message", null, "A Pattern msg")),
                 params);
     }
 
@@ -322,10 +322,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A Positive msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A Positive msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A Positive msg")), params);
     }
 
     @Test
@@ -335,10 +335,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A PositiveOrZero msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A PositiveOrZero msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A PositiveOrZero msg")), params);
     }
 
     @Test
@@ -348,10 +348,10 @@ class AnnotElemSourceParamsBuilderTest {
         when(annotElmt.message()).thenReturn("A Size msg");
 
         // Run
-        List<SourceParamDto> params = this.instance.process(annotElmt);
+        List<TargetAnnotParamDto> params = this.instance.process(annotElmt);
 
         // Verify
-        assertEquals(List.of(new SourceParamDto("message", null, "A Size msg")), params);
+        assertEquals(List.of(new TargetAnnotParamDto("message", null, "A Size msg")), params);
     }
 
     private <R extends Annotation> R buildAnnotElmt(Class<R> classToMock) {

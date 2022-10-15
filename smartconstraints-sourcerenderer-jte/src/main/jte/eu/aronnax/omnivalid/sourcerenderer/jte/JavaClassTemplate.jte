@@ -1,9 +1,9 @@
-@import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceAnnotDto
-@import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceClassDto
-@import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourcePropertyDto
+@import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetAnnotDto
+@import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetClassDto
+@import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetMetaAnnotDto
 @import gg.jte.support.ForSupport
 
-@param SourceClassDto sourceClass
+@param TargetClassDto sourceClass
 
 package ${sourceClass.packageName()};
 
@@ -22,8 +22,8 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 class ${sourceClass.simpleName()} {
-@for(SourcePropertyDto sourceElement : sourceClass.properties())
-    @for(SourceAnnotDto sourceAnnot : sourceElement.annots())
+@for(TargetMetaAnnotDto sourceElement : sourceClass.properties())
+    @for(TargetAnnotDto sourceAnnot : sourceElement.annots())
     @${sourceAnnot.qualifiedName()}(
         @for(var param : ForSupport.of(sourceAnnot.annotParams())) ${param.get().name()} = ${param.get().quotedValue()} @if(!param.isLast()),@endif @endfor
     )

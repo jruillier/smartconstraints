@@ -1,8 +1,8 @@
 package eu.aronnax.smartconstraints.sourcerenderer.jte;
 
-import eu.aronnax.smartconstraints.domain.port.sourcerenderer.RenderingDto;
-import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceClassDto;
-import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceRendererPort;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.CodeRendererPort;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.RenderingDto;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetClassDto;
 import eu.aronnax.smartconstraints.domain.usecase.NamingUtil;
 import gg.jte.TemplateOutput;
 import gg.jte.generated.precompiled.eu.aronnax.omnivalid.sourcerenderer.jte.JteJavaClassTemplateGenerated;
@@ -12,13 +12,13 @@ import java.util.Map;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class JteSourceRenderer implements SourceRendererPort {
+public class JteCodeRenderer implements CodeRendererPort {
 
     @Inject
-    public JteSourceRenderer() {}
+    public JteCodeRenderer() {}
 
     @Override
-    public RenderingDto renderSource(Map.Entry<CharSequence, SourceClassDto> entry) {
+    public RenderingDto render(Map.Entry<CharSequence, TargetClassDto> entry) {
         TemplateOutput output = new StringOutput();
         JteJavaClassTemplateGenerated.render(output, null, entry.getValue());
         String qualifiedName = entry.getKey().toString();

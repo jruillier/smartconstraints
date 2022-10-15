@@ -54,9 +54,12 @@ class BuildSourceHelperTest {
         Map.Entry<CharSequence, SourceClassDto> result = this.instance.buildSourceDto(elementsByName);
 
         // Verify
-        assertEquals("FakeAddressConstraints", result.getValue().simpleName());
-        // TODO JERUI1       assertEquals("gp.fake.FakeAddressConstraints", result.getValue().qualifiedName());
+        assertEquals("FakeAddress_Constraints", result.getValue().simpleName());
+        assertEquals("gp.fake.FakeAddress_Constraints", result.getValue().qualifiedName());
         List<SourcePropertyDto> resultProperties = result.getValue().properties();
-        //        assertEquals(new AName("streetName"), resultProperties.get(0).name());
+        SourcePropertyDto streetNameProp = resultProperties.get(0);
+        assertEquals("StreetName", streetNameProp.name());
+        //        List<SourceAnnotDto> streetNameAnnots = streetNameProp.annots();
+        //        assertEquals("NotNull", streetNameAnnots.get(0).simpleName());
     }
 }

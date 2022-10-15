@@ -32,4 +32,9 @@ class AName implements Name {
     public CharSequence subSequence(int start, int end) {
         return this.str.subSequence(start, end);
     }
+
+    @Override
+    public String toString() {
+        return this.str;
+    }
 }

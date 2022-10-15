@@ -172,7 +172,9 @@ class AnnotElemSourceParamsBuilderTest {
 
         // Verify
         assertEquals(
-                Arrays.asList(new TargetAnnotParamDto("value", 5L, null), new TargetAnnotParamDto("message", null, "A Max msg")),
+                Arrays.asList(
+                        new TargetAnnotParamDto("value", 5L, null),
+                        new TargetAnnotParamDto("message", null, "A Max msg")),
                 params);
     }
 
@@ -188,7 +190,9 @@ class AnnotElemSourceParamsBuilderTest {
 
         // Verify
         assertEquals(
-                Arrays.asList(new TargetAnnotParamDto("value", 5L, null), new TargetAnnotParamDto("message", null, "A Min msg")),
+                Arrays.asList(
+                        new TargetAnnotParamDto("value", 5L, null),
+                        new TargetAnnotParamDto("message", null, "A Min msg")),
                 params);
     }
 

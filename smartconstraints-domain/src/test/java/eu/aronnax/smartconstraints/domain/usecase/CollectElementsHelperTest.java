@@ -39,8 +39,8 @@ class CollectElementsHelperTest {
     void collectAnnotElements() {
         // Prepare
         TypeElement copyConstraintsAnnotDef = this.buildTypeElement(CopyConstraints.class.getName());
-        Set<? extends TypeElement> annots =
-                new HashSet<>(Arrays.asList(this.buildTypeElement("gp.fake.AnotherAnnotation"), copyConstraintsAnnotDef));
+        Set<? extends TypeElement> annots = new HashSet<>(
+                Arrays.asList(this.buildTypeElement("gp.fake.AnotherAnnotation"), copyConstraintsAnnotDef));
 
         PackageElement annotPackage = this.buildCCPackageElement("gp.fake.targetpkg", "gp.fake.frompkg");
 

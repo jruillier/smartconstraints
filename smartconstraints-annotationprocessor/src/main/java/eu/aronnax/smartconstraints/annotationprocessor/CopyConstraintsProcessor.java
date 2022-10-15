@@ -39,10 +39,7 @@ public class CopyConstraintsProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        this.processCopyConstraintsAnnotationUC.exec(annotations, roundEnv,
-
-
-                this.processingEnv);
+        this.processCopyConstraintsAnnotationUC.exec(annotations, roundEnv, this.processingEnv);
 
         return false;
     }

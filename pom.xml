@@ -114,7 +114,7 @@
 
   <profiles>
     <profile>
-      <id>developer</id>
+      <id>ci</id>
       <properties>
         <spotlessCheckPhase>verify</spotlessCheckPhase>
       </properties>

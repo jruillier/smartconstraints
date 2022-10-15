@@ -1,6 +1,6 @@
 package eu.aronnax.smartconstraints.domain.usecase;
 
-import eu.aronnax.smartconstraints.domain.port.sourcerenderer.RenderingDto;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.RenderingDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.io.IOException;

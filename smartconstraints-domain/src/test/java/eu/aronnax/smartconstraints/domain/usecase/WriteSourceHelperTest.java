@@ -3,7 +3,7 @@ package eu.aronnax.smartconstraints.domain.usecase;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-import eu.aronnax.smartconstraints.domain.port.sourcerenderer.RenderingDto;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.RenderingDto;
 import java.io.IOException;
 import java.io.Writer;
 import javax.annotation.processing.Filer;

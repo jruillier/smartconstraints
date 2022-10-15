@@ -2,11 +2,11 @@ package eu.aronnax.smartconstraints.sourcerenderer.jte;
 
 import dagger.Binds;
 import dagger.Module;
-import eu.aronnax.smartconstraints.domain.port.sourcerenderer.SourceRendererPort;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.CodeRendererPort;
 
 @Module
 public abstract class JteSourceRendererModule {
 
     @Binds
-    abstract SourceRendererPort jteSourceRenderer(JteSourceRenderer jteSourceRenderer);
+    abstract CodeRendererPort jteSourceRenderer(JteCodeRenderer jteSourceRenderer);
 }

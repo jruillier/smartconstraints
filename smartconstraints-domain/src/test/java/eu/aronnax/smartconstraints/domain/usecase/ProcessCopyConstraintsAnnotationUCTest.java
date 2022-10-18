@@ -3,10 +3,9 @@ package eu.aronnax.smartconstraints.domain.usecase;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.ElementCollectorPort;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.SourceEntityDto;
+import java.util.*;
 import java.util.stream.Stream;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
@@ -25,13 +24,13 @@ class ProcessCopyConstraintsAnnotationUCTest {
     private ProcessCopyConstraintsAnnotationUC instance;
 
     @Mock
-    private CollectElementsHelper collectElementsHelper;
+    private ElementCollectorPort collectElementsHelper;
 
     @Mock
-    private BuildSourceHelper buildSourceHelper;
+    private BuildTargetHelper buildTargetHelper;
 
     @Mock
-    private RenderSourceHelper renderSourceHelper;
+    private RenderTargetHelper renderTargetHelper;
 
     @Mock
     private WriteSourceHelper writeSourceHelper;
@@ -39,7 +38,7 @@ class ProcessCopyConstraintsAnnotationUCTest {
     @BeforeEach
     void setUp() {
         when(this.collectElementsHelper.collectAnnotElements(any(), any(), any()))
-                .thenReturn(Stream.of(mock(Map.Entry.class)));
+                .thenReturn(Stream.of(new SourceEntityDto("", Collections.emptyList(), "")));
     }
 
     @Test
@@ -55,8 +54,8 @@ class ProcessCopyConstraintsAnnotationUCTest {
 
         // Verify
         verify(this.collectElementsHelper, times(1)).collectAnnotElements(any(), any(), any());
-        verify(this.buildSourceHelper, times(1)).buildSourceDto(any());
-        verify(this.renderSourceHelper, times(1)).renderSource(any());
+        verify(this.buildTargetHelper, times(1)).buildTargetClass(any());
+        verify(this.renderTargetHelper, times(1)).renderSource(any());
         verify(this.writeSourceHelper, times(1)).writeSource(any(), any());
     }
 }

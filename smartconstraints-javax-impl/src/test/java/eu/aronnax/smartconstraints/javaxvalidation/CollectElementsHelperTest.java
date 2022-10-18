@@ -1,14 +1,12 @@
-package eu.aronnax.smartconstraints.domain.usecase;
+package eu.aronnax.smartconstraints.javaxvalidation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import eu.aronnax.smartconstraints.annotation.CopyConstraints;
 import java.util.*;
-import java.util.stream.Collectors;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
-import javax.lang.model.element.Element;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
@@ -71,9 +69,9 @@ class CollectElementsHelperTest {
         when(processingEnv.getElementUtils()).thenReturn(mockElemUtils);
 
         // Run
-        List<Map.Entry<String, List<Element>>> result = this.collectElementsHelper
+        var result = this.collectElementsHelper
                 .collectAnnotElements(annots, roundEnv, processingEnv)
-                .collect(Collectors.toList());
+                .toList();
 
         // Verify
         assertEquals(1, result.size());

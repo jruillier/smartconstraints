@@ -1,9 +1,11 @@
 @import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetAnnotDto
 @import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetClassDto
 @import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetMetaAnnotDto
+@import eu.aronnax.smartconstraints.sourcerenderer.jte.JteHelper
 @import gg.jte.support.ForSupport
 
 @param TargetClassDto sourceClass
+@param JteHelper helper
 
 package ${sourceClass.packageName()};
 
@@ -25,7 +27,7 @@ class ${sourceClass.simpleName()} {
 @for(TargetMetaAnnotDto sourceElement : sourceClass.properties())
     @for(TargetAnnotDto sourceAnnot : sourceElement.annots())
     @${sourceAnnot.qualifiedName()}(
-        @for(var param : ForSupport.of(sourceAnnot.annotParams())) ${param.get().name()} = ${param.get().quotedValue()} @if(!param.isLast()),@endif @endfor
+        ${helper.formatParams(sourceAnnot.annotParams())}
     )
 @endfor
     @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })

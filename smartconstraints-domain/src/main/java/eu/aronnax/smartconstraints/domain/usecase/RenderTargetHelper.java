@@ -8,12 +8,12 @@ import jakarta.inject.Inject;
 import java.util.Map;
 
 @ApplicationScoped
-class RenderSourceHelper {
+class RenderTargetHelper {
 
     private final CodeRendererPort codeRendererPort;
 
     @Inject
-    RenderSourceHelper(CodeRendererPort codeRendererPort) {
+    RenderTargetHelper(CodeRendererPort codeRendererPort) {
         this.codeRendererPort = codeRendererPort;
     }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>eu.aronnax.smartconstraints</groupId>
@@ -7,21 +7,22 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>smartconstraints-domain</artifactId>
+  <artifactId>smartconstraints-javax-impl</artifactId>
 
   <dependencies>
-    <!-- smartconstraints -->
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
-      <artifactId>smartconstraints-annotation</artifactId>
+      <artifactId>smartconstraints-domain</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
-    <!-- Other libs -->
     <dependency>
-      <groupId>jakarta.enterprise</groupId>
-      <artifactId>jakarta.enterprise.cdi-api</artifactId>
+      <groupId>com.google.dagger</groupId>
+      <artifactId>dagger</artifactId>
     </dependency>
-    <!-- Tests -->
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -29,12 +30,12 @@
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
+      <artifactId>mockito-junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-junit-jupiter</artifactId>
+      <artifactId>mockito-core</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

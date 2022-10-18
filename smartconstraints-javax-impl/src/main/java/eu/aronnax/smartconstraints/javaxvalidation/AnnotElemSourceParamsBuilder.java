@@ -1,4 +1,4 @@
-package eu.aronnax.smartconstraints.domain.usecase;
+package eu.aronnax.smartconstraints.javaxvalidation;
 
 import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetAnnotParamDto;
 import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;

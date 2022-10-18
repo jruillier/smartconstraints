@@ -7,6 +7,10 @@
     <file url="file://$PROJECT_DIR$/smartconstraints-annotationprocessor/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smartconstraints-domain/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smartconstraints-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/smartconstraints-jakarta-impl/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/smartconstraints-jakarta-impl/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/smartconstraints-javax-impl/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/smartconstraints-javax-impl/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smartconstraints-sourcerenderer-jte/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smartconstraints-sourcerenderer-jte/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smartconstraints-sourcerenderer-jte/target/generated-sources/jte" charset="UTF-8" />

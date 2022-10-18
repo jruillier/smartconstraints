@@ -16,6 +16,8 @@
     <module>smartconstraints-utils-apachecommons3</module>
     <module>smartconstraints-test</module>
     <module>smartconstraints-test-entity</module>
+    <module>smartconstraints-javax-impl</module>
+    <module>smartconstraints-jakarta-impl</module>
   </modules>
 
   <properties>

@@ -1,6 +1,7 @@
-package eu.aronnax.smartconstraints.domain.usecase;
+package eu.aronnax.smartconstraints.javaxvalidation;
 
 import eu.aronnax.smartconstraints.annotation.CopyConstraints;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.*;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.util.*;
@@ -10,7 +11,6 @@ import java.util.stream.Stream;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.validation.Validation;
@@ -21,21 +21,17 @@ import javax.validation.metadata.ElementDescriptor;
 import javax.validation.metadata.PropertyDescriptor;
 
 @ApplicationScoped
-class CollectElementsHelper {
+class CollectElementsHelper implements ElementCollectorPort {
 
     private static final Logger LOGGER = Logger.getLogger(CollectElementsHelper.class.getName());
-
-    private final ConstraintsHelper constraintsHelper;
 
     private final Validator validator =
             Validation.buildDefaultValidatorFactory().getValidator();
 
     @Inject
-    CollectElementsHelper(ConstraintsHelper constraintsHelper) {
-        this.constraintsHelper = constraintsHelper;
-    }
+    CollectElementsHelper() {}
 
-    Stream<SourceEntityDto> collectAnnotElements(
+    public Stream<SourceEntityDto> collectAnnotElements(
             Set<? extends TypeElement> annotations, RoundEnvironment roundEnv, ProcessingEnvironment processingEnv) {
         return annotations.stream()
                 .filter(annot -> annot.getQualifiedName().contentEquals(CopyConstraints.class.getName()))
@@ -99,34 +95,6 @@ class CollectElementsHelper {
                 ((PackageElement) targetPackage).getQualifiedName());
     }
 
-    private Stream<ElemTargetVO> getProperties(SourceTargetVO sourceTargetVO, ProcessingEnvironment processingEnv) {
-        return processingEnv
-                .getElementUtils()
-                .getPackageElement(sourceTargetVO.sourcePackage)
-                .getEnclosedElements()
-                .stream()
-                .filter(element -> !element.getSimpleName().toString().endsWith("_Constraints"))
-                .flatMap(typeElem -> typeElem.getEnclosedElements().stream())
-                .filter(typeElem -> typeElem.getKind().equals(ElementKind.FIELD))
-                .filter(element -> this.constraintsHelper
-                        .getConstraintClasses()
-                        .anyMatch(constClass -> element.getAnnotation(constClass) != null))
-                .map(element -> new ElemTargetVO(element, sourceTargetVO.targetPackage));
-    }
-
-    private void mergeIntoMap(Map<String, List<Element>> anotElementsPerClass, ElemTargetVO elementTarget) {
-        anotElementsPerClass.merge(
-                elementTarget.targetPackage + "."
-                        + elementTarget.element.getEnclosingElement().getSimpleName(),
-                Collections.singletonList(elementTarget.element),
-                (elements, elements2) -> {
-                    ArrayList<Element> merge = new ArrayList<>();
-                    merge.addAll(elements);
-                    merge.addAll(elements2);
-                    return merge;
-                });
-    }
-
     private void logProcessedElement(SourceEntityDto entry) {
         LOGGER.info("CLASSE: " + entry.classQualifiedName() + " ELEMS : "
                 + entry.sourceProperties().stream()
@@ -136,17 +104,6 @@ class CollectElementsHelper {
                                         .collect(Collectors.joining(", "))
                                 + ") ")
                         .collect(Collectors.joining(", ")));
-    }
-
-    static class ElemTargetVO {
-
-        final Element element;
-        final CharSequence targetPackage;
-
-        ElemTargetVO(Element element, CharSequence targetPackage) {
-            this.element = element;
-            this.targetPackage = targetPackage;
-        }
     }
 
     record SourceTargetVO(CharSequence sourcePackage, CharSequence targetPackage) {}

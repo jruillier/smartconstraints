@@ -14,13 +14,17 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class JteCodeRenderer implements CodeRendererPort {
 
+    private final JteHelper jteHelper;
+
     @Inject
-    public JteCodeRenderer() {}
+    public JteCodeRenderer(JteHelper jteHelper) {
+        this.jteHelper = jteHelper;
+    }
 
     @Override
     public RenderingDto render(Map.Entry<CharSequence, TargetClassDto> entry) {
         TemplateOutput output = new StringOutput();
-        JteJavaClassTemplateGenerated.render(output, null, entry.getValue());
+        JteJavaClassTemplateGenerated.render(output, null, entry.getValue(), this.jteHelper);
         String qualifiedName = entry.getKey().toString();
         String packageName = NamingUtil.extractPackageName(qualifiedName);
         String classSimpleName = NamingUtil.extractSimpleName(qualifiedName);

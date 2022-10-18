@@ -13,6 +13,12 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.metadata.BeanDescriptor;
+import javax.validation.metadata.ConstraintDescriptor;
+import javax.validation.metadata.ElementDescriptor;
+import javax.validation.metadata.PropertyDescriptor;
 
 @ApplicationScoped
 class CollectElementsHelper {
@@ -21,24 +27,68 @@ class CollectElementsHelper {
 
     private final ConstraintsHelper constraintsHelper;
 
+    private final Validator validator =
+            Validation.buildDefaultValidatorFactory().getValidator();
+
     @Inject
     CollectElementsHelper(ConstraintsHelper constraintsHelper) {
         this.constraintsHelper = constraintsHelper;
     }
 
-    Stream<Map.Entry<String, List<Element>>> collectAnnotElements(
+    Stream<SourceEntityDto> collectAnnotElements(
             Set<? extends TypeElement> annotations, RoundEnvironment roundEnv, ProcessingEnvironment processingEnv) {
-
-        Map<String, List<Element>> anotElementsPerClass = new HashMap<>();
-
-        annotations.stream()
+        return annotations.stream()
                 .filter(annot -> annot.getQualifiedName().contentEquals(CopyConstraints.class.getName()))
-                .flatMap(smartConstraintsAnnot -> roundEnv.getElementsAnnotatedWith(smartConstraintsAnnot).stream())
+                .flatMap(copyConstraintsAnnot -> roundEnv.getElementsAnnotatedWith(copyConstraintsAnnot).stream())
                 .map(this::buildSourceTarget)
-                .flatMap(sourceTargetVO -> this.getProperties(sourceTargetVO, processingEnv))
-                .forEach(elementTarget -> this.mergeIntoMap(anotElementsPerClass, elementTarget));
+                .flatMap(sourceTargetVO ->
+                        this.getSourceEntitiesFromPackage(processingEnv, sourceTargetVO.sourcePackage))
+                .peek(this::logProcessedElement);
+    }
 
-        return anotElementsPerClass.entrySet().stream().peek(this::logProcessedElement);
+    private Stream<SourceEntityDto> getSourceEntitiesFromPackage(
+            ProcessingEnvironment processingEnv, CharSequence sourcePackage) {
+
+        return processingEnv.getElementUtils().getPackageElement(sourcePackage).getEnclosedElements().stream()
+                .filter(element -> element.getKind().isClass())
+                .map(element -> this.getBeanNameAndDescriptor(this.validator, (TypeElement) element))
+                .map(beanNameAndDesc ->
+                        beanNameAndDesc.newWithValue(beanNameAndDesc.value().getConstrainedProperties()))
+                .filter(beanNameAndConstProps -> !beanNameAndConstProps.value().isEmpty())
+                .map(beanNameAndConstProps -> new SourceEntityDto(
+                        beanNameAndConstProps.key(), this.getSourceProperties(beanNameAndConstProps.value())));
+    }
+
+    private List<SourcePropertyDto> getSourceProperties(Set<PropertyDescriptor> properties) {
+        return properties.stream()
+                .filter(ElementDescriptor::hasConstraints)
+                .map(prop -> new SourcePropertyDto(
+                        prop.getPropertyName(), this.buildSourceAnnots(prop.getConstraintDescriptors())))
+                .toList();
+    }
+
+    private List<SourceAnnotDto> buildSourceAnnots(Set<ConstraintDescriptor<?>> constraintDescriptors) {
+        return constraintDescriptors.stream()
+                .map(constDesc -> new SourceAnnotDto(
+                        constDesc.getAnnotation().annotationType().getName(),
+                        constDesc.getAnnotation().annotationType().getSimpleName(),
+                        this.buildSourceAnnotParams(constDesc.getAttributes())))
+                .toList();
+    }
+
+    private List<SourceAnnotParamDto> buildSourceAnnotParams(Map<String, Object> attributes) {
+        return attributes.entrySet().stream()
+                .map(entry -> new SourceAnnotParamDto(entry.getKey(), entry.getValue()))
+                .toList();
+    }
+
+    private KeyValueDto<BeanDescriptor> getBeanNameAndDescriptor(Validator validator, TypeElement element) {
+        try {
+            String className = element.getQualifiedName().toString();
+            return new KeyValueDto<>(className, validator.getConstraintsForClass(Class.forName(className)));
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private SourceTargetVO buildSourceTarget(Element targetPackage) {
@@ -75,11 +125,11 @@ class CollectElementsHelper {
                 });
     }
 
-    private void logProcessedElement(Map.Entry<String, List<Element>> entry) {
-        LOGGER.info("CLASSE: " + entry.getKey() + " ELEMS : "
-                + entry.getValue().stream()
-                        .map(element -> element.getSimpleName() + " ("
-                                + element.getAnnotationMirrors().stream()
+    private void logProcessedElement(SourceEntityDto entry) {
+        LOGGER.info("CLASSE: " + entry.classQualifiedName() + " ELEMS : "
+                + entry.sourceProperties().stream()
+                        .map(element -> element.propertyName() + " ("
+                                + element.annots().stream()
                                         .map(Objects::toString)
                                         .collect(Collectors.joining(", "))
                                 + ") ")
@@ -97,14 +147,5 @@ class CollectElementsHelper {
         }
     }
 
-    static class SourceTargetVO {
-
-        final CharSequence sourcePackage;
-        final CharSequence targetPackage;
-
-        SourceTargetVO(CharSequence sourcePackage, CharSequence targetPackage) {
-            this.sourcePackage = sourcePackage;
-            this.targetPackage = targetPackage;
-        }
-    }
+    record SourceTargetVO(CharSequence sourcePackage, CharSequence targetPackage) {}
 }

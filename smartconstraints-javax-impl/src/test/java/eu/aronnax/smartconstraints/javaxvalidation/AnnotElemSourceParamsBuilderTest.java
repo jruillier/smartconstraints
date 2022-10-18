@@ -1,4 +1,4 @@
-package eu.aronnax.smartconstraints.domain.usecase;
+package eu.aronnax.smartconstraints.javaxvalidation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;

@@ -34,7 +34,7 @@ public class CopyConstraintsProcessor extends AbstractProcessor {
         super();
 
         ServicesFactory servicesFactory = DaggerServicesFactory.builder().build();
-        this.processCopyConstraintsAnnotationUC = servicesFactory.processSmartConstraintsraintsAnnotationUC();
+        this.processCopyConstraintsAnnotationUC = servicesFactory.processSmartConstraintsAnnotationUC();
     }
 
     @Override

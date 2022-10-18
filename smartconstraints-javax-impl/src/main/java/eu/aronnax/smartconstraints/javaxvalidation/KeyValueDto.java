@@ -1,4 +1,4 @@
-package eu.aronnax.smartconstraints.domain.usecase;
+package eu.aronnax.smartconstraints.javaxvalidation;
 
 record KeyValueDto<V>(String key, V value) {
     public <NV> KeyValueDto<NV> newWithValue(NV newValue) {

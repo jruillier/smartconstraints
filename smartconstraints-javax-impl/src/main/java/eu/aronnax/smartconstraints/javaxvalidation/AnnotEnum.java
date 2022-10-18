@@ -1,4 +1,4 @@
-package eu.aronnax.smartconstraints.domain.usecase;
+package eu.aronnax.smartconstraints.javaxvalidation;
 
 import java.lang.annotation.Annotation;
 import java.util.Arrays;

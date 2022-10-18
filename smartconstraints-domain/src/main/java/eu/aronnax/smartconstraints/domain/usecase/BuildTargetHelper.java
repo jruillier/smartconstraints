@@ -1,9 +1,6 @@
 package eu.aronnax.smartconstraints.domain.usecase;
 
-import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetAnnotDto;
-import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetAnnotParamDto;
-import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetClassDto;
-import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetMetaAnnotDto;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.*;
 import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -18,17 +15,10 @@ class BuildTargetHelper {
     private static final Logger LOGGER = Logger.getLogger(BuildTargetHelper.class.getName());
 
     private final StringUtilsPort stringUtils;
-    private final ConstraintsHelper constraintsHelper;
-    private final AnnotElemSourceParamsBuilder annotElemSourceParamsBuilder;
 
     @Inject
-    BuildTargetHelper(
-            final StringUtilsPort stringUtils,
-            final ConstraintsHelper constraintsHelper,
-            final AnnotElemSourceParamsBuilder annotElemSourceParamsBuilder) {
+    BuildTargetHelper(final StringUtilsPort stringUtils) {
         this.stringUtils = stringUtils;
-        this.constraintsHelper = constraintsHelper;
-        this.annotElemSourceParamsBuilder = annotElemSourceParamsBuilder;
     }
 
     Map.Entry<CharSequence, TargetClassDto> buildTargetClass(final SourceEntityDto sourceEntity) {

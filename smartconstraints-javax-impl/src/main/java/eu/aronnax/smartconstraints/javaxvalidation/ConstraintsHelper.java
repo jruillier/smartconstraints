@@ -1,4 +1,4 @@
-package eu.aronnax.smartconstraints.domain.usecase;
+package eu.aronnax.smartconstraints.javaxvalidation;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

@@ -1,7 +1,5 @@
 package eu.aronnax.smartconstraints.test.sto;
 
-import eu.aronnax.smartconstraints.test.entity.AddressEntity_Constraints;
-
 public class AddressSto {
 
     @AddressEntity_Constraints.Street

@@ -41,13 +41,13 @@ class CollectElementsHelper {
                 .filter(annot -> annot.getQualifiedName().contentEquals(CopyConstraints.class.getName()))
                 .flatMap(copyConstraintsAnnot -> roundEnv.getElementsAnnotatedWith(copyConstraintsAnnot).stream())
                 .map(this::buildSourceTarget)
-                .flatMap(sourceTargetVO ->
-                        this.getSourceEntitiesFromPackage(processingEnv, sourceTargetVO.sourcePackage))
+                .flatMap(sourceTargetVO -> this.getSourceEntitiesFromPackage(
+                        processingEnv, sourceTargetVO.sourcePackage, sourceTargetVO.targetPackage))
                 .peek(this::logProcessedElement);
     }
 
     private Stream<SourceEntityDto> getSourceEntitiesFromPackage(
-            ProcessingEnvironment processingEnv, CharSequence sourcePackage) {
+            ProcessingEnvironment processingEnv, CharSequence sourcePackage, CharSequence targetPackage) {
 
         return processingEnv.getElementUtils().getPackageElement(sourcePackage).getEnclosedElements().stream()
                 .filter(element -> element.getKind().isClass())
@@ -56,7 +56,9 @@ class CollectElementsHelper {
                         beanNameAndDesc.newWithValue(beanNameAndDesc.value().getConstrainedProperties()))
                 .filter(beanNameAndConstProps -> !beanNameAndConstProps.value().isEmpty())
                 .map(beanNameAndConstProps -> new SourceEntityDto(
-                        beanNameAndConstProps.key(), this.getSourceProperties(beanNameAndConstProps.value())));
+                        beanNameAndConstProps.key(),
+                        this.getSourceProperties(beanNameAndConstProps.value()),
+                        targetPackage.toString()));
     }
 
     private List<SourcePropertyDto> getSourceProperties(Set<PropertyDescriptor> properties) {

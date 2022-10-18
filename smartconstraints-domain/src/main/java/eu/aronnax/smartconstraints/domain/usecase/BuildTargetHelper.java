@@ -5,22 +5,24 @@ import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetAnnotParamDto;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetClassDto;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetMetaAnnotDto;
 import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-class BuildSourceHelper {
+@ApplicationScoped
+class BuildTargetHelper {
 
-    private static final Logger LOGGER = Logger.getLogger(BuildSourceHelper.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BuildTargetHelper.class.getName());
 
     private final StringUtilsPort stringUtils;
     private final ConstraintsHelper constraintsHelper;
     private final AnnotElemSourceParamsBuilder annotElemSourceParamsBuilder;
 
     @Inject
-    BuildSourceHelper(
+    BuildTargetHelper(
             final StringUtilsPort stringUtils,
             final ConstraintsHelper constraintsHelper,
             final AnnotElemSourceParamsBuilder annotElemSourceParamsBuilder) {
@@ -29,29 +31,29 @@ class BuildSourceHelper {
         this.annotElemSourceParamsBuilder = annotElemSourceParamsBuilder;
     }
 
-    Map.Entry<CharSequence, TargetClassDto> buildSourceDto(final SourceEntityDto sourceEntity) {
+    Map.Entry<CharSequence, TargetClassDto> buildTargetClass(final SourceEntityDto sourceEntity) {
 
-        String classQualifiedName = sourceEntity.classQualifiedName() + "_Constraints";
-        String classSimpleName = NamingUtil.extractSimpleName(classQualifiedName);
-        String packageName = NamingUtil.extractPackageName(classQualifiedName);
+        String classSimpleName = NamingUtil.extractSimpleName(sourceEntity.classQualifiedName()) + "_Constraints";
+        String packageName = sourceEntity.targetPackage();
+        String classQualifiedName = packageName + "." + classSimpleName;
 
         MapEntryDto<TargetClassDto> result = new MapEntryDto<>(
                 classQualifiedName,
                 new TargetClassDto(
-                        packageName, classQualifiedName, classSimpleName, this.getSourceProperties(sourceEntity)));
+                        packageName, classQualifiedName, classSimpleName, this.buildTargetMetaAnnots(sourceEntity)));
         LOGGER.info(result.getValue().toString());
         return result;
     }
 
-    private List<TargetMetaAnnotDto> getSourceProperties(SourceEntityDto entry) {
+    private List<TargetMetaAnnotDto> buildTargetMetaAnnots(SourceEntityDto entry) {
         return entry.sourceProperties().stream()
                 .map(propertyElem -> new TargetMetaAnnotDto(
                         this.stringUtils.capitalize(propertyElem.propertyName()),
-                        this.getSourceAnnots(propertyElem.annots())))
+                        this.buildTargetAnnots(propertyElem.annots())))
                 .collect(Collectors.toList());
     }
 
-    private List<TargetAnnotDto> getSourceAnnots(List<SourceAnnotDto> propertyAnnots) {
+    private List<TargetAnnotDto> buildTargetAnnots(List<SourceAnnotDto> propertyAnnots) {
         return propertyAnnots.stream()
                 .map(annotElmt -> new TargetAnnotDto(
                         annotElmt.name(), annotElmt.simpleName(), this.buildAnnotParams(annotElmt.params())))

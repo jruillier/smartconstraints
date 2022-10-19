@@ -8,6 +8,17 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <developers>
+    <developer>
+      <name>Jérôme RUILLIER</name>
+      <url>https://github.com/jruillier</url>
+      <roles>
+        <role>author</role>
+      </roles>
+      <timezone>GMT-4</timezone>
+    </developer>
+  </developers>
+
   <modules>
     <module>smartconstraints-annotation</module>
     <module>smartconstraints-annotationprocessor</module>
@@ -19,6 +30,14 @@
     <module>smartconstraints-javax-impl</module>
     <module>smartconstraints-jakarta-impl</module>
   </modules>
+
+  <scm>
+    <url>scm:git:https://github.com/jruillier/smartconstraints.git</url>
+  </scm>
+
+  <ciManagement>
+    <url>https://github.com/jruillier/smartconstraints/actions</url>
+  </ciManagement>
 
   <properties>
     <maven.compiler.source>17</maven.compiler.source>

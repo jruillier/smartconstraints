@@ -27,4 +27,12 @@ public class AddressEntity {
     public String getAsCustomString() {
         return this.street + "\n" + this.zipCode;
     }
+
+    /**
+     * Should be ignored.
+     */
+    @NotNull
+    public String getSuffixedString(@NotNull String suffix) {
+        return this.street + " " + suffix;
+    }
 }

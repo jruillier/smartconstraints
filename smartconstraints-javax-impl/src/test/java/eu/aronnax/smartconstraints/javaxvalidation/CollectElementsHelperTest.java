@@ -3,7 +3,7 @@ package eu.aronnax.smartconstraints.javaxvalidation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-import eu.aronnax.smartconstraints.annotation.CopyConstraints;
+import eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints;
 import java.util.*;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
@@ -36,7 +36,7 @@ class CollectElementsHelperTest {
     @Test
     void collectAnnotElements() {
         // Prepare
-        TypeElement copyConstraintsAnnotDef = this.buildTypeElement(CopyConstraints.class.getName());
+        TypeElement copyConstraintsAnnotDef = this.buildTypeElement(CopyJavaxConstraints.class.getName());
         Set<? extends TypeElement> annots = new HashSet<>(
                 Arrays.asList(this.buildTypeElement("gp.fake.AnotherAnnotation"), copyConstraintsAnnotDef));
 
@@ -78,12 +78,12 @@ class CollectElementsHelperTest {
     }
 
     private PackageElement buildCCPackageElement(String curPkg, String fromPkg) {
-        CopyConstraints mockCC = mock(CopyConstraints.class);
+        CopyJavaxConstraints mockCC = mock(CopyJavaxConstraints.class);
         when(mockCC.from()).thenReturn(fromPkg);
 
         PackageElement mock = mock(PackageElement.class);
         when(mock.getQualifiedName()).thenReturn(new AName(curPkg));
-        when(mock.getAnnotation(CopyConstraints.class)).thenReturn(mockCC);
+        when(mock.getAnnotation(CopyJavaxConstraints.class)).thenReturn(mockCC);
 
         return mock;
     }

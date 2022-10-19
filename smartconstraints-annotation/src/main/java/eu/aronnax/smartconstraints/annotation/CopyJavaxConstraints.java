@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.PACKAGE)
-public @interface CopyConstraints {
+public @interface CopyJavaxConstraints {
 
     String from();
 }

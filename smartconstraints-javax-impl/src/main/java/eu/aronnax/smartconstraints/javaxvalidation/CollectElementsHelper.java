@@ -1,6 +1,6 @@
 package eu.aronnax.smartconstraints.javaxvalidation;
 
-import eu.aronnax.smartconstraints.annotation.CopyConstraints;
+import eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.*;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -34,7 +34,7 @@ class CollectElementsHelper implements ElementCollectorPort {
     public Stream<SourceEntityDto> collectAnnotElements(
             Set<? extends TypeElement> annotations, RoundEnvironment roundEnv, ProcessingEnvironment processingEnv) {
         return annotations.stream()
-                .filter(annot -> annot.getQualifiedName().contentEquals(CopyConstraints.class.getName()))
+                .filter(annot -> annot.getQualifiedName().contentEquals(CopyJavaxConstraints.class.getName()))
                 .flatMap(copyConstraintsAnnot -> roundEnv.getElementsAnnotatedWith(copyConstraintsAnnot).stream())
                 .map(this::buildSourceTarget)
                 .flatMap(sourceTargetVO -> this.getSourceEntitiesFromPackage(
@@ -91,7 +91,7 @@ class CollectElementsHelper implements ElementCollectorPort {
 
     private SourceTargetVO buildSourceTarget(Element targetPackage) {
         return new SourceTargetVO(
-                targetPackage.getAnnotation(CopyConstraints.class).from(),
+                targetPackage.getAnnotation(CopyJavaxConstraints.class).from(),
                 ((PackageElement) targetPackage).getQualifiedName());
     }
 

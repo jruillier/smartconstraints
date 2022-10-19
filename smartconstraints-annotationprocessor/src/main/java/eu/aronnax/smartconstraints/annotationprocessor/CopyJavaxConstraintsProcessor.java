@@ -1,12 +1,14 @@
 package eu.aronnax.smartconstraints.annotationprocessor;
 
 import com.google.auto.service.AutoService;
+import eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints;
 import eu.aronnax.smartconstraints.domain.usecase.ProcessCopyConstraintsAnnotationUC;
 import java.util.Set;
 import java.util.logging.Logger;
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
+import javax.tools.Diagnostic;
 
 /**
  * The entry point of SmartConstraints. This annotation processor will :
@@ -20,17 +22,20 @@ import javax.lang.model.element.TypeElement;
  *     <li>write generated classes</li>
  * </ul>
  */
-@SupportedAnnotationTypes({"javax.validation.constraints.*", "eu.aronnax.smartconstraints.annotation.CopyConstraints"})
+@SupportedAnnotationTypes({
+    "javax.validation.constraints.*",
+    "eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints"
+})
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
 @AutoService(Processor.class)
-public class CopyConstraintsProcessor extends AbstractProcessor {
+public class CopyJavaxConstraintsProcessor extends AbstractProcessor {
 
-    public static final Logger LOGGER = Logger.getLogger(CopyConstraintsProcessor.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(CopyJavaxConstraintsProcessor.class.getName());
 
     private final ProcessCopyConstraintsAnnotationUC processCopyConstraintsAnnotationUC;
 
     @SuppressWarnings("unused")
-    public CopyConstraintsProcessor() {
+    public CopyJavaxConstraintsProcessor() {
         super();
 
         ServicesFactory servicesFactory = DaggerServicesFactory.builder().build();
@@ -39,6 +44,11 @@ public class CopyConstraintsProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        this.processingEnv
+                .getMessager()
+                .printMessage(
+                        Diagnostic.Kind.NOTE,
+                        "Processing any " + CopyJavaxConstraints.class.getSimpleName() + " annotations...");
         this.processCopyConstraintsAnnotationUC.exec(annotations, roundEnv, this.processingEnv);
 
         return false;

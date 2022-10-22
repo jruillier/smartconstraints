@@ -4,7 +4,6 @@ import com.google.auto.service.AutoService;
 import eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints;
 import eu.aronnax.smartconstraints.domain.usecase.ProcessCopyConstraintsAnnotationUC;
 import java.util.Set;
-import java.util.logging.Logger;
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
@@ -29,8 +28,6 @@ import javax.tools.Diagnostic;
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
 @AutoService(Processor.class)
 public class CopyJavaxConstraintsProcessor extends AbstractProcessor {
-
-    public static final Logger LOGGER = Logger.getLogger(CopyJavaxConstraintsProcessor.class.getName());
 
     private final ProcessCopyConstraintsAnnotationUC processCopyConstraintsAnnotationUC;
 

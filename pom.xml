@@ -39,7 +39,7 @@
   </modules>
 
   <scm>
-    <developerConnection>scm:git:https://github.com/jruillier/smartconstraints.git</developerConnection>
+    <developerConnection>scm:git:ssh://git@github.com:jruillier/smartconstraints.git</developerConnection>
     <url>https://github.com/jruillier/smartconstraints/commits/</url>
   </scm>
 

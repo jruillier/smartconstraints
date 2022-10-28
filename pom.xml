@@ -5,7 +5,7 @@
 
   <groupId>eu.aronnax.smartconstraints</groupId>
   <artifactId>smartconstraints-parent</artifactId>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>0.1.1</version>
   <packaging>pom</packaging>
 
   <name>SmartConstraints parent project</name>
@@ -45,7 +45,7 @@
   <scm>
     <developerConnection>scm:git:ssh://git@github.com/jruillier/smartconstraints.git</developerConnection>
     <url>https://github.com/jruillier/smartconstraints/commits/</url>
-    <tag>HEAD</tag>
+    <tag>smartconstraints-parent-0.1.1</tag>
   </scm>
 
   <ciManagement>

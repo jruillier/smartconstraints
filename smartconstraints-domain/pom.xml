@@ -9,6 +9,9 @@
 
   <artifactId>smartconstraints-domain</artifactId>
 
+  <name>SmartConstraints domain (not for public use)</name>
+  <description>Provides business logic for SmartConstraints. (Clean Architecture)</description>
+
   <dependencies>
     <!-- smartconstraints -->
     <dependency>

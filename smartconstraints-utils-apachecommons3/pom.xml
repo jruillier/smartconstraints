@@ -9,6 +9,9 @@
 
   <artifactId>smartconstraints-utils-apachecommons3</artifactId>
 
+  <name>SmartConstraints apache-commons-3 utils implementation (not for public use)</name>
+  <description>`org.apache.commons:commons-lang3` based utils implementation. (Clean Architecture)</description>
+
   <dependencies>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>

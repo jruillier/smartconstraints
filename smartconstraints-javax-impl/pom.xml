@@ -9,6 +9,9 @@
 
   <artifactId>smartconstraints-javax-impl</artifactId>
 
+  <name>SmartConstraints javax implementation (not for public use)</name>
+  <description>`javax.validation:validation-api` based collector implementation for SmartConstraints. (Clean Architecture)</description>
+
   <dependencies>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>

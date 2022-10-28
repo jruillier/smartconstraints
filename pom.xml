@@ -8,6 +8,12 @@
   <version>0.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <name>SmartConstraints parent project</name>
+  <description>SmartConstraints helps you work with annotated validation constraints (`javax.validation:validation-api`)
+    in multi layered application (as in Clean Architecture).
+    See `smartconstraints-annotationprocessor` for further explanation.</description>
+  <url>https://github.com/jruillier/smartconstraints</url>
+
   <licenses>
     <license>
       <name>GNU Lesser General Public License v2.1</name>

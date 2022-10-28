@@ -9,4 +9,7 @@
 
   <artifactId>smartconstraints-jakarta-impl</artifactId>
 
+  <name>SmartConstraints jakarta implementation (not for public use)</name>
+  <description>NOT IMPLEMENTED YET</description>
+
 </project>

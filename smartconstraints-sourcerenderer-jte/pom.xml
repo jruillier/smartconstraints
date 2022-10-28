@@ -9,6 +9,9 @@
 
   <artifactId>smartconstraints-sourcerenderer-jte</artifactId>
 
+  <name>SmartConstraints source renderer JTE implementation (not for public use)</name>
+  <description>`gg.jte:jte` source renderer based implementation for SmartConstraints. (Clean Architecture)</description>
+
   <dependencies>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>

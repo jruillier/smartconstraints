@@ -9,6 +9,10 @@
 
   <artifactId>smartconstraints-annotationprocessor</artifactId>
 
+  <name>SmartConstraints annotation processor</name>
+  <description>Provides the annotation processor that wil generate meta annotations based on `@CopyJavaxConstraints` instructions.
+    Should be used in conjunction with `smartconstraints-annotation`, as a maven `provided` dependency.</description>
+
   <dependencies>
     <!-- smartconstraints -->
     <dependency>

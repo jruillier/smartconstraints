@@ -5,7 +5,7 @@
 
   <groupId>eu.aronnax.smartconstraints</groupId>
   <artifactId>smartconstraints-parent</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.1.0</version>
   <packaging>pom</packaging>
 
   <licenses>
@@ -41,6 +41,7 @@
   <scm>
     <developerConnection>scm:git:ssh://git@github.com/jruillier/smartconstraints.git</developerConnection>
     <url>https://github.com/jruillier/smartconstraints/commits/</url>
+    <tag>smartconstraints-parent-0.1.0</tag>
   </scm>
 
   <ciManagement>
@@ -138,11 +139,11 @@
         <version>2.24.1</version>
         <configuration>
           <java>
-            <removeUnusedImports></removeUnusedImports>
-            <palantirJavaFormat></palantirJavaFormat>
+            <removeUnusedImports />
+            <palantirJavaFormat />
           </java>
           <pom>
-            <sortPom></sortPom>
+            <sortPom />
           </pom>
         </configuration>
         <executions>

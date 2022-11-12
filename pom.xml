@@ -8,7 +8,7 @@
   <version>0.1.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>SmartConstraints parent project</name>
+  <name>SmartConstraints</name>
   <description>SmartConstraints helps you work with annotated validation constraints (`javax.validation:validation-api`)
     in multi layered application (as in Clean Architecture).
     See `smartconstraints-annotationprocessor` for further explanation.</description>

@@ -33,7 +33,6 @@ class CollectElementsHelper implements ElementCollectorPort {
                 .map(this::buildSourceTarget)
                 .flatMap(sourceTargetVO -> this.collectSourceEntities(sourceTargetVO, processingEnv))
                 .peek(this::logProcessedElement);
-
     }
 
     private SourceTargetVO buildSourceTarget(Element targetPackage) {
@@ -42,7 +41,8 @@ class CollectElementsHelper implements ElementCollectorPort {
                 ((PackageElement) targetPackage).getQualifiedName());
     }
 
-    private Stream<SourceEntityDto> collectSourceEntities(SourceTargetVO sourceTargetVO, ProcessingEnvironment processingEnv) {
+    private Stream<SourceEntityDto> collectSourceEntities(
+            SourceTargetVO sourceTargetVO, ProcessingEnvironment processingEnv) {
         return processingEnv
                 .getElementUtils()
                 .getPackageElement(sourceTargetVO.sourcePackage)
@@ -50,8 +50,8 @@ class CollectElementsHelper implements ElementCollectorPort {
                 .stream()
                 .filter(element -> !element.getSimpleName().toString().endsWith("_Constraints"))
                 .map(element -> new SourceEntityDto(
-                        ((TypeElement)element).getQualifiedName().toString(),
-                        this.collectSourceProps((TypeElement)element),
+                        ((TypeElement) element).getQualifiedName().toString(),
+                        this.collectSourceProps((TypeElement) element),
                         sourceTargetVO.targetPackage().toString()));
     }
 
@@ -61,9 +61,8 @@ class CollectElementsHelper implements ElementCollectorPort {
                 .filter(element -> this.constraintsHelper
                         .getConstraintClasses()
                         .anyMatch(constClass -> element.getAnnotation(constClass) != null))
-                .map(element -> new SourcePropertyDto(
-                        element.getSimpleName().toString(),
-                        this.collectSourceAnnots(element)))
+                .map(element ->
+                        new SourcePropertyDto(element.getSimpleName().toString(), this.collectSourceAnnots(element)))
                 .toList();
     }
 
@@ -71,7 +70,11 @@ class CollectElementsHelper implements ElementCollectorPort {
         return propElement.getAnnotationMirrors().stream()
                 .map(annotMirror -> new SourceAnnotDto(
                         annotMirror.getAnnotationType().toString(),
-                        annotMirror.getAnnotationType().asElement().getSimpleName().toString(),
+                        annotMirror
+                                .getAnnotationType()
+                                .asElement()
+                                .getSimpleName()
+                                .toString(),
                         this.collectSourceAnnotParams(annotMirror)))
                 .toList();
     }

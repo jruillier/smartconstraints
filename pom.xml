@@ -40,12 +40,14 @@
     <module>smartconstraints-utils-apachecommons3</module>
     <module>smartconstraints-javax-impl</module>
     <module>smartconstraints-jakarta-impl</module>
+<!--    <module>smartconstraints-test</module>-->
+<!--    <module>smartconstraints-test-entity</module>-->
   </modules>
 
   <scm>
     <developerConnection>scm:git:ssh://git@github.com/jruillier/smartconstraints.git</developerConnection>
-    <url>https://github.com/jruillier/smartconstraints/commits/</url>
     <tag>HEAD</tag>
+    <url>https://github.com/jruillier/smartconstraints/commits/</url>
   </scm>
 
   <ciManagement>
@@ -148,11 +150,11 @@
         <version>2.24.1</version>
         <configuration>
           <java>
-            <removeUnusedImports />
-            <palantirJavaFormat />
+            <removeUnusedImports></removeUnusedImports>
+            <palantirJavaFormat></palantirJavaFormat>
           </java>
           <pom>
-            <sortPom />
+            <sortPom></sortPom>
           </pom>
         </configuration>
         <executions>

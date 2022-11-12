@@ -15,11 +15,11 @@ Add the `smartconstraints-annotation` as
 a compile time dependency to your project.
 (Not required at runtime) 
 
-Add the `@CopyConstraints` annotation 
+Add the `@CopyJavaxConstraints` annotation 
 on a `package-info.java` in jour project, 
 where meta-annotations will be generated. 
 
-Add the `from` attribute to `@CopyConstraints` 
+Add the `from` attribute to `@CopyJavaxConstraints` 
 and specify the package where your entities
 are located. 
 

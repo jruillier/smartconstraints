@@ -1,4 +1,4 @@
-package eu.aronnax.smartconstraints.test.sto;
+package eu.aronnax.smartconstraints.test.fromexternallib;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

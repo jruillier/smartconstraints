@@ -15,6 +15,7 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import javax.validation.constraints.*;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
@@ -26,7 +27,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 class ${sourceClass.simpleName()} {
 @for(TargetMetaAnnotDto sourceElement : sourceClass.properties())
     @for(TargetAnnotDto sourceAnnot : sourceElement.annots())
-    @${sourceAnnot.qualifiedName()}(
+    @${sourceAnnot.simpleName()}(
         ${helper.formatParams(sourceAnnot.annotParams())}
     )
 @endfor

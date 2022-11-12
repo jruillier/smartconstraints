@@ -4,7 +4,7 @@
   <parent>
     <groupId>eu.aronnax.smartconstraints</groupId>
     <artifactId>smartconstraints-parent</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.2-SNAPSHOT</version>
   </parent>
 
   <artifactId>smartconstraints-test</artifactId>
@@ -13,7 +13,13 @@
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-annotationprocessor</artifactId>
-      <version>0.1.1-SNAPSHOT</version>
+      <version>0.1.2-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>eu.aronnax.smartconstraints</groupId>
+      <artifactId>smartconstraints-annotation</artifactId>
+      <version>0.1.2-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -22,29 +28,22 @@
     </dependency>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
-      <artifactId>smartconstraints-annotation</artifactId>
-      <version>0.1.1-SNAPSHOT</version>
+      <artifactId>smartconstraints-test-entity</artifactId>
+      <version>0.1.2-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>6.2.4.Final</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>eu.aronnax.smartconstraints</groupId>
-      <artifactId>smartconstraints-test-entity</artifactId>
-      <version>0.1.1-SNAPSHOT</version>
-      <scope>provided</scope>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.el</artifactId>
+      <version>3.0.1-b12</version>
+      <scope>test</scope>
     </dependency>
-    <!-- annotation processing fails when specified -->
-    <!--    <dependency>-->
-    <!--      <groupId>org.hibernate.validator</groupId>-->
-    <!--      <artifactId>hibernate-validator</artifactId>-->
-    <!--      <version>6.2.4.Final</version>-->
-    <!--      <scope>test</scope>-->
-    <!--    </dependency>-->
-    <!--    <dependency>-->
-    <!--      <groupId>org.glassfish</groupId>-->
-    <!--      <artifactId>javax.el</artifactId>-->
-    <!--      <version>3.0.1-b12</version>-->
-    <!--      <scope>test</scope>-->
-    <!--    </dependency>-->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>

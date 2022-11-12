@@ -1,4 +1,4 @@
-package eu.aronnax.smartconstraints.test.sto;
+package eu.aronnax.smartconstraints.test.fromexternallib;
 
 public class AddressSto {
 

@@ -43,6 +43,6 @@ public class ValidationTest {
         Set<ConstraintViolation<AddressSto>> violations = validator.validate(addressSto);
 
         // Verify
-//        assertEquals(2, violations.size());
+        assertEquals(2, violations.size());
     }
 }

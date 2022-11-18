@@ -4,7 +4,7 @@
   <parent>
     <groupId>eu.aronnax.smartconstraints</groupId>
     <artifactId>smartconstraints-parent</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.0</version>
   </parent>
 
   <artifactId>smartconstraints-annotation</artifactId>

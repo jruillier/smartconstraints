@@ -153,9 +153,6 @@
             <removeUnusedImports></removeUnusedImports>
             <palantirJavaFormat></palantirJavaFormat>
           </java>
-          <pom>
-            <sortPom></sortPom>
-          </pom>
         </configuration>
         <executions>
           <execution>

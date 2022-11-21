@@ -4,7 +4,7 @@
   <parent>
     <groupId>eu.aronnax.smartconstraints</groupId>
     <artifactId>smartconstraints-parent</artifactId>
-    <version>0.1.2-SNAPSHOT</version>
+    <version>0.2.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>smartconstraints-test</artifactId>
@@ -13,13 +13,13 @@
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-annotationprocessor</artifactId>
-      <version>0.1.2-SNAPSHOT</version>
+      <version>0.2.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-annotation</artifactId>
-      <version>0.1.2-SNAPSHOT</version>
+      <version>0.2.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -29,7 +29,7 @@
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-test-entity</artifactId>
-      <version>0.1.2-SNAPSHOT</version>
+      <version>0.2.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

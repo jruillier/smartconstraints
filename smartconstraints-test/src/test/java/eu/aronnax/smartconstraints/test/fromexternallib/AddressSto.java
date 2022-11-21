@@ -1,11 +1,13 @@
 package eu.aronnax.smartconstraints.test.fromexternallib;
 
+import static eu.aronnax.smartconstraints.test.fromexternallib.AddressEntity_Constraints.*;
+
 public class AddressSto {
 
-    @AddressEntity_Constraints.Street
+    @ValidStreet
     private String street;
 
-    @AddressEntity_Constraints.ZipCode
+    @ValidZipCode
     private String zipCode;
 
     public String getStreet() {

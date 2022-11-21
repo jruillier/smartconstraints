@@ -1,3 +1,5 @@
 package eu.aronnax.smartconstraints.test.samemodule.dto;
 
-public record AddressSameModuleDto(@AddressSameModuleEntity_Constraints.ZipCode String streetName) {}
+import static eu.aronnax.smartconstraints.test.samemodule.dto.AddressSameModuleEntity_Constraints.*;
+
+public record AddressSameModuleDto(@ValidZipCode String streetName) {}

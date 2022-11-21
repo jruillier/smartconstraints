@@ -38,7 +38,7 @@ class BuildTargetHelper {
     private List<TargetMetaAnnotDto> buildTargetMetaAnnots(SourceEntityDto entry) {
         return entry.sourceProperties().stream()
                 .map(propertyElem -> new TargetMetaAnnotDto(
-                        this.stringUtils.capitalize(propertyElem.propertyName()),
+                        "Valid" + this.stringUtils.capitalize(propertyElem.propertyName()),
                         this.buildTargetAnnots(propertyElem.annots())))
                 .collect(Collectors.toList());
     }

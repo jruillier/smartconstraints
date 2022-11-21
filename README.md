@@ -1,3 +1,5 @@
+[![Maven Central](https://img.shields.io/maven-central/v/eu.aronnax.smartconstraints/smartconstraints-annotation.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22eu.aronnax.smartconstraints%22%20AND%20a:%22smartconstraints-annotation%22)
+
 # SmartConstraints
 
 SmartContraints is a Java annotation 
@@ -30,7 +32,7 @@ As a compile time dependency to your project.
 Run your build :-)
 
 You can now use annotations like :
-`@AddressConstraints.StreetName` on your DTOs that
+`@AddressConstraints.ValidStreetName` on your DTOs that
 aggregates validations from original
  field , without any runtime 
 dependency to `AddressEntity`. 

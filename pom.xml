@@ -12,7 +12,7 @@
   <description>SmartConstraints helps you work with annotated validation constraints (`javax.validation:validation-api`)
     in multi layered application (as in Clean Architecture).
     See `smartconstraints-annotationprocessor` for further explanation.</description>
-  <url>https://github.com/jruillier/smartconstraints</url>
+  <url>https://jruillier.github.io</url>
 
   <licenses>
     <license>
@@ -55,6 +55,10 @@
   </ciManagement>
 
   <distributionManagement>
+    <site>
+      <id>staging</id>
+      <url>file://tmp</url>
+    </site>
     <snapshotRepository>
       <id>ossrh</id>
       <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
@@ -133,7 +137,10 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.11.0</version>
+          <version>3.12.1</version>
+          <configuration>
+<!--            <skipDeploy>true</skipDeploy>-->
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -160,6 +167,25 @@
               <goal>check</goal>
             </goals>
             <phase>${spotlessCheckPhase}</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.12</version>
+        <configuration>
+          <message>Creating site for ${project.version}</message>
+<!--          <repositoryOwner>jruillier</repositoryOwner>-->
+<!--          <repositoryName>jruillier.github.io</repositoryName>-->
+          <server>github</server>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>site</phase>
+            <goals>
+              <goal>site</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>

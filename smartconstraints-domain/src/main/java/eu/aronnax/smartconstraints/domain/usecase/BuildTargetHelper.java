@@ -37,9 +37,9 @@ class BuildTargetHelper {
 
     private String buildTargetClassSimpleName(SourceEntityDto sourceEntity) {
         String simpleName = NamingUtil.extractSimpleName(sourceEntity.classQualifiedName());
-        simpleName = simpleName.endsWith("Entity") && simpleName.length() > 6 ?
-                simpleName.substring(0, simpleName.length() - 6) :
-                simpleName;
+        simpleName = simpleName.endsWith("Entity") && simpleName.length() > 6
+                ? simpleName.substring(0, simpleName.length() - 6)
+                : simpleName;
         return simpleName + "_Constraints";
     }
 

@@ -23,8 +23,8 @@ class BuildTargetHelper {
 
     Map.Entry<CharSequence, TargetClassDto> buildTargetClass(final SourceEntityDto sourceEntity) {
 
-        String classSimpleName = NamingUtil.extractSimpleName(sourceEntity.classQualifiedName()) + "_Constraints";
         String packageName = sourceEntity.targetPackage();
+        String classSimpleName = this.buildTargetClassSimpleName(sourceEntity);
         String classQualifiedName = packageName + "." + classSimpleName;
 
         MapEntryDto<TargetClassDto> result = new MapEntryDto<>(
@@ -33,6 +33,14 @@ class BuildTargetHelper {
                         packageName, classQualifiedName, classSimpleName, this.buildTargetMetaAnnots(sourceEntity)));
         LOGGER.info(result.getValue().toString());
         return result;
+    }
+
+    private String buildTargetClassSimpleName(SourceEntityDto sourceEntity) {
+        String simpleName = NamingUtil.extractSimpleName(sourceEntity.classQualifiedName());
+        simpleName = simpleName.endsWith("Entity") && simpleName.length() > 6 ?
+                simpleName.substring(0, simpleName.length() - 6) :
+                simpleName;
+        return simpleName + "_Constraints";
     }
 
     private List<TargetMetaAnnotDto> buildTargetMetaAnnots(SourceEntityDto entry) {

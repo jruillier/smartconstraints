@@ -11,11 +11,52 @@ constraints from your entities and
 SmartConstraints is a Work In Progress. 
 Stay tuned for incoming release on maven central :-)
 
- ## How-To
+ ## Maven How-To
+ 
+Define a property to define SmartConstraints version:
+```xml
+   </properties>
+        <smartconstraints.version>0.4.0</smartconstraints.version>
+    </properties>
+```
 
 Add the `smartconstraints-annotation` as 
-a compile time dependency to your project.
+a `provided` dependency to your project.
 (Not required at runtime) 
+
+```xml
+    <dependencies>
+        <dependency>
+            <groupId>eu.aronnax.smartconstraints</groupId>
+            <artifactId>smartconstraints-annotation</artifactId>
+            <version>${smartconstraints.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+```
+
+Add the `smartconstraints-annotationprocessor`
+as a `maven-compiler-plugin` `annotationProcessor`:
+
+```xml
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>eu.aronnax.smartconstraints</groupId>
+                            <artifactId>smartconstraints-annotationprocessor</artifactId>
+                            <version>${smartconstraints.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+```
 
 Add the `@CopyJavaxConstraints` annotation 
 on a `package-info.java` in jour project, 

@@ -73,7 +73,7 @@ As a compile time dependency to your project.
 Run your build :-)
 
 You can now use annotations like :
-`@AddressConstraints.ValidStreetName` on your DTOs that
+`@Address_Constraints.ValidStreetName` on your DTOs that
 aggregates validations from original
  field , without any runtime 
 dependency to `AddressEntity`. 

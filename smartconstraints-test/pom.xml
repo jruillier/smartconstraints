@@ -4,7 +4,7 @@
   <parent>
     <groupId>eu.aronnax.smartconstraints</groupId>
     <artifactId>smartconstraints-parent</artifactId>
-    <version>0.3.1-SNAPSHOT</version>
+    <version>0.4.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>smartconstraints-test</artifactId>
@@ -12,14 +12,8 @@
   <dependencies>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
-      <artifactId>smartconstraints-annotationprocessor</artifactId>
-      <version>0.3.1-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-annotation</artifactId>
-      <version>0.3.1-SNAPSHOT</version>
+      <version>0.4.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -29,7 +23,7 @@
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-test-entity</artifactId>
-      <version>0.3.1-SNAPSHOT</version>
+      <version>0.4.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -53,19 +47,19 @@
 
   <build>
     <plugins>
-<!--      <plugin>-->
-<!--        <groupId>org.apache.maven.plugins</groupId>-->
-<!--        <artifactId>maven-compiler-plugin</artifactId>-->
-<!--        <configuration>-->
-<!--          <annotationProcessorPaths>-->
-<!--            <path>-->
-<!--              <groupId>eu.aronnax.smartconstraints</groupId>-->
-<!--              <artifactId>smartconstraints-annotationprocessor</artifactId>-->
-<!--              <version>0.3.1-SNAPSHOT</version>-->
-<!--            </path>-->
-<!--          </annotationProcessorPaths>-->
-<!--        </configuration>-->
-<!--      </plugin>-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>eu.aronnax.smartconstraints</groupId>
+              <artifactId>smartconstraints-annotationprocessor</artifactId>
+              <version>0.4.1-SNAPSHOT</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-install-plugin</artifactId>

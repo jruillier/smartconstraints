@@ -1,6 +1,6 @@
 package eu.aronnax.smartconstraints.test.fromexternallib;
 
-import static eu.aronnax.smartconstraints.test.fromexternallib.AddressEntity_Constraints.*;
+import static eu.aronnax.smartconstraints.test.fromexternallib.Address_Constraints.*;
 
 public class AddressSto {
 

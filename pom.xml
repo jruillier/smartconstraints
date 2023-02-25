@@ -40,8 +40,8 @@
     <module>smartconstraints-utils-apachecommons3</module>
     <module>smartconstraints-javax-impl</module>
     <module>smartconstraints-jakarta-impl</module>
-    <!--    <module>smartconstraints-test</module>-->
-    <!--    <module>smartconstraints-test-entity</module>-->
+    <module>smartconstraints-test</module>
+    <module>smartconstraints-test-entity</module>
   </modules>
 
   <scm>
@@ -166,6 +166,17 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <useReleaseProfile>false</useReleaseProfile>
+          <releaseProfiles>release</releaseProfiles>
+          <goals>deploy</goals>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>com.github.github</groupId>
         <artifactId>site-maven-plugin</artifactId>
         <version>0.12</version>
@@ -256,17 +267,6 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-release-plugin</artifactId>
-            <version>2.5.3</version>
-            <configuration>
-              <autoVersionSubmodules>true</autoVersionSubmodules>
-              <useReleaseProfile>false</useReleaseProfile>
-              <releaseProfiles>release</releaseProfiles>
-              <goals>deploy</goals>
-            </configuration>
           </plugin>
         </plugins>
       </build>

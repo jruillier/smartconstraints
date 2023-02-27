@@ -25,7 +25,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 class ${sourceClass.simpleName()} {
-@for(TargetMetaAnnotDto sourceElement : sourceClass.properties())
+@for(TargetMetaAnnotDto sourceElement : sourceClass.metaAnnots())
     @for(TargetAnnotDto sourceAnnot : sourceElement.annots())
     @${sourceAnnot.simpleName()}(
         ${helper.formatParams(sourceAnnot.annotParams())}

@@ -7,6 +7,7 @@ import eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints;
 import java.util.*;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
@@ -49,12 +50,14 @@ class CollectElementsHelperTest {
 
         VariableElement propStreetName = mock(VariableElement.class);
         lenient().when(propStreetName.getAnnotation(Size.class)).thenReturn(fakeSizeAnnot);
+        lenient().when(propStreetName.getKind()).thenReturn(ElementKind.FIELD);
+        lenient().when(propStreetName.getSimpleName()).thenReturn(new AName("streetName"));
 
         TypeElement srcClass = mock(TypeElement.class);
         when(srcClass.getSimpleName()).thenReturn(new AName("FakeAddress"));
+        when(srcClass.getQualifiedName()).thenReturn(new AName("gp.fake.frompkg.FakeAddress"));
         List srcProperties = List.of(propStreetName);
         when(srcClass.getEnclosedElements()).thenReturn(srcProperties);
-        when(propStreetName.getEnclosingElement()).thenReturn(srcClass);
 
         List srcClasses = List.of(srcClass);
 

@@ -49,11 +49,11 @@ class BuildSourceHelperTest {
 
         // Verify
         assertEquals("FakeAddress_Constraints", result.getValue().simpleName());
-        assertEquals("gp.fake.FakeAddress_Constraints", result.getValue().qualifiedName());
-        List<TargetMetaAnnotDto> resultProperties = result.getValue().properties();
-        TargetMetaAnnotDto streetNameProp = resultProperties.get(0);
-        assertEquals("StreetName", streetNameProp.name());
-        //        List<SourceAnnotDto> streetNameAnnots = streetNameProp.annots();
+        assertEquals("gp.faketarget.FakeAddress_Constraints", result.getValue().qualifiedName());
+        List<TargetMetaAnnotDto> resultProperties = result.getValue().metaAnnots();
+        TargetMetaAnnotDto streetNameMetaAnnot = resultProperties.get(0);
+        assertEquals("ValidStreetName", streetNameMetaAnnot.name());
+        //        List<SourceAnnotDto> streetNameAnnots = streetNameMetaAnnot.annots();
         //        assertEquals("NotNull", streetNameAnnots.get(0).simpleName());
     }
 }

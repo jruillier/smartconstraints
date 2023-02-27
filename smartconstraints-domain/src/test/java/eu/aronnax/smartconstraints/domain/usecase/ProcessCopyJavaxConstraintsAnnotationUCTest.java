@@ -18,7 +18,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class ProcessCopyJavaxConstraintsAnnotationUCTest {
+public class ProcessCopyJavaxConstraintsAnnotationUCTest {
 
     @InjectMocks
     private ProcessCopyConstraintsAnnotationUC instance;

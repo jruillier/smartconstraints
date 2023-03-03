@@ -1,4 +1,5 @@
 [![Maven Central](https://img.shields.io/maven-central/v/eu.aronnax.smartconstraints/smartconstraints-annotation.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22eu.aronnax.smartconstraints%22%20AND%20a:%22smartconstraints-annotation%22)
+[![Build+Tests](https://github.com/jruillier/smartconstraints/actions/workflows/maven.yml/badge.svg)](https://github.com/jruillier/smartconstraints/actions/workflows/maven.yml)
 
 # SmartConstraints
 

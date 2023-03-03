@@ -42,6 +42,7 @@
     <module>smartconstraints-jakarta-impl</module>
     <module>smartconstraints-test</module>
     <module>smartconstraints-test-entity</module>
+    <module>smartconstraints-reportaggregate</module>
   </modules>
 
   <scm>
@@ -210,6 +211,30 @@
       <properties>
         <spotlessCheckPhase>verify</spotlessCheckPhase>
       </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <groupId>org.jacoco</groupId>
+            <version>0.8.8</version>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
     <profile>
       <id>release</id>

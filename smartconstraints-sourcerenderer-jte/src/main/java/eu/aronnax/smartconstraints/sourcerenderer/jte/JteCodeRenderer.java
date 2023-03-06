@@ -9,7 +9,6 @@ import gg.jte.TemplateOutput;
 import gg.jte.generated.precompiled.eu.aronnax.omnivalid.sourcerenderer.jte.JteJavaClassTemplateGenerated;
 import gg.jte.output.StringOutput;
 import jakarta.enterprise.context.ApplicationScoped;
-
 import javax.inject.Inject;
 
 @ApplicationScoped

@@ -1,11 +1,11 @@
 package eu.aronnax.smartconstraints.domain.usecase;
 
+import eu.aronnax.smartconstraints.domain.port.KeyValueDto;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.CodeRendererPort;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.RenderingDto;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetClassDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import java.util.Map;
 
 @ApplicationScoped
 class RenderTargetHelper {
@@ -17,7 +17,7 @@ class RenderTargetHelper {
         this.codeRendererPort = codeRendererPort;
     }
 
-    RenderingDto renderSource(Map.Entry<CharSequence, TargetClassDto> entry) {
+    RenderingDto renderSource(KeyValueDto<TargetClassDto> entry) {
         return this.codeRendererPort.render(entry);
     }
 }

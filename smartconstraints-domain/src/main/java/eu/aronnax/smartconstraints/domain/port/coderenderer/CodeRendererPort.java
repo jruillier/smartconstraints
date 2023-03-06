@@ -1,8 +1,8 @@
 package eu.aronnax.smartconstraints.domain.port.coderenderer;
 
-import java.util.Map;
+import eu.aronnax.smartconstraints.domain.port.KeyValueDto;
 
 public interface CodeRendererPort {
 
-    RenderingDto render(Map.Entry<CharSequence, TargetClassDto> entry);
+    RenderingDto render(KeyValueDto<TargetClassDto> entry);
 }

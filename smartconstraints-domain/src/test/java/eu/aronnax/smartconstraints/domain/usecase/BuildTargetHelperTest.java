@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+import eu.aronnax.smartconstraints.domain.port.KeyValueDto;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.SourceEntityDto;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.SourcePropertyDto;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetClassDto;
@@ -12,7 +13,6 @@ import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,12 +45,12 @@ class BuildSourceHelperTest {
         var elementsByName = new SourceEntityDto("gp.fake.FakeAddress", List.of(propStreetName), "gp.faketarget");
 
         // Run
-        Map.Entry<CharSequence, TargetClassDto> result = this.instance.buildTargetClass(elementsByName);
+        KeyValueDto<TargetClassDto> result = this.instance.buildTargetClass(elementsByName);
 
         // Verify
-        assertEquals("FakeAddress_Constraints", result.getValue().simpleName());
-        assertEquals("gp.faketarget.FakeAddress_Constraints", result.getValue().qualifiedName());
-        List<TargetMetaAnnotDto> resultProperties = result.getValue().metaAnnots();
+        assertEquals("FakeAddress_Constraints", result.value().simpleName());
+        assertEquals("gp.faketarget.FakeAddress_Constraints", result.value().qualifiedName());
+        List<TargetMetaAnnotDto> resultProperties = result.value().metaAnnots();
         TargetMetaAnnotDto streetNameMetaAnnot = resultProperties.get(0);
         assertEquals("ValidStreetName", streetNameMetaAnnot.name());
         //        List<SourceAnnotDto> streetNameAnnots = streetNameMetaAnnot.annots();

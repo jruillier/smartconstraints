@@ -1,11 +1,12 @@
 package eu.aronnax.smartconstraints.domain.usecase;
 
+import eu.aronnax.smartconstraints.domain.port.KeyValueDto;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.*;
 import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -21,17 +22,17 @@ class BuildTargetHelper {
         this.stringUtils = stringUtils;
     }
 
-    Map.Entry<CharSequence, TargetClassDto> buildTargetClass(final SourceEntityDto sourceEntity) {
+    KeyValueDto<TargetClassDto> buildTargetClass(final SourceEntityDto sourceEntity) {
 
         String packageName = sourceEntity.targetPackage();
         String classSimpleName = this.buildTargetClassSimpleName(sourceEntity);
         String classQualifiedName = packageName + "." + classSimpleName;
 
-        MapEntryDto<TargetClassDto> result = new MapEntryDto<>(
+        KeyValueDto<TargetClassDto> result = new KeyValueDto<>(
                 classQualifiedName,
                 new TargetClassDto(
                         packageName, classQualifiedName, classSimpleName, this.buildTargetMetaAnnots(sourceEntity)));
-        LOGGER.info(result.getValue().toString());
+        LOGGER.info(result.value().toString());
         return result;
     }
 

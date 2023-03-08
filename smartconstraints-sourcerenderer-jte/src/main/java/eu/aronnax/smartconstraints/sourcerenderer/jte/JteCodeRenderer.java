@@ -9,6 +9,7 @@ import gg.jte.TemplateOutput;
 import gg.jte.generated.precompiled.eu.aronnax.omnivalid.sourcerenderer.jte.JteJavaClassTemplateGenerated;
 import gg.jte.output.StringOutput;
 import jakarta.enterprise.context.ApplicationScoped;
+import java.time.ZonedDateTime;
 import javax.inject.Inject;
 
 @ApplicationScoped
@@ -24,7 +25,8 @@ public class JteCodeRenderer implements CodeRendererPort {
     @Override
     public RenderingDto render(KeyValueDto<TargetClassDto> entry) {
         TemplateOutput output = new StringOutput();
-        JteJavaClassTemplateGenerated.render(output, null, entry.value(), this.jteHelper);
+        GeneratorInfo generatorInfo = new GeneratorInfo(this.getClass().getCanonicalName(), ZonedDateTime.now());
+        JteJavaClassTemplateGenerated.render(output, null, generatorInfo, entry.value(), this.jteHelper);
         String qualifiedName = entry.key().toString();
         String packageName = NamingUtil.extractPackageName(qualifiedName);
         String classSimpleName = NamingUtil.extractSimpleName(qualifiedName);

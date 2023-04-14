@@ -18,7 +18,7 @@ Stay tuned for incoming release on maven central :-)
  
 Define a property to define SmartConstraints version:
 ```xml
-   </properties>
+   <properties>
         <smartconstraints.version>0.4.0</smartconstraints.version>
     </properties>
 ```

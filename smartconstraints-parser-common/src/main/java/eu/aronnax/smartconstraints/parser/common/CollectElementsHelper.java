@@ -1,26 +1,34 @@
-package eu.aronnax.smartconstraints.javaxvalidation;
+package eu.aronnax.smartconstraints.parser.common;
 
 import eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.*;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import java.util.*;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @ApplicationScoped
-class CollectElementsHelper implements ElementCollectorPort {
+public class CollectElementsHelper implements ElementCollectorPort {
 
     private static final Logger LOGGER = Logger.getLogger(CollectElementsHelper.class.getName());
 
-    private final ConstraintsHelper constraintsHelper;
+    private final ConstraintsHelperPort constraintsHelper;
 
+    /**
+     * According to injector setup, an appropriate {@link ConstraintsHelperPort} will be injected.
+     * @param constraintsHelper matching processed annotations type
+     */
+    @SuppressWarnings("CdiInjectionPointsInspection")
     @Inject
-    CollectElementsHelper(ConstraintsHelper constraintsHelper) {
+    CollectElementsHelper(ConstraintsHelperPort constraintsHelper) {
         this.constraintsHelper = constraintsHelper;
     }
 

@@ -1,4 +1,4 @@
-package eu.aronnax.smartconstraints.javaxvalidation;
+package eu.aronnax.smartconstraints.parser.common;
 
 import javax.lang.model.element.Name;
 

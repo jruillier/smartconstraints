@@ -12,4 +12,26 @@
   <name>SmartConstraints collector jakarta impl.</name>
   <description>Not for public use. NOT IMPLEMENTED YET</description>
 
+  <dependencies>
+    <dependency>
+      <groupId>eu.aronnax.smartconstraints</groupId>
+      <artifactId>smartconstraints-domain</artifactId>
+      <version>0.4.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>eu.aronnax.smartconstraints</groupId>
+      <artifactId>smartconstraints-parser-common</artifactId>
+      <version>0.4.1-SNAPSHOT</version>
+    </dependency>
+    <!-- libs -->
+    <dependency>
+      <groupId>com.google.dagger</groupId>
+      <artifactId>dagger</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+    </dependency>
+  </dependencies>
+
 </project>

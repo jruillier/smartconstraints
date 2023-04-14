@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>eu.aronnax.smartconstraints</groupId>
     <artifactId>smartconstraints-parent</artifactId>
     <version>0.4.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>smartconstraints-javax-impl</artifactId>
-
-  <name>SmartConstraints collector javax impl.</name>
-  <description>Not for public use. `javax.validation:validation-api` based collector implementation for SmartConstraints. (Clean Architecture)</description>
+  <artifactId>smartconstraints-parser-common</artifactId>
+  <description>Not for public use. Common parser classes for SmartConstraints. (Clean Architecture)</description>
 
   <dependencies>
     <dependency>
@@ -18,19 +19,10 @@
       <artifactId>smartconstraints-domain</artifactId>
       <version>0.4.1-SNAPSHOT</version>
     </dependency>
-    <dependency>
-      <groupId>eu.aronnax.smartconstraints</groupId>
-      <artifactId>smartconstraints-parser-common</artifactId>
-      <version>0.4.1-SNAPSHOT</version>
-    </dependency>
     <!-- libs -->
     <dependency>
       <groupId>com.google.dagger</groupId>
       <artifactId>dagger</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
     </dependency>
     <!-- tests -->
     <dependency>

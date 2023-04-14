@@ -1,17 +1,7 @@
 package eu.aronnax.smartconstraints.javaxvalidation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetAnnotParamDto;
 import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;
-import java.lang.annotation.Annotation;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import javax.validation.constraints.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,11 +9,22 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.validation.constraints.*;
+import java.lang.annotation.Annotation;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
-class AnnotElemSourceParamsBuilderTest {
+class JavaxAnnotElemSourceParamsBuilderTest {
 
     @InjectMocks
-    private AnnotElemSourceParamsBuilder instance;
+    private JavaxAnnotElemSourceParamsBuilder instance;
 
     @Mock
     private StringUtilsPort stringUtilsPort;
@@ -358,6 +359,7 @@ class AnnotElemSourceParamsBuilderTest {
         assertEquals(List.of(new TargetAnnotParamDto("message", null, "A Size msg")), params);
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private <R extends Annotation> R buildAnnotElmt(Class<R> classToMock) {
         R annotElmt = mock(classToMock);
         when(annotElmt.annotationType()).thenReturn((Class) classToMock);

@@ -1,4 +1,4 @@
-package eu.aronnax.smartconstraints.javaxvalidation;
+package eu.aronnax.smartconstraints.parser.common;
 
 record KeyValueDto<V>(String key, V value) {
     public <NV> KeyValueDto<NV> newWithValue(NV newValue) {

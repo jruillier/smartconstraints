@@ -11,6 +11,8 @@
     <file url="file://$PROJECT_DIR$/smartconstraints-jakarta-impl/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smartconstraints-javax-impl/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smartconstraints-javax-impl/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/smartconstraints-parser-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/smartconstraints-parser-common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smartconstraints-reportaggregate/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smartconstraints-reportaggregate/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smartconstraints-sourcerenderer-jte/src/main/java" charset="UTF-8" />

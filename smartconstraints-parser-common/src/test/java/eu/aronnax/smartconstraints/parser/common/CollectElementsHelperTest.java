@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -35,6 +36,8 @@ class CollectElementsHelperTest {
     @BeforeEach
     void setUp() {
         when(this.constraintsHelper.getConstraintClasses()).thenReturn(Stream.of(FakeSize.class));
+        when(this.constraintsHelper.getCopyConstraintsAnnotation()).thenReturn((Class) CopyJavaxConstraints.class);
+        when(this.constraintsHelper.extractFromPackage(any())).thenReturn("gp.fake.frompkg");
     }
 
     @Test
@@ -85,12 +88,8 @@ class CollectElementsHelperTest {
 
     @SuppressWarnings("SameParameterValue")
     private PackageElement buildCCPackageElement(String curPkg, String fromPkg) {
-        CopyJavaxConstraints mockCC = mock(CopyJavaxConstraints.class);
-        when(mockCC.from()).thenReturn(fromPkg);
-
         PackageElement mock = mock(PackageElement.class);
         when(mock.getQualifiedName()).thenReturn(new AName(curPkg));
-        when(mock.getAnnotation(CopyJavaxConstraints.class)).thenReturn(mockCC);
 
         return mock;
     }

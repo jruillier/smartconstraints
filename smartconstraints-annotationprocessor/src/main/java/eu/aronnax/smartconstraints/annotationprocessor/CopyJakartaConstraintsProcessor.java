@@ -3,12 +3,11 @@ package eu.aronnax.smartconstraints.annotationprocessor;
 import com.google.auto.service.AutoService;
 import eu.aronnax.smartconstraints.annotation.CopyJakartaConstraints;
 import eu.aronnax.smartconstraints.domain.usecase.ProcessCopyConstraintsAnnotationUC;
-
+import java.util.Set;
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
-import java.util.Set;
 
 /**
  * The entry point of SmartConstraints. This annotation processor will :

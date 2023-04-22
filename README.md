@@ -5,13 +5,13 @@
 
 # SmartConstraints
 
-SmartContraints is a Java annotation 
-processor that collects validation 
+SmartContraints is a Java annotation
+processor that collects validation
 constraints from your entities and
- generates corresponding meta annotations. 
- You can then use them easily in your DTOs. 
+generates corresponding composed annotations.
+You can then use them easily in your DTOs.
 
-SmartConstraints is a Work In Progress. 
+SmartConstraints is a Work In Progress.
 Stay tuned for incoming release on maven central :-)
 
  ## Maven How-To
@@ -61,13 +61,13 @@ as a `maven-compiler-plugin` `annotationProcessor`:
     </build>
 ```
 
-Add the `@CopyJavaxConstraints` annotation 
-on a `package-info.java` in jour project, 
-where meta-annotations will be generated. 
+Add the `@CopyJavaxConstraints` annotation
+on a `package-info.java` in jour project,
+where composed annotations will be generated.
 
-Add the `from` attribute to `@CopyJavaxConstraints` 
+Add the `from` attribute to `@CopyJavaxConstraints`
 and specify the package where your entities
-are located. 
+are located.
 
 Add the `smartconstraints-annotationprocessor`
 As a compile time dependency to your project. 

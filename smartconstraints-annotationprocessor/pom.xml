@@ -10,8 +10,12 @@
   <artifactId>smartconstraints-annotationprocessor</artifactId>
 
   <name>SmartConstraints annotation processor</name>
-  <description>Provides the annotation processor that wil generate meta annotations based on `@CopyJavaxConstraints` instructions.
-    Should be used in conjunction with `smartconstraints-annotation`, as a maven `provided` dependency.</description>
+  <description><![CDATA[
+    Provides the annotation processor that will generate composed annotations based on
+    <code>@CopyJavaxConstraints</code> and <code>@CopyJakartaConstraints</code>
+    (provided by <code>smartconstraints-annotation</code>).
+    Should be used as an annotation processor (in <code>maven-compiler-plugin</code> config).
+    ]]></description>
   <properties>
     <auto-service.version>1.0.1</auto-service.version>
   </properties>
@@ -32,6 +36,12 @@
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-javax-impl</artifactId>
       <version>0.4.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>eu.aronnax.smartconstraints</groupId>
+      <artifactId>smartconstraints-jakarta-impl</artifactId>
+      <version>0.4.1-SNAPSHOT</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
@@ -59,12 +69,6 @@
       <groupId>org.mockito</groupId>
       <artifactId>mockito-junit-jupiter</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>eu.aronnax.smartconstraints</groupId>
-      <artifactId>smartconstraints-jakarta-impl</artifactId>
-      <version>0.4.1-SNAPSHOT</version>
-      <scope>compile</scope>
     </dependency>
   </dependencies>
 

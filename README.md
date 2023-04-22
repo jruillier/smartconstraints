@@ -44,7 +44,7 @@ public class AddressDto {
 - ❌ You repeat yourself
 - ❌ If your constraintes have to change, your Entity and your DTO can become out of sync if you forget to update one of them
 
-### With smartconstraints
+### With SmartConstraints
 
 You could simply write:
 

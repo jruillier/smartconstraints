@@ -7,7 +7,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-
 import java.util.Collections;
 
 @ApplicationScoped

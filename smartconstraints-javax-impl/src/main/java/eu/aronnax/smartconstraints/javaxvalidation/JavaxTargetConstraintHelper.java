@@ -5,10 +5,9 @@ import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetAnyClassDto;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetConstraintHelperPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
+import java.util.Collections;
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.util.Collections;
 
 @ApplicationScoped
 public class JavaxTargetConstraintHelper implements TargetConstraintHelperPort {

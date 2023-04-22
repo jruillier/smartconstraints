@@ -8,17 +8,64 @@
 SmartContraints is a Java annotation
 processor that collects validation
 constraints from your entities and
-generates corresponding composed annotations.
-You can then use them easily in your DTOs.
+generates corresponding composed constraints annotations. 
+You can then use them easily in your DTOs. 
+
 
 SmartConstraints is a Work In Progress.
 Stay tuned for incoming release on maven central :-)
 
- ## Maven How-To
+## Example
+
+With given entity:
+
+```java
+public class AddressEntity {
+
+    @NotNull
+    @Size(min = 5, max = 5)
+    private String zipCode;
+
+}
+```
+
+### Without SmartConstraints
+
+Your DTO would need to repeat constraints, like:
+
+```java
+public class AddressDto {
+
+    @NotNull
+    @Size(min = 5, max = 5)
+    private String zipCode;
+
+}
+```
+- ❌ You repeat yourself
+- ❌ If your constraintes have to change, your Entity and your DTO can become out of sync if you forget to update one of them
+
+### With SmartConstraints
+
+You could simply write:
+
+```java
+public class AddressDto {
+
+    @ValidZipCode
+    private String zipCode;
+
+}
+```
+- ✅ DRY, and readable
+- ✅ (Almost) no extra work
+- ✅ Constraints are always in sync
+
+## Maven How-To
  
 Define a property to define SmartConstraints version:
 ```xml
-   </properties>
+   <properties>
         <smartconstraints.version>0.4.0</smartconstraints.version>
     </properties>
 ```

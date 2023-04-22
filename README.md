@@ -109,7 +109,7 @@ as a `maven-compiler-plugin` `annotationProcessor`:
 ```
 
 Add the `@CopyJavaxConstraints` annotation
-on a `package-info.java` in jour project,
+on a `package-info.java` in your project,
 where composed annotations will be generated.
 
 Add the `from` attribute to `@CopyJavaxConstraints`

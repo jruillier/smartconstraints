@@ -4,11 +4,10 @@ import eu.aronnax.smartconstraints.annotation.CopyJakartaConstraints;
 import eu.aronnax.smartconstraints.parser.common.ConstraintsHelperPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
-import javax.lang.model.element.Element;
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.stream.Stream;
+import javax.lang.model.element.Element;
 
 @ApplicationScoped
 class JakartaConstraintsHelper implements ConstraintsHelperPort {

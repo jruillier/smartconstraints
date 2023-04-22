@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;

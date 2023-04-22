@@ -1,8 +1,8 @@
 package eu.aronnax.smartconstraints.parser.common;
 
-import javax.lang.model.element.Element;
 import java.lang.annotation.Annotation;
 import java.util.stream.Stream;
+import javax.lang.model.element.Element;
 
 public interface ConstraintsHelperPort {
 

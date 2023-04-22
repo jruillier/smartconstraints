@@ -17,7 +17,7 @@ import javax.tools.Diagnostic;
  *     <li>find any entities annotated with validation constraints</li>
  *     <li>extract objects that describe all validation constraints in entities</li>
  *     <li>prepare objects that describe what should be generated</li>
- *     <li>generate (as a string) one class per entity with all meta annotations within</li>
+ *     <li>generate (as a string) one class per entity with all composed annotations within</li>
  *     <li>write generated classes</li>
  * </ul>
  */

@@ -1,4 +1,4 @@
-@CopyJavaxConstraints(from = "eu.aronnax.smartconstraints.test.samemodule.entity")
+@CopyJakartaConstraints(from = "eu.aronnax.smartconstraints.test.jakarta.entity")
 package eu.aronnax.smartconstraints.test.jakarta.dto;
 
-import eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints;
+import eu.aronnax.smartconstraints.annotation.CopyJakartaConstraints;

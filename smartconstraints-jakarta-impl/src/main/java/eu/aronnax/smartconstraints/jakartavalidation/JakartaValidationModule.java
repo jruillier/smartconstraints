@@ -3,6 +3,7 @@ package eu.aronnax.smartconstraints.jakartavalidation;
 import dagger.Binds;
 import dagger.Module;
 import eu.aronnax.smartconstraints.domain.port.coderenderer.ElementCollectorPort;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetConstraintHelperPort;
 import eu.aronnax.smartconstraints.parser.common.CollectElementsHelper;
 import eu.aronnax.smartconstraints.parser.common.ConstraintsHelperPort;
 
@@ -14,5 +15,8 @@ public abstract class JakartaValidationModule {
     public abstract ElementCollectorPort collectElementsHelper(CollectElementsHelper helper);
 
     @Binds
-    abstract ConstraintsHelperPort constraintsHelper(JakartaConstraintsHelper helper);
+    public abstract ConstraintsHelperPort constraintsHelper(JakartaConstraintsHelper helper);
+
+    @Binds
+    public abstract TargetConstraintHelperPort targetConstraintHelperPort(JakartaTargetConstraintHelper helper);
 }

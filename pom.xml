@@ -40,6 +40,7 @@
     <module>smartconstraints-utils-apachecommons3</module>
     <module>smartconstraints-javax-impl</module>
     <module>smartconstraints-jakarta-impl</module>
+    <module>smartconstraints-parser-common</module>
     <module>smartconstraints-test</module>
     <module>smartconstraints-test-entity</module>
     <module>smartconstraints-reportaggregate</module>
@@ -92,6 +93,11 @@
         <version>2.0.1.Final</version>
       </dependency>
       <dependency>
+        <groupId>jakarta.validation</groupId>
+        <artifactId>jakarta.validation-api</artifactId>
+        <version>3.0.2</version>
+      </dependency>
+      <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter</artifactId>
         <version>5.8.2</version>
@@ -118,7 +124,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M9</version>
+          <version>3.0.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -155,7 +161,7 @@
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
-        <version>2.24.1</version>
+        <version>2.36.0</version>
         <configuration>
           <java>
             <removeUnusedImports />

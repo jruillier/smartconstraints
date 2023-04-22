@@ -4,7 +4,7 @@ import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.Optional;
 
-enum AnnotEnum {
+enum JavaxAnnotEnum {
     AssertFalse(javax.validation.constraints.AssertFalse.class) {},
 
     AssertTrue(javax.validation.constraints.AssertTrue.class) {},
@@ -49,16 +49,16 @@ enum AnnotEnum {
 
     Size(javax.validation.constraints.Size.class) {};
 
-    static Optional<AnnotEnum> getByAnnotType(Class<? extends Annotation> annotType) {
+    private final Class<? extends Annotation> annotClass;
+
+    JavaxAnnotEnum(Class<? extends Annotation> annotClass) {
+        this.annotClass = annotClass;
+    }
+
+    static Optional<JavaxAnnotEnum> getByAnnotType(Class<? extends Annotation> annotType) {
         return Arrays.stream(values())
                 .filter((value) -> annotType.equals(value.getAnnotClass()))
                 .findAny();
-    }
-
-    private final Class<? extends Annotation> annotClass;
-
-    AnnotEnum(Class<? extends Annotation> annotClass) {
-        this.annotClass = annotClass;
     }
 
     public Class<? extends Annotation> getAnnotClass() {

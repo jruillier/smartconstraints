@@ -10,7 +10,11 @@
   <artifactId>smartconstraints-annotation</artifactId>
 
   <name>SmartConstraints annotation</name>
-  <description>Provides the `@CopyJavaxConstraints` annotation to use in your `package-info.java` file, where meta-annotation should be generated.
-    Should be used in conjunction with `smartconstraints-annotationprocessor`, as a maven `provided` dependency.</description>
+  <description><![CDATA[
+    Provides <code>@CopyJavaxConstraints</code> and <code>@CopyJakartaConstraints</code> annotations
+    to use in your <code>package-info.java</code> file, where composed-annotation should be generated.
+    Should be used as a maven <code>provided</code> dependency.
+    See <code>smartconstraints-annotationprocessor</code> for code generation.
+    ]]></description>
 
 </project>

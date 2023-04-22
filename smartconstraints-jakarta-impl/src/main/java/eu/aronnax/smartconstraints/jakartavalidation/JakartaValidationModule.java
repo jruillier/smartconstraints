@@ -1,4 +1,4 @@
-package eu.aronnax.smartconstraints.javaxvalidation;
+package eu.aronnax.smartconstraints.jakartavalidation;
 
 import dagger.Binds;
 import dagger.Module;
@@ -9,14 +9,14 @@ import eu.aronnax.smartconstraints.parser.common.ConstraintsHelperPort;
 
 @SuppressWarnings("unused")
 @Module
-public abstract class JavaxValidationModule {
+public abstract class JakartaValidationModule {
 
     @Binds
     public abstract ElementCollectorPort collectElementsHelper(CollectElementsHelper helper);
 
     @Binds
-    public abstract ConstraintsHelperPort constraintsHelper(JavaxConstraintsHelper helper);
+    public abstract ConstraintsHelperPort constraintsHelper(JakartaConstraintsHelper helper);
 
     @Binds
-    public abstract TargetConstraintHelperPort targetConstraintHelperPort(JavaxTargetConstraintHelper helper);
+    public abstract TargetConstraintHelperPort targetConstraintHelperPort(JakartaTargetConstraintHelper helper);
 }

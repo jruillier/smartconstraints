@@ -20,10 +20,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class AnnotElemSourceParamsBuilderTest {
+class JavaxAnnotElemSourceParamsBuilderTest {
 
     @InjectMocks
-    private AnnotElemSourceParamsBuilder instance;
+    private JavaxAnnotElemSourceParamsBuilder instance;
 
     @Mock
     private StringUtilsPort stringUtilsPort;
@@ -358,6 +358,7 @@ class AnnotElemSourceParamsBuilderTest {
         assertEquals(List.of(new TargetAnnotParamDto("message", null, "A Size msg")), params);
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private <R extends Annotation> R buildAnnotElmt(Class<R> classToMock) {
         R annotElmt = mock(classToMock);
         when(annotElmt.annotationType()).thenReturn((Class) classToMock);

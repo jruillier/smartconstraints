@@ -11,18 +11,18 @@ import java.util.List;
 import javax.validation.constraints.*;
 
 @ApplicationScoped
-class AnnotElemSourceParamsBuilder {
+class JavaxAnnotElemSourceParamsBuilder {
 
     private final StringUtilsPort stringUtils;
 
     @Inject
-    public AnnotElemSourceParamsBuilder(StringUtilsPort stringUtils) {
+    public JavaxAnnotElemSourceParamsBuilder(StringUtilsPort stringUtils) {
         this.stringUtils = stringUtils;
     }
 
     public List<TargetAnnotParamDto> process(Annotation annotElmt) {
-        return AnnotEnum.getByAnnotType(annotElmt.annotationType())
-                .map(annotEnum -> switch (annotEnum) {
+        return JavaxAnnotEnum.getByAnnotType(annotElmt.annotationType())
+                .map(javaxAnnotEnum -> switch (javaxAnnotEnum) {
                     case AssertFalse -> this.processAssertFalse(annotElmt);
                     case AssertTrue -> this.processAssertTrue(annotElmt);
                     case DecimalMax -> this.processDecimalMax(annotElmt);
@@ -67,7 +67,7 @@ class AnnotElemSourceParamsBuilder {
         DecimalMax annot = (DecimalMax) annotElmt;
         List<TargetAnnotParamDto> annotParams = new ArrayList<>();
         if (!annot.inclusive()) {
-            annotParams.add(new TargetAnnotParamDto("inclusive", annot.inclusive(), null));
+            annotParams.add(new TargetAnnotParamDto("inclusive", false, null));
         }
         if (this.stringUtils.isNotBlank(annot.value())) {
             annotParams.add(new TargetAnnotParamDto("value", null, annot.value()));
@@ -80,7 +80,7 @@ class AnnotElemSourceParamsBuilder {
         DecimalMin annot = (DecimalMin) annotElmt;
         List<TargetAnnotParamDto> annotParams = new ArrayList<>();
         if (!annot.inclusive()) {
-            annotParams.add(new TargetAnnotParamDto("inclusive", annot.inclusive(), null));
+            annotParams.add(new TargetAnnotParamDto("inclusive", false, null));
         }
         annotParams.add(new TargetAnnotParamDto("value", null, annot.value()));
         this.addMessageParam(annotParams, DecimalMin.class, annot.message());
@@ -240,6 +240,7 @@ class AnnotElemSourceParamsBuilder {
         }
     }
 
+    @SuppressWarnings("SameParameterValue")
     private String buildMessageKeyForParam(Class<? extends Annotation> annotClass, String paramName) {
         return "{" + annotClass.getName() + "." + paramName + "}";
     }

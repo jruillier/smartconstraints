@@ -5,10 +5,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import eu.aronnax.smartconstraints.domain.port.KeyValueDto;
-import eu.aronnax.smartconstraints.domain.port.coderenderer.SourceEntityDto;
-import eu.aronnax.smartconstraints.domain.port.coderenderer.SourcePropertyDto;
-import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetClassDto;
-import eu.aronnax.smartconstraints.domain.port.coderenderer.TargetMetaAnnotDto;
+import eu.aronnax.smartconstraints.domain.port.coderenderer.*;
 import eu.aronnax.smartconstraints.domain.port.stringutils.StringUtilsPort;
 import java.util.Collections;
 import java.util.List;
@@ -28,6 +25,9 @@ class BuildSourceHelperTest {
 
     @Mock
     private StringUtilsPort stringUtils;
+
+    @Mock
+    private TargetConstraintHelperPort targetConstraintHelperPort;
 
     @BeforeEach
     void setUp() {
@@ -50,10 +50,10 @@ class BuildSourceHelperTest {
         // Verify
         assertEquals("FakeAddress_Constraints", result.value().simpleName());
         assertEquals("gp.faketarget.FakeAddress_Constraints", result.value().qualifiedName());
-        List<TargetMetaAnnotDto> resultProperties = result.value().metaAnnots();
-        TargetMetaAnnotDto streetNameMetaAnnot = resultProperties.get(0);
-        assertEquals("ValidStreetName", streetNameMetaAnnot.name());
-        //        List<SourceAnnotDto> streetNameAnnots = streetNameMetaAnnot.annots();
+        List<TargetComposedAnnotDto> resultProperties = result.value().composedAnnots();
+        TargetComposedAnnotDto streetNameComposedAnnot = resultProperties.get(0);
+        assertEquals("ValidStreetName", streetNameComposedAnnot.name());
+        //        List<SourceAnnotDto> streetNameAnnots = streetNameComposedAnnot.annots();
         //        assertEquals("NotNull", streetNameAnnots.get(0).simpleName());
     }
 }

@@ -15,10 +15,12 @@ class BuildTargetHelper {
     private static final Logger LOGGER = Logger.getLogger(BuildTargetHelper.class.getName());
 
     private final StringUtilsPort stringUtils;
+    private final TargetConstraintHelperPort targetConstraintHelperPort;
 
     @Inject
-    BuildTargetHelper(final StringUtilsPort stringUtils) {
+    BuildTargetHelper(final StringUtilsPort stringUtils, final TargetConstraintHelperPort targetConstraintHelperPort) {
         this.stringUtils = stringUtils;
+        this.targetConstraintHelperPort = targetConstraintHelperPort;
     }
 
     KeyValueDto<TargetClassDto> buildTargetClass(final SourceEntityDto sourceEntity) {
@@ -30,7 +32,10 @@ class BuildTargetHelper {
         KeyValueDto<TargetClassDto> result = new KeyValueDto<>(
                 classQualifiedName,
                 new TargetClassDto(
-                        packageName, classQualifiedName, classSimpleName, this.buildTargetMetaAnnots(sourceEntity)));
+                        packageName,
+                        classQualifiedName,
+                        classSimpleName,
+                        this.buildTargetComposedAnnots(sourceEntity)));
         LOGGER.info(result.value().toString());
         return result;
     }
@@ -43,10 +48,12 @@ class BuildTargetHelper {
         return simpleName + "_Constraints";
     }
 
-    private List<TargetMetaAnnotDto> buildTargetMetaAnnots(SourceEntityDto entry) {
+    private List<TargetComposedAnnotDto> buildTargetComposedAnnots(SourceEntityDto entry) {
         return entry.sourceProperties().stream()
-                .map(propertyElem -> new TargetMetaAnnotDto(
+                .map(propertyElem -> new TargetComposedAnnotDto(
                         "Valid" + this.stringUtils.capitalize(propertyElem.propertyName()),
+                        this.targetConstraintHelperPort.getConstraintAnnot(),
+                        this.targetConstraintHelperPort.getPayload(),
                         this.buildTargetAnnots(propertyElem.annots())))
                 .collect(Collectors.toList());
     }

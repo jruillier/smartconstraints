@@ -1,7 +1,7 @@
 package eu.aronnax.smartconstraints.annotationprocessor;
 
 import com.google.auto.service.AutoService;
-import eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints;
+import eu.aronnax.smartconstraints.annotation.CopyJakartaConstraints;
 import eu.aronnax.smartconstraints.domain.usecase.ProcessCopyConstraintsAnnotationUC;
 import java.util.Set;
 import javax.annotation.processing.*;
@@ -12,7 +12,7 @@ import javax.tools.Diagnostic;
 /**
  * The entry point of SmartConstraints. This annotation processor will :
  * <ul>
- *     <li>look for @{@link CopyJavaxConstraints} annotations</li>
+ *     <li>look for @{@link CopyJakartaConstraints} annotations</li>
  *     <li>scan the package indicated in the 'from' property</li>
  *     <li>find any entities annotated with validation constraints</li>
  *     <li>extract objects that describe all validation constraints in entities</li>
@@ -22,22 +22,22 @@ import javax.tools.Diagnostic;
  * </ul>
  */
 @SupportedAnnotationTypes({
-    "javax.validation.constraints.*",
-    "eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints"
+    "jakarta.validation.constraints.*",
+    "eu.aronnax.smartconstraints.annotation.CopyJakartaConstraints"
 })
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
 @AutoService(Processor.class)
-public class CopyJavaxConstraintsProcessor extends AbstractProcessor {
+public class CopyJakartaConstraintsProcessor extends AbstractProcessor {
 
     private final ProcessCopyConstraintsAnnotationUC processCopyConstraintsAnnotationUC;
 
     @SuppressWarnings("unused")
-    public CopyJavaxConstraintsProcessor() {
+    public CopyJakartaConstraintsProcessor() {
         super();
 
-        JavaxServicesFactory javaxServicesFactory =
-                DaggerJavaxServicesFactory.builder().build();
-        this.processCopyConstraintsAnnotationUC = javaxServicesFactory.processSmartConstraintsAnnotationUC();
+        JakartaServicesFactory jakartaServicesFactory =
+                DaggerJakartaServicesFactory.builder().build();
+        this.processCopyConstraintsAnnotationUC = jakartaServicesFactory.processSmartConstraintsAnnotationUC();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class CopyJavaxConstraintsProcessor extends AbstractProcessor {
                 .getMessager()
                 .printMessage(
                         Diagnostic.Kind.NOTE,
-                        "Processing any " + CopyJavaxConstraints.class.getSimpleName() + " annotations...");
+                        "Processing any " + CopyJakartaConstraints.class.getSimpleName() + " annotations...");
         this.processCopyConstraintsAnnotationUC.exec(annotations, roundEnv, this.processingEnv);
 
         return false;

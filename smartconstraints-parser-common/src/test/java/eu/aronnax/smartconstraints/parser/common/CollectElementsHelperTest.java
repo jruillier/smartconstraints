@@ -1,10 +1,14 @@
-package eu.aronnax.smartconstraints.javaxvalidation;
+package eu.aronnax.smartconstraints.parser.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import eu.aronnax.smartconstraints.annotation.CopyJavaxConstraints;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.ElementKind;
@@ -12,7 +16,6 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.Elements;
-import javax.validation.constraints.Size;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,11 +30,13 @@ class CollectElementsHelperTest {
     private CollectElementsHelper collectElementsHelper;
 
     @Mock
-    private ConstraintsHelper constraintsHelper;
+    private ConstraintsHelperPort constraintsHelper;
 
     @BeforeEach
     void setUp() {
-        when(this.constraintsHelper.getConstraintClasses()).thenCallRealMethod();
+        when(this.constraintsHelper.getConstraintClasses()).thenReturn(Stream.of(FakeSize.class));
+        when(this.constraintsHelper.getCopyConstraintsAnnotation()).thenReturn((Class) CopyJavaxConstraints.class);
+        when(this.constraintsHelper.extractFromPackage(any())).thenReturn("gp.fake.frompkg");
     }
 
     @Test
@@ -44,26 +49,26 @@ class CollectElementsHelperTest {
         PackageElement annotPackage = this.buildCCPackageElement("gp.fake.targetpkg", "gp.fake.frompkg");
 
         RoundEnvironment roundEnv = mock(RoundEnvironment.class);
-        when(roundEnv.getElementsAnnotatedWith(copyConstraintsAnnotDef)).thenReturn(new HashSet(List.of(annotPackage)));
+        //noinspection unchecked,rawtypes
+        when(roundEnv.getElementsAnnotatedWith(copyConstraintsAnnotDef)).thenReturn((Set) Set.of(annotPackage));
 
-        Size fakeSizeAnnot = mock(Size.class);
+        FakeSize fakeSizeAnnot = mock(FakeSize.class);
 
         VariableElement propStreetName = mock(VariableElement.class);
-        lenient().when(propStreetName.getAnnotation(Size.class)).thenReturn(fakeSizeAnnot);
+        lenient().when(propStreetName.getAnnotation(FakeSize.class)).thenReturn(fakeSizeAnnot);
         lenient().when(propStreetName.getKind()).thenReturn(ElementKind.FIELD);
         lenient().when(propStreetName.getSimpleName()).thenReturn(new AName("streetName"));
 
         TypeElement srcClass = mock(TypeElement.class);
         when(srcClass.getSimpleName()).thenReturn(new AName("FakeAddress"));
         when(srcClass.getQualifiedName()).thenReturn(new AName("gp.fake.frompkg.FakeAddress"));
-        List srcProperties = List.of(propStreetName);
-        when(srcClass.getEnclosedElements()).thenReturn(srcProperties);
-
-        List srcClasses = List.of(srcClass);
+        //noinspection unchecked,rawtypes
+        when(srcClass.getEnclosedElements()).thenReturn((List) List.of(propStreetName));
 
         PackageElement srcPkgElem = mock(PackageElement.class);
 
-        when(srcPkgElem.getEnclosedElements()).thenReturn(srcClasses);
+        //noinspection unchecked,rawtypes
+        when(srcPkgElem.getEnclosedElements()).thenReturn((List) List.of(srcClass));
 
         Elements mockElemUtils = mock(Elements.class);
         when(mockElemUtils.getPackageElement("gp.fake.frompkg")).thenReturn(srcPkgElem);
@@ -80,13 +85,10 @@ class CollectElementsHelperTest {
         assertEquals(1, result.size());
     }
 
+    @SuppressWarnings("SameParameterValue")
     private PackageElement buildCCPackageElement(String curPkg, String fromPkg) {
-        CopyJavaxConstraints mockCC = mock(CopyJavaxConstraints.class);
-        when(mockCC.from()).thenReturn(fromPkg);
-
         PackageElement mock = mock(PackageElement.class);
         when(mock.getQualifiedName()).thenReturn(new AName(curPkg));
-        when(mock.getAnnotation(CopyJavaxConstraints.class)).thenReturn(mockCC);
 
         return mock;
     }

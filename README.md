@@ -66,7 +66,7 @@ public class AddressDto {
 Define a property to define SmartConstraints version:
 ```xml
    <properties>
-        <smartconstraints.version>0.4.0</smartconstraints.version>
+        <smartconstraints.version>0.5.1</smartconstraints.version>
     </properties>
 ```
 

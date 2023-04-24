@@ -4,7 +4,7 @@
   <parent>
     <groupId>eu.aronnax.smartconstraints</groupId>
     <artifactId>smartconstraints-parent</artifactId>
-    <version>0.5.1</version>
+    <version>0.5.2-SNAPSHOT</version>
   </parent>
 
   <artifactId>smartconstraints-annotationprocessor</artifactId>
@@ -25,28 +25,28 @@
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-domain</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-utils-apachecommons3</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-javax-impl</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-jakarta-impl</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-sourcerenderer-jte</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2-SNAPSHOT</version>
     </dependency>
     <!-- Other libs -->
     <dependency>

@@ -4,7 +4,7 @@
   <parent>
     <groupId>eu.aronnax.smartconstraints</groupId>
     <artifactId>smartconstraints-parent</artifactId>
-    <version>0.5.1</version>
+    <version>0.5.2-SNAPSHOT</version>
   </parent>
 
   <artifactId>smartconstraints-jakarta-impl</artifactId>
@@ -16,12 +16,12 @@
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-domain</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-parser-common</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2-SNAPSHOT</version>
     </dependency>
     <!-- libs -->
     <dependency>

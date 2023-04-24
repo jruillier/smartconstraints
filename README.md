@@ -132,16 +132,38 @@ dependency to `AddressEntity`.
 
 SmartContraints as been designed as a
  tool to help adoption of 
-CleanArchitecture principles.  
+CleanArchitecture principles.
 
 SmartConstraints also works with source
-entities located in third party libraries. 
+entities located in third party libraries.
 
 ## Requirements
 
 Your project must be at least a Java 17 project.
 
 Your project must use `javax.validation.constraints.*` annotations.
+
+## Roadmap
+
+#### 1.1
+
+- ☐ Support multi-round annotation processor
+
+#### 1.0 (2023-summer)
+
+- ☐ Additional testing
+
+#### 0.6 (2023-06)
+
+- ☐ Support validation groups
+
+#### 0.5 (2023-04-24)
+
+- ☑ Also support jakarta constraints
+
+#### 0.4 (2023-02-24)
+
+- ☑︎ Support javax constraints
 
 ## Contribute
 

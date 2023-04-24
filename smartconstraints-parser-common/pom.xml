@@ -5,7 +5,7 @@
   <parent>
     <groupId>eu.aronnax.smartconstraints</groupId>
     <artifactId>smartconstraints-parent</artifactId>
-    <version>0.5.1-SNAPSHOT</version>
+    <version>0.5.1</version>
   </parent>
 
   <artifactId>smartconstraints-parser-common</artifactId>
@@ -15,7 +15,7 @@
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-domain</artifactId>
-      <version>0.5.1-SNAPSHOT</version>
+      <version>0.5.1</version>
     </dependency>
     <!-- libs -->
     <dependency>

@@ -4,7 +4,7 @@
   <parent>
     <groupId>eu.aronnax.smartconstraints</groupId>
     <artifactId>smartconstraints-parent</artifactId>
-    <version>0.5.1-SNAPSHOT</version>
+    <version>0.5.1</version>
   </parent>
 
   <artifactId>smartconstraints-reportaggregate</artifactId>
@@ -16,27 +16,27 @@
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-domain</artifactId>
-      <version>0.5.1-SNAPSHOT</version>
+      <version>0.5.1</version>
     </dependency>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-annotationprocessor</artifactId>
-      <version>0.5.1-SNAPSHOT</version>
+      <version>0.5.1</version>
     </dependency>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-javax-impl</artifactId>
-      <version>0.5.1-SNAPSHOT</version>
+      <version>0.5.1</version>
     </dependency>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-sourcerenderer-jte</artifactId>
-      <version>0.5.1-SNAPSHOT</version>
+      <version>0.5.1</version>
     </dependency>
     <dependency>
       <groupId>eu.aronnax.smartconstraints</groupId>
       <artifactId>smartconstraints-utils-apachecommons3</artifactId>
-      <version>0.5.1-SNAPSHOT</version>
+      <version>0.5.1</version>
     </dependency>
   </dependencies>
 

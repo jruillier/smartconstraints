@@ -147,23 +147,23 @@ Your project must use `javax.validation.constraints.*` annotations.
 
 #### 1.1
 
-- ☐ Support multi-round annotation processor
+- [ ] Support multi-round annotation processor
 
 #### 1.0 (2023-summer)
 
-- ☐ Additional testing
+- [ ] Additional testing
 
 #### 0.6 (2023-06)
 
-- ☐ Support validation groups
+- [ ] Support validation groups
 
 #### 0.5 (2023-04-24)
 
-- ☑ Also support jakarta constraints
+- [x] Also support jakarta constraints
 
 #### 0.4 (2023-02-24)
 
-- ☑︎ Support javax constraints
+- [x] Support javax constraints
 
 ## Contribute
 

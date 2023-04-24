@@ -4,7 +4,7 @@
   <parent>
     <groupId>eu.aronnax.smartconstraints</groupId>
     <artifactId>smartconstraints-parent</artifactId>
-    <version>0.4.1-SNAPSHOT</version>
+    <version>0.5.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>smartconstraints-jakarta-impl</artifactId>

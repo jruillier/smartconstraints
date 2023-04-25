@@ -78,7 +78,7 @@ class Address_Constraints {
     @Documented
     @jakarta.validation.Constraint(validatedBy = {})
     public @interface ValidZipCode {
-        String message() default "{eu.aronnax.smartconstraints.test.jakarta.dto.AddressSameModule_Constraints.message}";
+        String message() default "{my.package.Address_Constraints.message}";
         Class<?>[] groups() default { };
         Class<? extends jakarta.validation.Payload>[] payload() default { };
     }

@@ -9,7 +9,7 @@ SmartContraints is a Java annotation
 processor that collects validation
 constraints from your entities and
 generates corresponding composed constraints annotations. 
-You can then use them easily in your DTOs. 
+Then, they can easily be used on your DTO's properties. 
 
 
 SmartConstraints is a Work In Progress.
@@ -141,14 +141,10 @@ where composed annotations will be generated. Add the `from` attribute
 and specify the package where your entities
 are located.
 
-Add the `smartconstraints-annotationprocessor`
-As a compile time dependency to your project. 
-(Not required at runtime) 
-
 Run your build :-)
 
 You can now use annotations like :
-`@Address_Constraints.ValidStreetName` on your DTOs that
+`@Address_Constraints.ValidStreetName` (use a static import to shorten it as `@ValidStreetName`) on your DTOs that
 aggregates validation constraints from original
  field, without any runtime 
 dependency to `AddressEntity`. 

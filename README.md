@@ -45,6 +45,8 @@ public class AddressDto {
 - ❌ You repeat yourself
 - ❌ If your constraintes have to change, your Entity and your DTO can become out of sync if you forget to update one of them
 
+Alternatively, you could write by hand a composed contraint annotation. [That's what SmartConstraints does for you automatically.](#under-the-hood)
+
 ### With SmartConstraints
 
 You could simply write:
@@ -60,6 +62,31 @@ public class AddressDto {
 - ✅ DRY, and readable
 - ✅ (Almost) no extra work
 - ✅ Constraints are always in sync
+
+### Under the hood
+
+SmartConstraints generates composed constraint annotations by analysing your entities.
+
+```java
+@Generated
+class Address_Constraints {
+
+    
+    @jakarta.validation.constraints.NotNull()    
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+    @Retention(RUNTIME)
+    @Documented
+    @jakarta.validation.Constraint(validatedBy = {})
+    public @interface ValidZipCode {
+        String message() default "{eu.aronnax.smartconstraints.test.jakarta.dto.AddressSameModule_Constraints.message}";
+        Class<?>[] groups() default { };
+        Class<? extends jakarta.validation.Payload>[] payload() default { };
+    }
+
+}
+```
+
+Of course, you can write them by yourself. SmartConstraints simply saves you from writing some boilerplate code.
 
 ## Maven How-To
  
@@ -108,11 +135,9 @@ as a `maven-compiler-plugin` `annotationProcessor`:
     </build>
 ```
 
-Add the `@CopyJavaxConstraints` annotation
+Add the `@CopyJavaxConstraints` or `@CopyJakartaConstraints` annotation
 on a `package-info.java` in your project,
-where composed annotations will be generated.
-
-Add the `from` attribute to `@CopyJavaxConstraints`
+where composed annotations will be generated. Add the `from` attribute
 and specify the package where your entities
 are located.
 
@@ -124,8 +149,8 @@ Run your build :-)
 
 You can now use annotations like :
 `@Address_Constraints.ValidStreetName` on your DTOs that
-aggregates validations from original
- field , without any runtime 
+aggregates validation constraints from original
+ field, without any runtime 
 dependency to `AddressEntity`. 
 
 ## Notes

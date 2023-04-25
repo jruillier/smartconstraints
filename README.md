@@ -141,7 +141,7 @@ entities located in third party libraries.
 
 Your project must be at least a Java 17 project.
 
-Your project must use `javax.validation.constraints.*` annotations.
+Your project must use `javax.validation.constraints.*` or `jakarta.validation.constraints.*` annotations.
 
 ## Roadmap
 

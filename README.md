@@ -72,7 +72,8 @@ SmartConstraints generates composed constraint annotations by analysing your ent
 class Address_Constraints {
 
     
-    @jakarta.validation.constraints.NotNull()    
+    @jakarta.validation.constraints.NotNull()   
+    @jakarta.validation.constraints.Size(min = 5, max = 5)
     @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
     @Retention(RUNTIME)
     @Documented

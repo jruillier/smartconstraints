@@ -171,11 +171,11 @@ Your project must use `javax.validation.constraints.*` or `jakarta.validation.co
 
 - [ ] Support multi-round annotation processor
 
-#### 1.0 (2023-summer)
+#### 1.0 (2023)
 
 - [ ] Additional testing
 
-#### 0.6 (2023-06)
+#### 0.6 (2023-07)
 
 - [ ] Support validation groups
 
